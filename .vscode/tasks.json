@@ -3,90 +3,244 @@
     "options": {
         "cwd": "${workspaceFolder}",
         "env": {
-            "PATH": "${env:PATH};C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312"
+            "PATH": "${env:PATH};C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312",
+            "PYTHONIOENCODING": "utf-8",
+            "PYTHONUNBUFFERED": "1"
         }
     },
+    "inputs": [
+        {
+            "id": "customFile",
+            "type": "promptString",
+            "description": "Digite o caminho do arquivo para processar:",
+            "default": "work.txt"
+        },
+        {
+            "id": "searchTerm",
+            "type": "promptString",
+            "description": "Digite o termo para buscar no config:",
+            "default": ""
+        }
+    ],
     "tasks": [
         {
-            "label": "ENCODE - Preparar para IA",
+            "label": "[HOG] ENCODE - Preparar para IA",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "encode"],
             "group": {"kind": "build", "isDefault": true},
-            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Converte termos sensiveis para termos neutros antes de enviar para IA"
         },
         {
-            "label": "RESTORE - Restaurar Original",
+            "label": "[HOG] RESTORE - Restaurar Original",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "restore"],
             "group": "build",
-            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Restaura os termos originais apos receber resposta da IA"
         },
         {
-            "label": "STATS - Estatisticas",
+            "label": "[HOG] STATS - Estatisticas",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "stats"],
             "group": "test",
-            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Mostra estatisticas do arquivo work.txt e regras de traducao"
         },
         {
-            "label": "PREVIEW - Ver Alteracoes",
+            "label": "[HOG] PREVIEW - Ver Alteracoes",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "preview"],
             "group": "test",
-            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Pre-visualiza as alteracoes sem modificar o arquivo"
         },
         {
-            "label": "HISTORY - Historico",
+            "label": "[HOG] HISTORY - Historico",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "history"],
             "group": "test",
-            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Exibe historico de todas as operacoes realizadas"
         },
         {
-            "label": "UNDO - Desfazer",
+            "label": "[HOG] UNDO - Desfazer Ultima",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "undo"],
             "group": "build",
-            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Desfaz a ultima operacao de encode ou restore"
         },
         {
-            "label": "VALIDATE - Validar Config",
+            "label": "[HOG] VALIDATE - Validar Config",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "validate"],
             "group": "test",
-            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Valida integridade do config.json e detecta conflitos"
         },
         {
-            "label": "INTERACTIVE - Modo Interativo",
+            "label": "[HOG] INTERACTIVE - Modo Console",
             "type": "shell",
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
             "args": ["translator.py", "interactive"],
             "group": "none",
-            "presentation": {"reveal": "always", "panel": "dedicated", "focus": true},
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Inicia modo interativo com menu completo"
         },
         {
-            "label": "START_HOG.bat",
+            "label": "[HOG] CLEAN - Limpar Backups",
+            "type": "shell",
+            "command": "Remove-Item",
+            "args": ["-Path", "work_*.txt", "-Force", "-ErrorAction", "SilentlyContinue"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Remove todos os arquivos de backup gerados"
+        },
+        {
+            "label": "[HOG] LIST BACKUPS - Listar Backups",
+            "type": "shell",
+            "command": "Get-ChildItem",
+            "args": ["-Path", ".", "-Filter", "work_*.txt", "-Name"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Lista todos os arquivos de backup existentes"
+        },
+        {
+            "label": "[HOG] CONFIG COUNT - Contar Regras",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["-c", "import json; data=json.load(open('config.json','r',encoding='utf-8')); print(f'Total de regras de traducao: {len(data)}')"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Conta o numero total de regras no config.json"
+        },
+        {
+            "label": "[HOG] GIT STATUS",
+            "type": "shell",
+            "command": "git",
+            "args": ["status", "-sb"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Mostra status do repositorio git"
+        },
+        {
+            "label": "[HOG] GIT PUSH",
+            "type": "shell",
+            "command": "git",
+            "args": ["push", "-u", "origin", "main"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Envia alteracoes para o GitHub"
+        },
+        {
+            "label": "[HOG] GIT COMMIT ALL",
+            "type": "shell",
+            "command": "git add .; git commit -m 'Update: Megazord Code'",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Adiciona e comita todas as alteracoes"
+        },
+        {
+            "label": "[HOG] START_HOG.bat",
             "type": "shell",
             "command": "cmd",
             "args": ["/c", "start", "START_HOG.bat"],
             "group": "none",
             "presentation": {"reveal": "never"},
-            "problemMatcher": []
+            "problemMatcher": [],
+            "detail": "Abre a interface grafica do THE HAND OF GOD"
+        },
+        {
+            "label": "[HOG] FULL CYCLE - Encode + Copy",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe translator.py encode; Get-Content work.txt | Set-Clipboard; Write-Host 'Conteudo copiado para clipboard!'",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Encode e copia resultado para area de transferencia"
         }
     ]
 }

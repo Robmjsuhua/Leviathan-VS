@@ -1,8 +1,8 @@
-#  THE HAND OF GOD
+# MEGAZORD CODE
 
-## Semantic Translation Engine v3.0
+## THE HAND OF GOD - Semantic Translation Engine v3.0
 
-Uma ferramenta avançada para normalização semântica de código, permitindo traduzir termos sensíveis para termos neutros antes de enviar para IAs e restaurar os termos originais depois.
+Uma ferramenta de alto desempenho para normalizacao semantica de codigo. Traduz termos sensiveis para termos neutros antes de enviar para IAs e restaura os termos originais depois.
 
 ![Version](https://img.shields.io/badge/version-3.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
@@ -10,111 +10,98 @@ Uma ferramenta avançada para normalização semântica de código, permitindo t
 
 ---
 
-##  Início Rápido
+## Inicio Rapido
 
 ### Windows (Recomendado)
 ```batch
-# Duplo-clique no arquivo:
 START_HOG.bat
 ```
 
 ### Linha de Comando
 ```bash
-# Sanitizar código (antes de enviar para IA)
-python translator.py encode
-
-# Restaurar termos originais (depois de receber resposta)
-python translator.py restore
-
-# Ver estatísticas
-python translator.py stats
-
-# Modo interativo
-python translator.py interactive
+python translator.py encode      # Sanitizar codigo
+python translator.py restore     # Restaurar originais
+python translator.py stats       # Estatisticas
+python translator.py interactive # Modo interativo
 ```
 
----
-
-##  Requisitos
-
-- **Python 3.8+** - [Download](https://python.org/downloads)
-- **Windows/Linux/macOS**
+### VSCode (Ctrl+Shift+B)
+Acesse o menu de tasks e selecione a operacao desejada.
 
 ---
 
-##  Instalação
+## Requisitos
+
+- Python 3.8+
+- Windows/Linux/macOS
+
+---
+
+## Instalacao
 
 ```bash
-# Clone o repositório
-git clone https://github.com/ThiagoFrag/hand-of-god.git
-
-# Entre na pasta
-cd hand-of-god
-
-# Execute
+git clone git@github.com:ThiagoFrag/Megazord-Code.git
+cd Megazord-Code
 python translator.py
 ```
 
 ---
 
-##  Comandos Disponíveis
+## Comandos Disponiveis
 
-| Comando | Alias | Descrição |
+| Comando | Alias | Descricao |
 |---------|-------|-----------|
-| `encode` | `e`, `sanitize`, `clean` | Sanitiza o conteúdo |
+| `encode` | `e`, `sanitize`, `clean` | Sanitiza o conteudo |
 | `decode` | `d`, `r`, `restore`, `revert` | Restaura os termos originais |
-| `stats` | `s` | Mostra estatísticas |
-| `history` | `h` | Mostra histórico de operações |
-| `undo` | `u` | Desfaz a última operação |
-| `validate` | `v` | Valida o arquivo de configuração |
-| `preview` | `p` | Preview das alterações |
+| `stats` | `s` | Mostra estatisticas |
+| `history` | `h` | Mostra historico de operacoes |
+| `undo` | `u` | Desfaz a ultima operacao |
+| `validate` | `v` | Valida o arquivo de configuracao |
+| `preview` | `p` | Preview das alteracoes |
 | `interactive` | `i` | Modo interativo |
 | `help` | `-h`, `--help` | Mostra ajuda |
 
 ---
 
-##  Fluxo de Trabalho
+## Fluxo de Trabalho
 
 ```
-
-                                                             
-  1. Cole seu código em work.txt                             
-                                                            
-  2. Execute ENCODE (opção 1)                                
-     - "exploit"  "performance_case"                        
-     - "bypass"  "bridge_compatibility"                     
-                                                            
-  3. Envie o código sanitizado para a IA                     
-                                                            
-  4. Cole a resposta da IA em work.txt                       
-                                                            
-  5. Execute RESTORE (opção 2)                               
-     - "performance_case"  "exploit"                        
-     - "bridge_compatibility"  "bypass"                     
-                                                            
-  6. Pronto! Código original restaurado                      
-                                                             
-
+1. Cole seu codigo em work.txt
+2. Execute ENCODE (Ctrl+Shift+B > ENCODE)
+   - "exploit" -> "performance_case"
+   - "bypass" -> "bridge_compatibility"
+3. Envie o codigo sanitizado para a IA
+4. Cole a resposta da IA em work.txt
+5. Execute RESTORE (Ctrl+Shift+B > RESTORE)
+   - "performance_case" -> "exploit"
+   - "bridge_compatibility" -> "bypass"
+6. Pronto! Codigo original restaurado
 ```
 
 ---
 
-##  Estrutura de Arquivos
+## Estrutura de Arquivos
 
 ```
-hand-of-god/
- START_HOG.bat       # Interface gráfica (Windows)
- translator.py       # Motor de tradução (Python)
- config.json         # Regras de tradução (104 regras)
- work.txt            # Arquivo de trabalho
- README.md           # Documentação
- .gitignore          # Arquivos ignorados pelo git
- backups/            # Backups automáticos (ignorado pelo git)
+Megazord-Code/
+    .vscode/
+        extensions.json    # Extensoes recomendadas
+        keybindings.json   # Atalhos de teclado
+        launch.json        # Configuracoes de debug
+        settings.json      # Configuracoes do VSCode
+        tasks.json         # Tasks automatizadas (16 tasks)
+    config.json            # Regras de traducao (104 regras)
+    LICENSE                # Licenca MIT
+    README.md              # Documentacao
+    semantic-engine.ts     # Versao TypeScript (em desenvolvimento)
+    START_HOG.bat          # Interface grafica Windows
+    translator.py          # Motor principal Python
+    work.txt               # Arquivo de trabalho
 ```
 
 ---
 
-##  Configuração
+## Configuracao
 
 Edite o arquivo `config.json` para adicionar ou modificar regras:
 
@@ -126,86 +113,106 @@ Edite o arquivo `config.json` para adicionar ou modificar regras:
 }
 ```
 
-###  Regras Incluídas (104 regras)
+### Regras Incluidas (104 regras)
 
 | Categoria | Exemplos |
 |-----------|----------|
-|  Segurança | bypass, exploit, vulnerability, injection |
-|  Malware | virus, trojan, backdoor, rootkit, keylogger |
-|  Ataques | xss, csrf, ddos, sql_injection, bruteforce |
-|  Ferramentas | scanner, fuzzer, debugger, decompiler |
-|  Acesso | privilege, root, admin, shell, terminal |
+| Seguranca | bypass, exploit, vulnerability, injection |
+| Malware | virus, trojan, backdoor, rootkit, keylogger |
+| Ataques | xss, csrf, ddos, sql_injection, bruteforce |
+| Ferramentas | scanner, fuzzer, debugger, decompiler |
+| Acesso | privilege, root, admin, shell, terminal |
 
 ---
 
-##  Recursos
+## Recursos
 
--  **Backup Automático** - Cada operação cria um backup
--  **Histórico** - Registra as últimas 50 operações
--  **Undo** - Desfaz a última operação
--  **Preview** - Vê as alterações antes de aplicar
--  **Validação** - Verifica conflitos na configuração
--  **Case Preserving** - Mantém maiúsculas/minúsculas
--  **Word Boundaries** - Só substitui palavras completas
--  **Estatísticas** - Contagem detalhada de alterações
--  **Hash Tracking** - Rastreia alterações por hash MD5
--  **Cores no Terminal** - Feedback visual colorido
-
----
-
-##  Menu Interativo
-
-```
-
-                    THE HAND OF GOD                         
-                 Semantic Engine v3.0                       
-
-                                                            
-   [1] ENCODE     - Preparar código para IA                 
-   [2] RESTORE    - Restaurar termos originais              
-   [3] PREVIEW    - Ver preview das alterações              
-   [4] STATS      - Ver estatísticas completas              
-   [5] HISTORY    - Ver histórico de operações              
-   [6] UNDO       - Desfazer última operação                
-   [7] VALIDATE   - Validar configuração                    
-                                                            
-   [E] EDIT       - Abrir work.txt                          
-   [C] CONFIG     - Editar regras                           
-   [B] BACKUPS    - Ver backups                             
-   [I] INTERACTIVE- Modo interativo Python                  
-                                                            
-   [0] EXIT       - Sair                                    
-                                                            
-
-```
+- Backup Automatico - Cada operacao cria um backup
+- Historico - Registra as ultimas 50 operacoes
+- Undo - Desfaz a ultima operacao
+- Preview - Ve as alteracoes antes de aplicar
+- Validacao - Verifica conflitos na configuracao
+- Case Preserving - Mantem maiusculas/minusculas
+- Word Boundaries - So substitui palavras completas
+- Estatisticas - Contagem detalhada de alteracoes
+- Hash Tracking - Rastreia alteracoes por hash MD5
+- Cores no Terminal - Feedback visual colorido
 
 ---
 
-##  Contribuição
+## VSCode Tasks (Ctrl+Shift+B)
 
-1. Faça um Fork do projeto
+| Task | Descricao |
+|------|-----------|
+| [HOG] ENCODE | Converte termos sensiveis para neutros |
+| [HOG] RESTORE | Restaura termos originais |
+| [HOG] STATS | Mostra estatisticas |
+| [HOG] PREVIEW | Pre-visualiza alteracoes |
+| [HOG] HISTORY | Exibe historico |
+| [HOG] UNDO | Desfaz ultima operacao |
+| [HOG] VALIDATE | Valida config.json |
+| [HOG] INTERACTIVE | Modo console |
+| [HOG] CLEAN | Remove backups |
+| [HOG] LIST BACKUPS | Lista backups |
+| [HOG] CONFIG COUNT | Conta regras |
+| [HOG] GIT STATUS | Status do git |
+| [HOG] GIT PUSH | Push para GitHub |
+| [HOG] GIT COMMIT ALL | Commit todas alteracoes |
+| [HOG] FULL CYCLE | Encode + Copia para clipboard |
+
+---
+
+## Configuracoes do VSCode
+
+O projeto inclui configuracoes otimizadas:
+
+- Tema escuro customizado (verde neon)
+- Fonte Cascadia Code com ligatures
+- Python analysis com type checking
+- Auto-save habilitado
+- Git auto-fetch
+- Extensoes recomendadas pre-configuradas
+
+---
+
+## Debug (F5)
+
+Configuracoes de debug incluidas:
+
+- HOG: Modo Interativo
+- HOG: ENCODE
+- HOG: RESTORE
+- HOG: STATS
+- HOG: VALIDATE
+- HOG: PREVIEW
+- HOG: Debug com Args Customizados
+- Python: Arquivo Atual
+
+---
+
+## Contribuicao
+
+1. Fork o projeto
 2. Crie sua Feature Branch (`git checkout -b feature/NovaRegra`)
-3. Commit suas mudanças (`git commit -m 'Add: nova regra de tradução'`)
+3. Commit suas mudancas (`git commit -m 'Add: nova regra de traducao'`)
 4. Push para a Branch (`git push origin feature/NovaRegra`)
 5. Abra um Pull Request
 
 ---
 
-##  Licença
+## Licenca
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto esta sob a licenca MIT. Veja o arquivo LICENSE para mais detalhes.
 
 ---
 
-##  Autor
+## Autor
 
 **ThiagoFrag**
 
-- GitHub: [@ThiagoFrag](https://github.com/ThiagoFrag)
+GitHub: [@ThiagoFrag](https://github.com/ThiagoFrag)
 
 ---
 
-<p align="center">
-  <b>THE HAND OF GOD</b> - Semantic Engine v3.0<br>
-  <i>Traduzindo o impossível em possível</i> 
-</p>
+MEGAZORD CODE - THE HAND OF GOD v3.0
+Semantic Translation Engine

@@ -2,28 +2,103 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: translator.py",
+            "name": "HOG: Modo Interativo",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/translator.py",
             "console": "integratedTerminal",
-            "args": []
+            "args": ["interactive"],
+            "justMyCode": true,
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
         {
-            "name": "Python: ENCODE",
+            "name": "HOG: ENCODE",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/translator.py",
             "console": "integratedTerminal",
-            "args": ["encode"]
+            "args": ["encode"],
+            "justMyCode": true,
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
         {
-            "name": "Python: RESTORE",
+            "name": "HOG: RESTORE",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/translator.py",
             "console": "integratedTerminal",
-            "args": ["restore"]
+            "args": ["restore"],
+            "justMyCode": true,
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        {
+            "name": "HOG: STATS",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/translator.py",
+            "console": "integratedTerminal",
+            "args": ["stats"],
+            "justMyCode": true
+        },
+        {
+            "name": "HOG: VALIDATE",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/translator.py",
+            "console": "integratedTerminal",
+            "args": ["validate"],
+            "justMyCode": true
+        },
+        {
+            "name": "HOG: PREVIEW",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/translator.py",
+            "console": "integratedTerminal",
+            "args": ["preview"],
+            "justMyCode": true
+        },
+        {
+            "name": "HOG: Debug com Args Customizados",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/translator.py",
+            "console": "integratedTerminal",
+            "args": ["${input:customArgs}"],
+            "justMyCode": false,
+            "stopOnEntry": false
+        },
+        {
+            "name": "Python: Arquivo Atual",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ],
+    "inputs": [
+        {
+            "id": "customArgs",
+            "type": "pickString",
+            "description": "Selecione a operacao:",
+            "options": [
+                "encode",
+                "restore",
+                "stats",
+                "preview",
+                "history",
+                "undo",
+                "validate",
+                "interactive"
+            ],
+            "default": "encode"
         }
     ]
 }

@@ -1,0 +1,42 @@
+{
+    "version": "1.0.0",
+    "note": "Copie estes atalhos para seu keybindings.json global (Ctrl+Shift+P > Open Keyboard Shortcuts JSON)",
+    "keybindings": [
+        {
+            "key": "ctrl+shift+e",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] ENCODE - Preparar para IA",
+            "description": "ENCODE - Prepara codigo para enviar a IA"
+        },
+        {
+            "key": "ctrl+shift+r",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] RESTORE - Restaurar Original",
+            "description": "RESTORE - Restaura termos originais"
+        },
+        {
+            "key": "ctrl+shift+s",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] STATS - Estatisticas",
+            "description": "STATS - Mostra estatisticas"
+        },
+        {
+            "key": "ctrl+shift+p",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] PREVIEW - Ver Alteracoes",
+            "description": "PREVIEW - Pre-visualiza alteracoes"
+        },
+        {
+            "key": "ctrl+shift+u",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] UNDO - Desfazer Ultima",
+            "description": "UNDO - Desfaz ultima operacao"
+        },
+        {
+            "key": "ctrl+shift+g",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] GIT PUSH",
+            "description": "GIT PUSH - Envia para GitHub"
+        }
+    ]
+}
