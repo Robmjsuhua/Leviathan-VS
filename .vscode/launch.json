@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: translator.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/translator.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Python: ENCODE",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/translator.py",
+            "console": "integratedTerminal",
+            "args": ["encode"]
+        },
+        {
+            "name": "Python: RESTORE",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/translator.py",
+            "console": "integratedTerminal",
+            "args": ["restore"]
+        }
+    ]
+}

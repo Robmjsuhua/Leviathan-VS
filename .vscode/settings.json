@@ -1,0 +1,27 @@
+{
+    "python.defaultInterpreterPath": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python.terminal.activateEnvironment": true,
+    "files.associations": {
+        "*.json": "json",
+        "*.txt": "plaintext"
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "[json]": {
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#1a1a2e",
+        "titleBar.activeBackground": "#16213e",
+        "titleBar.activeForeground": "#e94560"
+    }
+}

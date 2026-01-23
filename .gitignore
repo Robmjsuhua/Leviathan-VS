@@ -20,7 +20,7 @@ env/
 .venv/
 
 # IDE
-.vscode/
+# .vscode/ - incluído no repo para compartilhar tasks
 .idea/
 *.swp
 *.swo

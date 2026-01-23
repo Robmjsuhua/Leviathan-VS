@@ -1,0 +1,92 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+            "PATH": "${env:PATH};C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312"
+        }
+    },
+    "tasks": [
+        {
+            "label": "ENCODE - Preparar para IA",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "encode"],
+            "group": {"kind": "build", "isDefault": true},
+            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "RESTORE - Restaurar Original",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "restore"],
+            "group": "build",
+            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "STATS - Estatisticas",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "stats"],
+            "group": "test",
+            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "PREVIEW - Ver Alteracoes",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "preview"],
+            "group": "test",
+            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "HISTORY - Historico",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "history"],
+            "group": "test",
+            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "UNDO - Desfazer",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "undo"],
+            "group": "build",
+            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "VALIDATE - Validar Config",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "validate"],
+            "group": "test",
+            "presentation": {"reveal": "always", "panel": "shared", "clear": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "INTERACTIVE - Modo Interativo",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "interactive"],
+            "group": "none",
+            "presentation": {"reveal": "always", "panel": "dedicated", "focus": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "START_HOG.bat",
+            "type": "shell",
+            "command": "cmd",
+            "args": ["/c", "start", "START_HOG.bat"],
+            "group": "none",
+            "presentation": {"reveal": "never"},
+            "problemMatcher": []
+        }
+    ]
+}
