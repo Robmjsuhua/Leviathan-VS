@@ -1,46 +1,74 @@
 # MEGAZORD CODE
 
-## THE HAND OF GOD - Semantic Translation Engine v5.0
+## THE HAND OF GOD - Semantic Translation Engine v5.0 + HTTP Toolkit v2.0
 
-Uma ferramenta de alto desempenho para normalizacao semantica de codigo. Traduz termos sensiveis para termos neutros antes de enviar para IAs e restaura os termos originais depois.
+Uma ferramenta de alto desempenho para normalizacao semantica de codigo e interceptacao de trafego HTTP com IA integrada.
 
 ![Version](https://img.shields.io/badge/version-5.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 ![MCP](https://img.shields.io/badge/MCP-enabled-purple)
+![AI](https://img.shields.io/badge/AI-powered-red)
+
+---
+
+## 🚀 Instalacao Rapida (1 Clique)
+
+### Windows
+```batch
+# Clique duplo no arquivo:
+INSTALL.bat
+```
+
+### PowerShell (Avancado)
+```powershell
+.\install.ps1
+```
+
+O instalador:
+- ✅ Instala Python, Git, VS Code (se necessario)
+- ✅ Configura extensoes do VS Code
+- ✅ Configura MCP para GitHub Copilot
+- ✅ Abre o projeto pronto para uso
 
 ---
 
 ## Novidades v5.0
 
-- **MCP Server** - Servidor Model Context Protocol para integracao com GitHub Copilot
-- **Traducao em Tempo Real** - Ferramentas disponiveis diretamente no chat do Copilot
-- **104 Regras** - Paradigma de Teoria de Grafos e Compiladores
-- **SAFE DEPLOY** - Bloqueia push com termos sensiveis
+- **🤖 HTTP Toolkit v2.0** - Interceptador HTTP com IA integrada
+- **🎭 Header Mimicry** - Rotacao automatica de User-Agent
+- **📊 AI Analysis** - Analise automatica de respostas
+- **🔧 Auto-Repair** - Recuperacao automatica de erros 403/401
+- **🌐 MCP Server** - Integracao com GitHub Copilot
+- **104 Regras** - Paradigma de Teoria de Grafos
 
 ---
 
 ## Inicio Rapido
 
-### Windows (Recomendado)
+### Windows (GUI)
 ```batch
 START_HOG.bat
 ```
 
+### HTTP Toolkit (Interativo)
+```bash
+python http_toolkit.py interactive
+```
+
 ### Linha de Comando
 ```bash
+# Semantic Translation
 python translator.py encode      # Sanitizar codigo
 python translator.py restore     # Restaurar originais
-python translator.py stats       # Estatisticas
-python translator.py interactive # Modo interativo
+
+# HTTP Toolkit
+python http_toolkit.py dispatch https://api.example.com -X POST -d '{"key":"value"}'
+python http_toolkit.py scan https://api.example.com
 ```
 
 ### VSCode (Ctrl+Shift+B)
 Acesse o menu de tasks e selecione a operacao desejada.
-
-### MCP Server (GitHub Copilot)
-O servidor MCP integra automaticamente com o chat do Copilot.
-Use os comandos: `encode`, `decode`, `check`, `find_terms`, `get_rules`
 
 ---
 

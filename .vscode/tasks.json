@@ -20,6 +20,19 @@
       "type": "promptString",
       "description": "Mensagem do commit:",
       "default": "HOG: secure update"
+    },
+    {
+      "id": "targetUrl",
+      "type": "promptString",
+      "description": "URL do endpoint alvo:",
+      "default": "https://api.example.com"
+    },
+    {
+      "id": "httpMethod",
+      "type": "pickString",
+      "description": "Metodo HTTP:",
+      "options": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+      "default": "GET"
     }
   ],
   "tasks": [
@@ -421,6 +434,47 @@
       },
       "problemMatcher": [],
       "detail": "Testa se o servidor MCP esta funcionando"
+    },
+    {
+      "label": "[HOG] HTTP TOOLKIT - Iniciar Interceptador",
+      "type": "shell",
+      "command": "npx ts-node plugin-http.ts",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "icon": {"id": "radio-tower"},
+      "problemMatcher": [],
+      "detail": "Abre a interface de manipulacao de requisicoes com protecao HOG"
+    },
+    {
+      "label": "[HOG] HTTP TOOLKIT - Testar Endpoint",
+      "type": "shell",
+      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "args": [
+        "-c",
+        "import json; from http_toolkit import HOGDispatcher; d = HOGDispatcher(); print(json.dumps(d.dispatch('${input:targetUrl}', '${input:httpMethod}'), indent=2))"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "icon": {"id": "globe"},
+      "problemMatcher": [],
+      "detail": "Testa um endpoint com protecao HOG integrada"
+    },
+    {
+      "label": "[HOG] HTTP TOOLKIT - Scan Rapido",
+      "type": "shell",
+      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe http_toolkit.py scan --url ${input:targetUrl}",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "icon": {"id": "search"},
+      "problemMatcher": [],
+      "detail": "Executa logic_stress_analysis no endpoint"
     }
   ]
 }

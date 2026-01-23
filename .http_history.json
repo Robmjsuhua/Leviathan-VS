@@ -1,0 +1,58 @@
+[
+  {
+    "timestamp": "2026-01-23T16:54:34.446082",
+    "url": "https://httpbin.org/get",
+    "method": "GET",
+    "status": 200,
+    "duration": 578.49
+  },
+  {
+    "timestamp": "2026-01-23T16:54:41.433855",
+    "url": "https://httpbin.org/anything",
+    "method": "GET",
+    "status": 200,
+    "duration": 505.19
+  },
+  {
+    "timestamp": "2026-01-23T16:54:42.438826",
+    "url": "https://httpbin.org/anything",
+    "method": "POST",
+    "status": 200,
+    "duration": 501.16
+  },
+  {
+    "timestamp": "2026-01-23T16:54:43.463393",
+    "url": "https://httpbin.org/anything",
+    "method": "PUT",
+    "status": 200,
+    "duration": 519.25
+  },
+  {
+    "timestamp": "2026-01-23T16:54:45.054734",
+    "url": "https://httpbin.org/anything",
+    "method": "DELETE",
+    "status": 200,
+    "duration": 1088.18
+  },
+  {
+    "timestamp": "2026-01-23T16:54:46.359933",
+    "url": "https://httpbin.org/anything",
+    "method": "OPTIONS",
+    "status": 200,
+    "duration": 803.32
+  },
+  {
+    "timestamp": "2026-01-23T16:54:47.358391",
+    "url": "https://httpbin.org/anything",
+    "method": "HEAD",
+    "status": 200,
+    "duration": 495.72
+  },
+  {
+    "timestamp": "2026-01-23T19:47:31.569209",
+    "url": "https://httpbin.org/get",
+    "method": "GET",
+    "status": 200,
+    "duration": 645.63
+  }
+]
