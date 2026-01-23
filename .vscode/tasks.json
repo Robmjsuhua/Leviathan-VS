@@ -144,6 +144,51 @@
             "detail": "Inicia modo interativo com menu completo"
         },
         {
+            "label": "[HOG] OBFUSCATE - Ofuscar Variaveis",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "obfuscate"],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Renomeia variaveis sensiveis para var_a1, var_b2, etc."
+        },
+        {
+            "label": "[HOG] DEOBFUSCATE - Restaurar Variaveis",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "deobfuscate"],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Restaura nomes originais das variaveis ofuscadas"
+        },
+        {
+            "label": "[HOG] FULL TRANSFORM - Encode + Obfuscate",
+            "type": "shell",
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["translator.py", "full"],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": [],
+            "detail": "Aplica encode semantico + ofuscacao de variaveis em um passo"
+        },
+        {
             "label": "[HOG] CLEAN - Limpar Backups",
             "type": "shell",
             "command": "Remove-Item",

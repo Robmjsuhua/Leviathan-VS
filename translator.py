@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 ================================================================================
-    THE HAND OF GOD - Semantic Translation Engine v3.0
-    
-    Uma ferramenta avancada para normalizacao semantica de codigo.
-    Permite traduzir termos sensiveis para termos neutros antes de enviar
-    para IAs e restaurar os termos originais depois.
-    
-    Autor: Hand of God Team
-    Versao: 3.0.0
+    MEGAZORD CODE - THE HAND OF GOD
+    Semantic Translation Engine v4.0
+
+    Motor de traducao semantica com paradigma de Teoria de Grafos.
+    Abstrai termos sensiveis para nomenclatura de compiladores e estruturas
+    de dados, tornando o codigo invisivel a filtros de contexto.
+
+    Autor: ThiagoFrag
+    Versao: 4.0.0
 ================================================================================
 """
 
@@ -21,17 +22,19 @@ import shutil
 import hashlib
 import argparse
 from pathlib import Path
-from typing import Dict, Tuple, List, Optional
+from typing import Dict, Tuple, List, Optional, Set
 from datetime import datetime
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
+from collections import Counter
 
 # ============================================================================
 # CONSTANTES E CONFIGURACOES
 # ============================================================================
 
-VERSION = "3.0.0"
-APP_NAME = "THE HAND OF GOD"
+VERSION = "4.0.0"
+APP_NAME = "MEGAZORD CODE"
+PARADIGM = "Graph Theory / Compiler Design"
 
 class Colors:
     """Codigos ANSI para cores no terminal."""
@@ -64,6 +67,34 @@ class Mode(Enum):
     HISTORY = "history"
     UNDO = "undo"
     INTERACTIVE = "interactive"
+    OBFUSCATE = "obfuscate"
+    DEOBFUSCATE = "deobfuscate"
+
+# Padroes de variaveis sensiveis para ofuscar
+SENSITIVE_VAR_PATTERNS = [
+    r'\bpassword\w*',
+    r'\bsecret\w*',
+    r'\bkey\w*',
+    r'\btoken\w*',
+    r'\badmin\w*',
+    r'\broot\w*',
+    r'\bshell\w*',
+    r'\bpayload\w*',
+    r'\bexploit\w*',
+    r'\bhack\w*',
+    r'\bcredential\w*',
+    r'\bauth\w*',
+    r'\bprivate\w*',
+    r'\bcipher\w*',
+    r'\bencrypt\w*',
+    r'\bdecrypt\w*',
+    r'\binjection\w*',
+    r'\bbypass\w*',
+    r'\bmalware\w*',
+    r'\bvirus\w*',
+    r'\btrojan\w*',
+    r'\bbackdoor\w*',
+]
 
 @dataclass
 class TranslationResult:
@@ -101,10 +132,12 @@ class SemanticTranslator:
         """Carrega as regras de traducao do arquivo de configuracao."""
         if not self.config_path.exists():
             self._create_default_config()
-        
+
         try:
             with open(self.config_path, 'r', encoding='utf-8') as f:
-                self.rules = json.load(f)
+                data = json.load(f)
+            # Filtrar campos de metadados (comecam com _)
+            self.rules = {k: v for k, v in data.items() if not k.startswith('_')}
         except json.JSONDecodeError as e:
             self._error(f"JSON invalido em config.json: {e}")
             sys.exit(1)
@@ -329,23 +362,167 @@ class SemanticTranslator:
     def validate_config(self) -> List[str]:
         """Valida o arquivo de configuracao."""
         errors = []
-        
+
         if not self.config_path.exists():
             errors.append("Arquivo config.json nao encontrado")
             return errors
-        
+
         # Verificar duplicatas nos valores
         values = list(self.rules.values())
         duplicates = set([v for v in values if values.count(v) > 1])
         if duplicates:
             errors.append(f"Valores duplicados: {duplicates}")
-        
+
         # Verificar conflitos
         for key in self.rules:
             if key in self.rules.values():
                 errors.append(f"Conflito: '{key}' existe como chave e valor")
-        
+
         return errors
+
+    def obfuscate_variables(self, preview_only: bool = False) -> TranslationResult:
+        """Ofusca nomes de variaveis sensiveis para var_a1, var_b2, etc."""
+        if not self.work_path.exists():
+            return TranslationResult(
+                success=False, content="", total_replacements=0,
+                changes=[], original_hash="", new_hash="",
+                backup_path=None, timestamp=datetime.now(), mode="obfuscate"
+            )
+
+        with open(self.work_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        if not content.strip():
+            return TranslationResult(
+                success=False, content="", total_replacements=0,
+                changes=[], original_hash="", new_hash="",
+                backup_path=None, timestamp=datetime.now(), mode="obfuscate"
+            )
+
+        original_hash = self._get_file_hash(content)
+        new_content = content
+        total_count = 0
+        changes = []
+        var_map = {}
+        var_counter = 0
+
+        # Encontrar todas as variaveis sensiveis
+        for pattern in SENSITIVE_VAR_PATTERNS:
+            matches = re.findall(pattern, content, re.IGNORECASE)
+            for match in set(matches):
+                if match.lower() not in var_map:
+                    var_counter += 1
+                    letter = chr(ord('a') + (var_counter - 1) % 26)
+                    number = (var_counter - 1) // 26 + 1
+                    new_name = f"var_{letter}{number}"
+                    var_map[match.lower()] = new_name
+
+        # Aplicar substituicoes (ordenar por tamanho para evitar conflitos)
+        sorted_vars = sorted(var_map.items(), key=lambda x: len(x[0]), reverse=True)
+        for original, replacement in sorted_vars:
+            pattern = re.compile(rf'\b{re.escape(original)}\b', re.IGNORECASE)
+            matches = pattern.findall(new_content)
+            count = len(matches)
+            if count > 0:
+                new_content = pattern.sub(replacement, new_content)
+                total_count += count
+                changes.append((original, replacement, count))
+
+        new_hash = self._get_file_hash(new_content)
+        backup_path = None
+
+        if not preview_only and total_count > 0:
+            backup_path = self._create_backup(content)
+            with open(self.work_path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+
+            # Salvar mapa de variaveis para restauracao
+            var_map_path = self.base_path / '.var_map.json'
+            with open(var_map_path, 'w', encoding='utf-8') as f:
+                json.dump(var_map, f, indent=2)
+
+            self._save_history({
+                "timestamp": datetime.now().isoformat(),
+                "mode": "obfuscate",
+                "replacements": total_count,
+                "original_hash": original_hash,
+                "new_hash": new_hash,
+                "backup": str(backup_path) if backup_path else None
+            })
+
+        return TranslationResult(
+            success=True, content=new_content,
+            total_replacements=total_count, changes=changes,
+            original_hash=original_hash, new_hash=new_hash,
+            backup_path=backup_path, timestamp=datetime.now(),
+            mode="obfuscate"
+        )
+
+    def deobfuscate_variables(self) -> TranslationResult:
+        """Restaura nomes de variaveis originais."""
+        var_map_path = self.base_path / '.var_map.json'
+
+        if not var_map_path.exists():
+            return TranslationResult(
+                success=False, content="", total_replacements=0,
+                changes=[], original_hash="", new_hash="",
+                backup_path=None, timestamp=datetime.now(), mode="deobfuscate"
+            )
+
+        with open(var_map_path, 'r', encoding='utf-8') as f:
+            var_map = json.load(f)
+
+        if not self.work_path.exists():
+            return TranslationResult(
+                success=False, content="", total_replacements=0,
+                changes=[], original_hash="", new_hash="",
+                backup_path=None, timestamp=datetime.now(), mode="deobfuscate"
+            )
+
+        with open(self.work_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        original_hash = self._get_file_hash(content)
+        new_content = content
+        total_count = 0
+        changes = []
+
+        # Inverter o mapa
+        reverse_map = {v: k for k, v in var_map.items()}
+
+        for obfuscated, original in reverse_map.items():
+            pattern = re.compile(rf'\b{re.escape(obfuscated)}\b')
+            matches = pattern.findall(new_content)
+            count = len(matches)
+            if count > 0:
+                new_content = pattern.sub(original, new_content)
+                total_count += count
+                changes.append((obfuscated, original, count))
+
+        new_hash = self._get_file_hash(new_content)
+        backup_path = self._create_backup(content)
+
+        with open(self.work_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+
+        var_map_path.unlink()  # Remover mapa apos restaurar
+
+        self._save_history({
+            "timestamp": datetime.now().isoformat(),
+            "mode": "deobfuscate",
+            "replacements": total_count,
+            "original_hash": original_hash,
+            "new_hash": new_hash,
+            "backup": str(backup_path) if backup_path else None
+        })
+
+        return TranslationResult(
+            success=True, content=new_content,
+            total_replacements=total_count, changes=changes,
+            original_hash=original_hash, new_hash=new_hash,
+            backup_path=backup_path, timestamp=datetime.now(),
+            mode="deobfuscate"
+        )
     
     # ========================================================================
     # METODOS DE SAIDA
@@ -493,6 +670,8 @@ class CLI:
             print(f"{Colors.CYAN}{Colors.RESET}  [5] HISTORY   - Historico          {Colors.CYAN}{Colors.RESET}")
             print(f"{Colors.CYAN}{Colors.RESET}  [6] UNDO      - Desfazer            {Colors.CYAN}{Colors.RESET}")
             print(f"{Colors.CYAN}{Colors.RESET}  [7] VALIDATE  - Validar config     {Colors.CYAN}{Colors.RESET}")
+            print(f"{Colors.CYAN}{Colors.RESET}  [8] OBFUSCATE - Ofuscar variaveis  {Colors.CYAN}{Colors.RESET}")
+            print(f"{Colors.CYAN}{Colors.RESET}  [9] DEOBFUSC  - Restaurar vars     {Colors.CYAN}{Colors.RESET}")
             print(f"{Colors.CYAN}{Colors.RESET}  [0] EXIT      - Sair               {Colors.CYAN}{Colors.RESET}")
             print(f"{Colors.CYAN}{Colors.RESET}")
             
@@ -531,8 +710,14 @@ class CLI:
                     for e in errors:
                         print(f"    - {e}")
                 else:
-                    print(f"\n{Colors.GREEN}[OK] Configuracao valida!{Colors.RESET}")
+                    print(f"\n{Colors.GREEN}[OK] Configuracao valida! ({len(self.translator.rules)} regras){Colors.RESET}")
                 print()
+            elif opt == '8':
+                result = self.translator.obfuscate_variables()
+                self.print_result(result)
+            elif opt == '9':
+                result = self.translator.deobfuscate_variables()
+                self.print_result(result)
             elif opt == '0':
                 break
             
@@ -584,7 +769,24 @@ class CLI:
             if result.success and result.changes:
                 for o, r, c in result.changes:
                     print(f"{Colors.RED}{o}{Colors.RESET}  {Colors.GREEN}{r}{Colors.RESET} ({c}x)")
-        
+
+        elif command in ('obfuscate', 'obf', 'o'):
+            result = self.translator.obfuscate_variables()
+            self.print_result(result)
+
+        elif command in ('deobfuscate', 'deobf', 'do'):
+            result = self.translator.deobfuscate_variables()
+            self.print_result(result)
+
+        elif command in ('full', 'f'):
+            # Ciclo completo: encode + obfuscate
+            print(f"{Colors.CYAN}[1/2] Aplicando encode...{Colors.RESET}")
+            result1 = self.translator.encode()
+            self.print_result(result1)
+            print(f"{Colors.CYAN}[2/2] Aplicando ofuscacao de variaveis...{Colors.RESET}")
+            result2 = self.translator.obfuscate_variables()
+            self.print_result(result2)
+
         elif command in ('interactive', 'i'):
             self.run_interactive()
         
@@ -594,20 +796,28 @@ class CLI:
 {Colors.CYAN}Uso:{Colors.RESET}
   python translator.py [comando]
 
-{Colors.CYAN}Comandos:{Colors.RESET}
+{Colors.CYAN}Comandos de Traducao:{Colors.RESET}
   encode, e      Sanitiza o conteudo (prepara para IA)
   decode, d, r   Restaura os termos originais
+  preview, p     Preview das alteracoes (sem aplicar)
+
+{Colors.CYAN}Comandos de Ofuscacao:{Colors.RESET}
+  obfuscate, o   Ofusca nomes de variaveis sensiveis
+  deobfuscate    Restaura nomes de variaveis originais
+  full, f        Ciclo completo: encode + obfuscate
+
+{Colors.CYAN}Comandos de Gerenciamento:{Colors.RESET}
   stats, s       Mostra estatisticas
   history, h     Mostra historico de operacoes
   undo, u        Desfaz a ultima operacao
   validate, v    Valida o arquivo de configuracao
-  preview, p     Preview das alteracoes (sem aplicar)
   interactive, i Modo interativo
 
 {Colors.CYAN}Exemplos:{Colors.RESET}
-  python translator.py encode
-  python translator.py restore
-  python translator.py stats
+  python translator.py encode      # Aplica traducao semantica
+  python translator.py obfuscate   # Ofusca variaveis
+  python translator.py full        # Encode + Obfuscate juntos
+  python translator.py restore     # Restaura termos originais
 """)
         
         else:
