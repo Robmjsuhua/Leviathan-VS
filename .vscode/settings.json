@@ -435,14 +435,14 @@
     // ═══════════════════════════════════════════════════════════════════
     // 🔧 EXTENSÕES ESPECÍFICAS
     // ═══════════════════════════════════════════════════════════════════
-    
+
     // Error Lens
     "errorLens.enabled": true,
     "errorLens.enabledDiagnosticLevels": ["error", "warning", "hint"],
     "errorLens.messageMaxChars": 100,
     "errorLens.fontStyleItalic": true,
     "errorLens.gutterIconsEnabled": true,
-    
+
     // TODO Tree
     "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]", "NOTE", "OPTIMIZE", "REVIEW"],
     "todo-tree.highlights.defaultHighlight": {
@@ -460,22 +460,22 @@
         "OPTIMIZE": { "icon": "rocket", "foreground": "#cc00ff" },
         "REVIEW": { "icon": "eye", "foreground": "#ff00ff" }
     },
-    
+
     // Material Icon Theme
     "material-icon-theme.folders.theme": "specific",
     "material-icon-theme.folders.color": "#00ff88",
     "material-icon-theme.activeIconPack": "react_redux",
     "material-icon-theme.hidesExplorerArrows": false,
-    
+
     // Ruff (Python Linter)
     "ruff.lint.enable": true,
     "ruff.organizeImports": true,
     "ruff.fixAll": true,
-    
+
     // REST Client
     "rest-client.enableTelemetry": false,
     "rest-client.previewResponseInUntitledDocument": true,
-    
+
     // Thunder Client
     "thunder-client.saveRequestOnSend": true,
 

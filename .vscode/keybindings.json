@@ -5,7 +5,7 @@
     // INSTRUÇÃO: Copie para seu keybindings.json global
     // (Ctrl+K Ctrl+S > Abrir JSON de Atalhos do Teclado)
     // ════════════════════════════════════════════════════════════════════
-    
+
     "version": "2.0.0",
     "keybindings": [
         // ═══════════════ HOG - TRADUÇÃO SEMÂNTICA ═══════════════
@@ -37,7 +37,7 @@
             "command": "workbench.action.tasks.runTask",
             "args": "[HOG] UNDO - Desfazer Ultima"
         },
-        
+
         // ═══════════════ HTTP TOOLKIT ═══════════════
         {
             "key": "ctrl+alt+h",
@@ -49,7 +49,7 @@
             "command": "workbench.action.tasks.runTask",
             "args": "[HOG] HTTP - Intercept (Modo AI)"
         },
-        
+
         // ═══════════════ GIT SHORTCUTS ═══════════════
         {
             "key": "ctrl+shift+g ctrl+shift+p",
@@ -66,7 +66,7 @@
             "command": "workbench.action.tasks.runTask",
             "args": "[HOG] GIT - SAFE DEPLOY"
         },
-        
+
         // ═══════════════ NAVIGATION BOOST ═══════════════
         {
             "key": "ctrl+tab",
@@ -96,7 +96,7 @@
             "key": "alt+5",
             "command": "workbench.action.openEditorAtIndex5"
         },
-        
+
         // ═══════════════ EDITOR POWER MOVES ═══════════════
         {
             "key": "ctrl+d",
@@ -128,7 +128,7 @@
             "command": "editor.action.deleteLines",
             "when": "editorTextFocus && !editorReadonly"
         },
-        
+
         // ═══════════════ TERMINAL ═══════════════
         {
             "key": "ctrl+`",
@@ -143,7 +143,7 @@
             "command": "workbench.action.terminal.copySelection",
             "when": "terminalFocus && terminalTextSelected"
         },
-        
+
         // ═══════════════ SIDEBAR ═══════════════
         {
             "key": "ctrl+b",
@@ -163,7 +163,7 @@
             "command": "workbench.view.scm",
             "when": "!editorTextFocus"
         },
-        
+
         // ═══════════════ COPILOT POWER ═══════════════
         {
             "key": "ctrl+i",
@@ -179,7 +179,7 @@
             "command": "github.copilot.acceptPanelSuggestion",
             "when": "github.copilot.panelVisible"
         },
-        
+
         // ═══════════════ MULTI-CURSOR MASTERY ═══════════════
         {
             "key": "ctrl+alt+up",
@@ -196,7 +196,7 @@
             "command": "editor.action.selectHighlights",
             "when": "editorFocus"
         },
-        
+
         // ═══════════════ CODE ACTIONS ═══════════════
         {
             "key": "ctrl+.",
@@ -223,7 +223,7 @@
             "command": "editor.action.goToReferences",
             "when": "editorHasReferenceProvider && editorTextFocus"
         },
-        
+
         // ═══════════════ FORMATTING ═══════════════
         {
             "key": "shift+alt+f",
@@ -235,7 +235,7 @@
             "command": "editor.action.formatSelection",
             "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus"
         },
-        
+
         // ═══════════════ BOOKMARKS (QUICK JUMPS) ═══════════════
         {
             "key": "ctrl+f2",
