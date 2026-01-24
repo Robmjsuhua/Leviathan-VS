@@ -15,17 +15,20 @@ Uma ferramenta de alto desempenho para normalizacao semantica de codigo e interc
 ## 🚀 Instalacao Rapida (1 Clique)
 
 ### Windows
+
 ```batch
 # Clique duplo no arquivo:
 INSTALL.bat
 ```
 
 ### PowerShell (Avancado)
+
 ```powershell
 .\install.ps1
 ```
 
 O instalador:
+
 - ✅ Instala Python, Git, VS Code (se necessario)
 - ✅ Configura extensoes do VS Code
 - ✅ Configura MCP para GitHub Copilot
@@ -47,16 +50,19 @@ O instalador:
 ## Inicio Rapido
 
 ### Windows (GUI)
+
 ```batch
 START_HOG.bat
 ```
 
 ### HTTP Toolkit (Interativo)
+
 ```bash
 python http_toolkit.py interactive
 ```
 
 ### Linha de Comando
+
 ```bash
 # Semantic Translation
 python translator.py encode      # Sanitizar codigo
@@ -68,6 +74,7 @@ python http_toolkit.py scan https://api.example.com
 ```
 
 ### VSCode (Ctrl+Shift+B)
+
 Acesse o menu de tasks e selecione a operacao desejada.
 
 ---
@@ -92,17 +99,17 @@ python translator.py
 
 ## Comandos Disponiveis
 
-| Comando | Alias | Descricao |
-|---------|-------|-----------|
-| `encode` | `e`, `sanitize`, `clean` | Sanitiza o conteudo |
-| `decode` | `d`, `r`, `restore`, `revert` | Restaura os termos originais |
-| `stats` | `s` | Mostra estatisticas |
-| `history` | `h` | Mostra historico de operacoes |
-| `undo` | `u` | Desfaz a ultima operacao |
-| `validate` | `v` | Valida o arquivo de configuracao |
-| `preview` | `p` | Preview das alteracoes |
-| `interactive` | `i` | Modo interativo |
-| `help` | `-h`, `--help` | Mostra ajuda |
+| Comando       | Alias                         | Descricao                        |
+| ------------- | ----------------------------- | -------------------------------- |
+| `encode`      | `e`, `sanitize`, `clean`      | Sanitiza o conteudo              |
+| `decode`      | `d`, `r`, `restore`, `revert` | Restaura os termos originais     |
+| `stats`       | `s`                           | Mostra estatisticas              |
+| `history`     | `h`                           | Mostra historico de operacoes    |
+| `undo`        | `u`                           | Desfaz a ultima operacao         |
+| `validate`    | `v`                           | Valida o arquivo de configuracao |
+| `preview`     | `p`                           | Preview das alteracoes           |
+| `interactive` | `i`                           | Modo interativo                  |
+| `help`        | `-h`, `--help`                | Mostra ajuda                     |
 
 ---
 
@@ -150,21 +157,21 @@ Edite o arquivo `config.json` para adicionar ou modificar regras:
 
 ```json
 {
-    "termo_original": "termo_sanitizado",
-    "exploit": "performance_case",
-    "bypass": "bridge_compatibility"
+  "termo_original": "termo_sanitizado",
+  "exploit": "performance_case",
+  "bypass": "bridge_compatibility"
 }
 ```
 
 ### Regras Incluidas (104 regras)
 
-| Categoria | Exemplos |
-|-----------|----------|
-| Seguranca | bypass, exploit, vulnerability, injection |
-| Malware | virus, trojan, backdoor, rootkit, keylogger |
-| Ataques | xss, csrf, ddos, sql_injection, bruteforce |
-| Ferramentas | scanner, fuzzer, debugger, decompiler |
-| Acesso | privilege, root, admin, shell, terminal |
+| Categoria   | Exemplos                                    |
+| ----------- | ------------------------------------------- |
+| Seguranca   | bypass, exploit, vulnerability, injection   |
+| Malware     | virus, trojan, backdoor, rootkit, keylogger |
+| Ataques     | xss, csrf, ddos, sql_injection, bruteforce  |
+| Ferramentas | scanner, fuzzer, debugger, decompiler       |
+| Acesso      | privilege, root, admin, shell, terminal     |
 
 ---
 
@@ -185,23 +192,23 @@ Edite o arquivo `config.json` para adicionar ou modificar regras:
 
 ## VSCode Tasks (Ctrl+Shift+B)
 
-| Task | Descricao |
-|------|-----------|
-| [HOG] ENCODE | Converte termos sensiveis para neutros |
-| [HOG] RESTORE | Restaura termos originais |
-| [HOG] STATS | Mostra estatisticas |
-| [HOG] PREVIEW | Pre-visualiza alteracoes |
-| [HOG] HISTORY | Exibe historico |
-| [HOG] UNDO | Desfaz ultima operacao |
-| [HOG] VALIDATE | Valida config.json |
-| [HOG] INTERACTIVE | Modo console |
-| [HOG] CLEAN | Remove backups |
-| [HOG] LIST BACKUPS | Lista backups |
-| [HOG] CONFIG COUNT | Conta regras |
-| [HOG] GIT STATUS | Status do git |
-| [HOG] GIT PUSH | Push para GitHub |
-| [HOG] GIT COMMIT ALL | Commit todas alteracoes |
-| [HOG] FULL CYCLE | Encode + Copia para clipboard |
+| Task                 | Descricao                              |
+| -------------------- | -------------------------------------- |
+| [HOG] ENCODE         | Converte termos sensiveis para neutros |
+| [HOG] RESTORE        | Restaura termos originais              |
+| [HOG] STATS          | Mostra estatisticas                    |
+| [HOG] PREVIEW        | Pre-visualiza alteracoes               |
+| [HOG] HISTORY        | Exibe historico                        |
+| [HOG] UNDO           | Desfaz ultima operacao                 |
+| [HOG] VALIDATE       | Valida config.json                     |
+| [HOG] INTERACTIVE    | Modo console                           |
+| [HOG] CLEAN          | Remove backups                         |
+| [HOG] LIST BACKUPS   | Lista backups                          |
+| [HOG] CONFIG COUNT   | Conta regras                           |
+| [HOG] GIT STATUS     | Status do git                          |
+| [HOG] GIT PUSH       | Push para GitHub                       |
+| [HOG] GIT COMMIT ALL | Commit todas alteracoes                |
+| [HOG] FULL CYCLE     | Encode + Copia para clipboard          |
 
 ---
 

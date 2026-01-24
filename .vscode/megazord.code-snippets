@@ -1,0 +1,353 @@
+{
+    // ════════════════════════════════════════════════════════════════════
+    // 🚀 MEGAZORD CODE v6.0 - NASA LEVEL CODE SNIPPETS
+    // 🔥 THE HAND OF GOD - Custom Snippets Collection
+    // ════════════════════════════════════════════════════════════════════
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🐍 PYTHON SNIPPETS
+    // ═══════════════════════════════════════════════════════════════════
+    
+    "Python Main Guard": {
+        "scope": "python",
+        "prefix": ["main", "ifmain", "__main__"],
+        "body": [
+            "if __name__ == '__main__':",
+            "    ${1:main()}"
+        ],
+        "description": "if __name__ == '__main__' guard"
+    },
+    
+    "Python Class": {
+        "scope": "python",
+        "prefix": ["class", "pyclass"],
+        "body": [
+            "class ${1:ClassName}:",
+            "    \"\"\"${2:Class description.}\"\"\"",
+            "    ",
+            "    def __init__(self${3:, args}):",
+            "        \"\"\"Initialize ${1:ClassName}.\"\"\"",
+            "        ${4:pass}",
+            "    ",
+            "    def ${5:method}(self):",
+            "        \"\"\"${6:Method description.}\"\"\"",
+            "        ${7:pass}"
+        ],
+        "description": "Python class with docstrings"
+    },
+    
+    "Python Function with Docstring": {
+        "scope": "python",
+        "prefix": ["def", "func", "function"],
+        "body": [
+            "def ${1:function_name}(${2:args}) -> ${3:None}:",
+            "    \"\"\"",
+            "    ${4:Function description.}",
+            "    ",
+            "    Args:",
+            "        ${2:args}: ${5:Description}",
+            "    ",
+            "    Returns:",
+            "        ${3:None}: ${6:Description}",
+            "    \"\"\"",
+            "    ${7:pass}"
+        ],
+        "description": "Python function with Google-style docstring"
+    },
+    
+    "Python Async Function": {
+        "scope": "python",
+        "prefix": ["async", "asyncdef", "asyncfunc"],
+        "body": [
+            "async def ${1:function_name}(${2:args}) -> ${3:None}:",
+            "    \"\"\"${4:Async function description.}\"\"\"",
+            "    ${5:pass}"
+        ],
+        "description": "Python async function"
+    },
+    
+    "Python Try-Except": {
+        "scope": "python",
+        "prefix": ["try", "tryex", "tryexcept"],
+        "body": [
+            "try:",
+            "    ${1:pass}",
+            "except ${2:Exception} as e:",
+            "    ${3:print(f'Error: {e}')}"
+        ],
+        "description": "Python try-except block"
+    },
+    
+    "Python Context Manager": {
+        "scope": "python",
+        "prefix": ["with", "context", "contextmanager"],
+        "body": [
+            "with ${1:open('file.txt', 'r')} as ${2:f}:",
+            "    ${3:content = f.read()}"
+        ],
+        "description": "Python context manager (with statement)"
+    },
+    
+    "Python Dataclass": {
+        "scope": "python",
+        "prefix": ["dataclass", "dc"],
+        "body": [
+            "from dataclasses import dataclass, field",
+            "",
+            "@dataclass",
+            "class ${1:ClassName}:",
+            "    \"\"\"${2:Dataclass description.}\"\"\"",
+            "    ${3:name}: str",
+            "    ${4:value}: int = 0"
+        ],
+        "description": "Python dataclass"
+    },
+    
+    "Python Logger Setup": {
+        "scope": "python",
+        "prefix": ["logger", "logging", "log"],
+        "body": [
+            "import logging",
+            "",
+            "logging.basicConfig(",
+            "    level=logging.${1|INFO,DEBUG,WARNING,ERROR,CRITICAL|},",
+            "    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'",
+            ")",
+            "logger = logging.getLogger(__name__)"
+        ],
+        "description": "Python logging setup"
+    },
+    
+    "Python HTTP Request": {
+        "scope": "python",
+        "prefix": ["request", "http", "fetch"],
+        "body": [
+            "import requests",
+            "",
+            "response = requests.${1|get,post,put,delete|}(",
+            "    '${2:https://api.example.com}',",
+            "    headers={'Content-Type': 'application/json'},",
+            "    ${3:json={'key': 'value'}}",
+            ")",
+            "",
+            "if response.ok:",
+            "    data = response.json()",
+            "    ${4:print(data)}",
+            "else:",
+            "    print(f'Error: {response.status_code}')"
+        ],
+        "description": "Python HTTP request with requests library"
+    },
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🔧 MEGAZORD HOG SNIPPETS
+    // ═══════════════════════════════════════════════════════════════════
+    
+    "HOG Translation Rule": {
+        "scope": "json,jsonc",
+        "prefix": ["hogrule", "translationrule"],
+        "body": [
+            "\"${1:original_term}\": \"${2:graph_term}\","
+        ],
+        "description": "Add new HOG translation rule to config.json"
+    },
+    
+    "HOG Comment Block": {
+        "scope": "python",
+        "prefix": ["hogblock", "megazordblock"],
+        "body": [
+            "# ════════════════════════════════════════════════════════════════",
+            "# 🔥 ${1:SECTION NAME}",
+            "# ════════════════════════════════════════════════════════════════"
+        ],
+        "description": "HOG-style section comment block"
+    },
+    
+    "HOG TODO": {
+        "scope": "python,javascript,typescript",
+        "prefix": ["hogtodo", "megazordtodo"],
+        "body": [
+            "# TODO: [HOG] ${1:Description} - ${CURRENT_DATE}/${CURRENT_MONTH}/${CURRENT_YEAR}"
+        ],
+        "description": "HOG-style TODO comment"
+    },
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 📜 JAVASCRIPT/TYPESCRIPT SNIPPETS
+    // ═══════════════════════════════════════════════════════════════════
+    
+    "Arrow Function": {
+        "scope": "javascript,typescript,javascriptreact,typescriptreact",
+        "prefix": ["arrow", "af", "arrowfunc"],
+        "body": [
+            "const ${1:functionName} = (${2:args}) => {",
+            "    ${3:// body}",
+            "};"
+        ],
+        "description": "Arrow function"
+    },
+    
+    "Async Arrow Function": {
+        "scope": "javascript,typescript,javascriptreact,typescriptreact",
+        "prefix": ["asyncarrow", "aaf", "asyncfunc"],
+        "body": [
+            "const ${1:functionName} = async (${2:args}) => {",
+            "    ${3:// body}",
+            "};"
+        ],
+        "description": "Async arrow function"
+    },
+    
+    "Console Log Object": {
+        "scope": "javascript,typescript,javascriptreact,typescriptreact",
+        "prefix": ["clg", "clog", "consoleobj"],
+        "body": [
+            "console.log('${1:label}:', ${1:variable});"
+        ],
+        "description": "Console log with object destructuring"
+    },
+    
+    "Fetch API": {
+        "scope": "javascript,typescript,javascriptreact,typescriptreact",
+        "prefix": ["fetch", "fetchapi"],
+        "body": [
+            "const response = await fetch('${1:url}', {",
+            "    method: '${2|GET,POST,PUT,DELETE|}',",
+            "    headers: {",
+            "        'Content-Type': 'application/json',",
+            "    },",
+            "    ${3:body: JSON.stringify(data),}",
+            "});",
+            "",
+            "const data = await response.json();",
+            "${4:console.log(data);}"
+        ],
+        "description": "Fetch API with async/await"
+    },
+    
+    "Try-Catch-Finally": {
+        "scope": "javascript,typescript,javascriptreact,typescriptreact",
+        "prefix": ["trycatch", "tcf"],
+        "body": [
+            "try {",
+            "    ${1:// code}",
+            "} catch (error) {",
+            "    console.error('Error:', error);",
+            "    ${2:throw error;}",
+            "} finally {",
+            "    ${3:// cleanup}",
+            "}"
+        ],
+        "description": "Try-catch-finally block"
+    },
+    
+    "React Functional Component": {
+        "scope": "javascriptreact,typescriptreact",
+        "prefix": ["rfc", "reactfc", "component"],
+        "body": [
+            "interface ${1:ComponentName}Props {",
+            "    ${2:prop}: ${3:string};",
+            "}",
+            "",
+            "export const ${1:ComponentName}: React.FC<${1:ComponentName}Props> = ({ ${2:prop} }) => {",
+            "    return (",
+            "        <div>",
+            "            ${4:content}",
+            "        </div>",
+            "    );",
+            "};"
+        ],
+        "description": "React functional component with TypeScript"
+    },
+    
+    "React useState Hook": {
+        "scope": "javascriptreact,typescriptreact",
+        "prefix": ["usestate", "state"],
+        "body": [
+            "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState<${2:string}>(${3:''});"
+        ],
+        "description": "React useState hook"
+    },
+    
+    "React useEffect Hook": {
+        "scope": "javascriptreact,typescriptreact",
+        "prefix": ["useeffect", "effect"],
+        "body": [
+            "useEffect(() => {",
+            "    ${1:// effect}",
+            "    ",
+            "    return () => {",
+            "        ${2:// cleanup}",
+            "    };",
+            "}, [${3:dependencies}]);"
+        ],
+        "description": "React useEffect hook with cleanup"
+    },
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 📝 GENERAL SNIPPETS
+    // ═══════════════════════════════════════════════════════════════════
+    
+    "File Header Comment": {
+        "scope": "python,javascript,typescript,rust,go",
+        "prefix": ["fileheader", "header"],
+        "body": [
+            "# ════════════════════════════════════════════════════════════════════",
+            "# 📄 ${TM_FILENAME}",
+            "# 📅 Created: ${CURRENT_DATE}/${CURRENT_MONTH}/${CURRENT_YEAR}",
+            "# 👤 Author: ${1:Your Name}",
+            "# 📝 Description: ${2:File description}",
+            "# ════════════════════════════════════════════════════════════════════"
+        ],
+        "description": "File header comment block"
+    },
+    
+    "TODO Comment": {
+        "scope": "python,javascript,typescript,rust,go",
+        "prefix": ["todo", "fixme"],
+        "body": [
+            "# TODO: ${1:Description}"
+        ],
+        "description": "TODO comment"
+    },
+    
+    "BUG Comment": {
+        "scope": "python,javascript,typescript,rust,go",
+        "prefix": ["bug", "bugfix"],
+        "body": [
+            "# BUG: ${1:Description of the bug}"
+        ],
+        "description": "BUG comment"
+    },
+    
+    "HACK Comment": {
+        "scope": "python,javascript,typescript,rust,go",
+        "prefix": ["hack"],
+        "body": [
+            "# HACK: ${1:Temporary solution - needs refactoring}"
+        ],
+        "description": "HACK comment"
+    },
+    
+    "NOTE Comment": {
+        "scope": "python,javascript,typescript,rust,go",
+        "prefix": ["note"],
+        "body": [
+            "# NOTE: ${1:Important information}"
+        ],
+        "description": "NOTE comment"
+    },
+    
+    "Section Divider": {
+        "scope": "python,javascript,typescript,rust,go",
+        "prefix": ["divider", "section", "sep"],
+        "body": [
+            "",
+            "# ═══════════════════════════════════════════════════════════════════",
+            "# ${1:SECTION NAME}",
+            "# ═══════════════════════════════════════════════════════════════════",
+            ""
+        ],
+        "description": "Section divider comment"
+    }
+}

@@ -1,20 +1,56 @@
 {
     "recommendations": [
+        // ════════════════════════════════════════════════════════════════
+        // 🚀 NASA LEVEL - EXTENSÕES ESSENCIAIS
+        // ════════════════════════════════════════════════════════════════
+        // === AI & COPILOT ===
+        "github.copilot",
+        "github.copilot-chat",
+        // === PYTHON ECOSYSTEM ===
         "ms-python.python",
         "ms-python.debugpy",
         "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        // === JAVASCRIPT/TYPESCRIPT ===
         "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        // === RUST ===
+        "rust-lang.rust-analyzer",
+        // === GO ===
+        "golang.go",
+        // === WEB DEVELOPMENT ===
+        "formulahendry.auto-rename-tag",
+        "bradlc.vscode-tailwindcss",
+        // === GIT & VERSION CONTROL ===
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        // === PRODUCTIVITY ===
+        "usernamehw.errorlens",
+        "gruntfuggly.todo-tree",
+        "christian-kohler.path-intellisense",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-portuguese-brazilian",
-        "usernamehw.errorlens",
-        "eamodio.gitlens",
-        "gruntfuggly.todo-tree",
+        // === VISUAL ENHANCEMENT ===
         "PKief.material-icon-theme",
-        "formulahendry.auto-rename-tag",
-        "christian-kohler.path-intellisense",
         "naumovs.color-highlight",
         "oderwat.indent-rainbow",
-        "yzhang.markdown-all-in-one"
+        "mechatroner.rainbow-csv",
+        // === MARKDOWN & DOCS ===
+        "yzhang.markdown-all-in-one",
+        "bierner.markdown-mermaid",
+        // === CONTAINERS & DEVOPS ===
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        // === API & REST ===
+        "humao.rest-client",
+        "rangav.vscode-thunder-client",
+        // === DATABASE ===
+        "mtxr.sqltools",
+        // === TESTING ===
+        "ms-vscode.test-adapter-converter",
+        // === DEBUGGING ===
+        "hediet.debug-visualizer"
     ],
     "unwantedRecommendations": []
 }

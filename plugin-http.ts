@@ -1,7 +1,7 @@
 /**
  * THE HAND OF GOD - Module: Network Dispatcher (HTTP Toolkit)
  * Objetivo: Interceptor de tráfego com Normalização Semântica integrada.
- * 
+ *
  * Funcionalidades:
  * - Header Mimicry: Rotação automática de User-Agent
  * - Response Diff: Comparação de respostas sanitizadas
@@ -95,7 +95,7 @@ class HeaderMimicry {
 
     getHeaders(): Record<string, string> {
         this.requestCount++;
-        
+
         // Rotação automática baseada no intervalo
         if (this.requestCount % this.rotationInterval === 0) {
             this.rotateProfile();
@@ -155,18 +155,18 @@ class SemanticProcessor {
             'status_code': 'exit_signal_identifier',
             'endpoint_discovery': 'resource_mapping',
             'vulnerability_scan': 'logic_stress_analysis',
-            
+
             // Headers sensíveis
             'authorization': 'credential_header',
             'x-api-key': 'service_identifier',
             'x-auth-token': 'session_marker',
-            
+
             // Métodos de ataque
             'injection': 'stream_merging',
             'bypass': 'linear_decoupling',
             'exploit': 'edge_case_path',
             'payload': 'serialized_state',
-            
+
             // Status codes críticos
             '401': 'auth_required_signal',
             '403': 'access_denied_signal',
@@ -242,7 +242,7 @@ class ResponseDiff {
         for (let i = 0; i < maxLines; i++) {
             const origLine = origLines[i] || '';
             const sanLine = sanLines[i] || '';
-            
+
             if (origLine !== sanLine) {
                 differences.push({
                     position: i + 1,
@@ -350,10 +350,10 @@ class AIAutoRepair {
         };
 
         const handler = strategies[response.status];
-        
+
         if (handler) {
             const { changes, strategy } = handler();
-            
+
             this.failureLog.push({
                 timestamp: new Date(),
                 url: config.url,
@@ -426,7 +426,7 @@ export class HOGDispatcher {
         const startTime = Date.now();
 
         // 1. Aplica o Frame de Conformidade no payload
-        const sanitizedPayload = payload 
+        const sanitizedPayload = payload
             ? this.semanticProcessor.sanitize(JSON.stringify(payload))
             : undefined;
 
@@ -464,14 +464,14 @@ export class HOGDispatcher {
 
             // 6. Analisa resultado
             const decouplingResult = this.responseDiff.detectLinearDecoupling(response);
-            
+
             if (!decouplingResult.success) {
                 console.log(`[HOG] Linear decoupling check: FAILED`);
                 console.log(`[HOG] Indicators: ${decouplingResult.indicators.join(', ')}`);
 
                 // 7. AI Auto-Repair
                 const repairPlan = await this.aiAutoRepair.analyzeFailure(response, config);
-                
+
                 if (repairPlan.shouldRetry) {
                     console.log(`[HOG] Auto-repair strategy: ${repairPlan.strategy}`);
                     // Aplica as mudanças sugeridas e faz retry
@@ -496,7 +496,7 @@ export class HOGDispatcher {
         } catch (error) {
             const endTime = Date.now();
             console.error(`[HOG] Request failed: ${error}`);
-            
+
             return {
                 status: 0,
                 statusText: 'Network Error',
@@ -528,7 +528,7 @@ export class HOGDispatcher {
                 headers: config.headers,
                 body: config.body
             });
-            
+
             const endTime = Date.now();
             return {
                 ...(result as any),

@@ -2,12 +2,33 @@
     "mcpServers": {
         "megazord": {
             "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-            "args": [
-                "c:\\Users\\th\\Desktop\\a\\mcp_server.py"
-            ],
-            "env": {
-                "PYTHONIOENCODING": "utf-8"
-            }
+            "args": ["c:\\Users\\th\\Desktop\\a\\mcp_server.py"],
+            "env": { "PYTHONIOENCODING": "utf-8" }
+        },
+        "filesystem": {
+            "command": "npx.cmd",
+            "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\th\\Desktop", "C:\\Users\\th\\Documents"],
+            "env": { "NODE_OPTIONS": "--no-warnings" }
+        },
+        "memory": {
+            "command": "npx.cmd",
+            "args": ["-y", "@modelcontextprotocol/server-memory"],
+            "env": { "NODE_OPTIONS": "--no-warnings" }
+        },
+        "fetch": {
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["-m", "mcp_server_fetch"],
+            "env": { "PYTHONIOENCODING": "utf-8" }
+        },
+        "time": {
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["-m", "mcp_server_time", "--local-timezone", "America/Sao_Paulo"],
+            "env": { "PYTHONIOENCODING": "utf-8" }
+        },
+        "sqlite": {
+            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "args": ["-m", "mcp_server_sqlite", "--db-path", "C:\\Users\\th\\Desktop\\a\\megazord.db"],
+            "env": { "PYTHONIOENCODING": "utf-8" }
         }
     }
 }

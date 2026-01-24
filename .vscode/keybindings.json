@@ -1,42 +1,251 @@
 {
-    "version": "1.0.0",
-    "note": "Copie estes atalhos para seu keybindings.json global (Ctrl+Shift+P > Open Keyboard Shortcuts JSON)",
+    // ════════════════════════════════════════════════════════════════════
+    // 🚀 MEGAZORD CODE v6.0 - NASA LEVEL KEYBINDINGS
+    // ════════════════════════════════════════════════════════════════════
+    // INSTRUÇÃO: Copie para seu keybindings.json global
+    // (Ctrl+K Ctrl+S > Abrir JSON de Atalhos do Teclado)
+    // ════════════════════════════════════════════════════════════════════
+    
+    "version": "2.0.0",
     "keybindings": [
+        // ═══════════════ HOG - TRADUÇÃO SEMÂNTICA ═══════════════
         {
             "key": "ctrl+shift+e",
             "command": "workbench.action.tasks.runTask",
             "args": "[HOG] ENCODE - Preparar para IA",
-            "description": "ENCODE - Prepara codigo para enviar a IA"
+            "when": "editorTextFocus"
         },
         {
-            "key": "ctrl+shift+r",
+            "key": "ctrl+shift+d",
             "command": "workbench.action.tasks.runTask",
             "args": "[HOG] RESTORE - Restaurar Original",
-            "description": "RESTORE - Restaura termos originais"
+            "when": "editorTextFocus"
         },
         {
-            "key": "ctrl+shift+s",
+            "key": "ctrl+alt+s",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] STATS - Estatisticas",
-            "description": "STATS - Mostra estatisticas"
+            "args": "[HOG] STATS - Estatisticas"
         },
         {
-            "key": "ctrl+shift+p",
+            "key": "ctrl+alt+p",
             "command": "workbench.action.tasks.runTask",
             "args": "[HOG] PREVIEW - Ver Alteracoes",
-            "description": "PREVIEW - Pre-visualiza alteracoes"
+            "when": "editorTextFocus"
         },
         {
-            "key": "ctrl+shift+u",
+            "key": "ctrl+alt+z",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] UNDO - Desfazer Ultima",
-            "description": "UNDO - Desfaz ultima operacao"
+            "args": "[HOG] UNDO - Desfazer Ultima"
+        },
+        
+        // ═══════════════ HTTP TOOLKIT ═══════════════
+        {
+            "key": "ctrl+alt+h",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] HTTP - Request Simples"
+        },
+        {
+            "key": "ctrl+alt+i",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] HTTP - Intercept (Modo AI)"
+        },
+        
+        // ═══════════════ GIT SHORTCUTS ═══════════════
+        {
+            "key": "ctrl+shift+g ctrl+shift+p",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] GIT PUSH"
+        },
+        {
+            "key": "ctrl+shift+g ctrl+shift+c",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] GIT COMMIT ALL"
+        },
+        {
+            "key": "ctrl+shift+g ctrl+shift+d",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HOG] GIT - SAFE DEPLOY"
+        },
+        
+        // ═══════════════ NAVIGATION BOOST ═══════════════
+        {
+            "key": "ctrl+tab",
+            "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
+        },
+        {
+            "key": "ctrl+shift+tab",
+            "command": "workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
+        },
+        {
+            "key": "alt+1",
+            "command": "workbench.action.openEditorAtIndex1"
+        },
+        {
+            "key": "alt+2",
+            "command": "workbench.action.openEditorAtIndex2"
+        },
+        {
+            "key": "alt+3",
+            "command": "workbench.action.openEditorAtIndex3"
+        },
+        {
+            "key": "alt+4",
+            "command": "workbench.action.openEditorAtIndex4"
+        },
+        {
+            "key": "alt+5",
+            "command": "workbench.action.openEditorAtIndex5"
+        },
+        
+        // ═══════════════ EDITOR POWER MOVES ═══════════════
+        {
+            "key": "ctrl+d",
+            "command": "editor.action.copyLinesDownAction",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+            "key": "ctrl+shift+d",
+            "command": "editor.action.deleteLines",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+            "key": "alt+up",
+            "command": "editor.action.moveLinesUpAction",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+            "key": "alt+down",
+            "command": "editor.action.moveLinesDownAction",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+            "key": "ctrl+j",
+            "command": "editor.action.joinLines",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+            "key": "ctrl+shift+k",
+            "command": "editor.action.deleteLines",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        
+        // ═══════════════ TERMINAL ═══════════════
+        {
+            "key": "ctrl+`",
+            "command": "workbench.action.terminal.toggleTerminal"
+        },
+        {
+            "key": "ctrl+shift+`",
+            "command": "workbench.action.terminal.new"
+        },
+        {
+            "key": "ctrl+shift+c",
+            "command": "workbench.action.terminal.copySelection",
+            "when": "terminalFocus && terminalTextSelected"
+        },
+        
+        // ═══════════════ SIDEBAR ═══════════════
+        {
+            "key": "ctrl+b",
+            "command": "workbench.action.toggleSidebarVisibility"
+        },
+        {
+            "key": "ctrl+shift+e",
+            "command": "workbench.view.explorer",
+            "when": "!editorTextFocus"
+        },
+        {
+            "key": "ctrl+shift+f",
+            "command": "workbench.view.search"
         },
         {
             "key": "ctrl+shift+g",
-            "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] GIT PUSH",
-            "description": "GIT PUSH - Envia para GitHub"
+            "command": "workbench.view.scm",
+            "when": "!editorTextFocus"
+        },
+        
+        // ═══════════════ COPILOT POWER ═══════════════
+        {
+            "key": "ctrl+i",
+            "command": "github.copilot.chat.attachFile",
+            "when": "chatIsEnabled"
+        },
+        {
+            "key": "ctrl+shift+i",
+            "command": "workbench.action.chat.open"
+        },
+        {
+            "key": "ctrl+enter",
+            "command": "github.copilot.acceptPanelSuggestion",
+            "when": "github.copilot.panelVisible"
+        },
+        
+        // ═══════════════ MULTI-CURSOR MASTERY ═══════════════
+        {
+            "key": "ctrl+alt+up",
+            "command": "editor.action.insertCursorAbove",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+alt+down",
+            "command": "editor.action.insertCursorBelow",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+shift+l",
+            "command": "editor.action.selectHighlights",
+            "when": "editorFocus"
+        },
+        
+        // ═══════════════ CODE ACTIONS ═══════════════
+        {
+            "key": "ctrl+.",
+            "command": "editor.action.quickFix",
+            "when": "editorHasCodeActionsProvider && editorTextFocus"
+        },
+        {
+            "key": "f2",
+            "command": "editor.action.rename",
+            "when": "editorHasRenameProvider && editorTextFocus"
+        },
+        {
+            "key": "f12",
+            "command": "editor.action.revealDefinition",
+            "when": "editorHasDefinitionProvider && editorTextFocus"
+        },
+        {
+            "key": "alt+f12",
+            "command": "editor.action.peekDefinition",
+            "when": "editorHasDefinitionProvider && editorTextFocus"
+        },
+        {
+            "key": "shift+f12",
+            "command": "editor.action.goToReferences",
+            "when": "editorHasReferenceProvider && editorTextFocus"
+        },
+        
+        // ═══════════════ FORMATTING ═══════════════
+        {
+            "key": "shift+alt+f",
+            "command": "editor.action.formatDocument",
+            "when": "editorHasDocumentFormattingProvider && editorTextFocus"
+        },
+        {
+            "key": "ctrl+k ctrl+f",
+            "command": "editor.action.formatSelection",
+            "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus"
+        },
+        
+        // ═══════════════ BOOKMARKS (QUICK JUMPS) ═══════════════
+        {
+            "key": "ctrl+f2",
+            "command": "bookmarks.toggle",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "f2",
+            "command": "bookmarks.jumpToNext",
+            "when": "editorTextFocus && !editorHasRenameProvider"
         }
     ]
 }

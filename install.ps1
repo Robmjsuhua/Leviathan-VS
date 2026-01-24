@@ -111,7 +111,7 @@ Write-Host "  [OK] Dependencias: $($packages -join ', ')" -ForegroundColor Green
 Write-Host "`n[5/8] Instalando extensoes VS Code..." -ForegroundColor Cyan
 $extensions = @(
     "GitHub.copilot",
-    "GitHub.copilot-chat", 
+    "GitHub.copilot-chat",
     "ms-python.python",
     "ms-python.vscode-pylance",
     "ms-python.debugpy"
@@ -125,11 +125,11 @@ Write-Host "`n[6/8] Configurando MCP para GitHub Copilot..." -ForegroundColor Cy
 if (-not $SkipMCP) {
     $mcpDir = "$env:APPDATA\Code\User\globalStorage\github.copilot"
     $mcpConfig = "$mcpDir\mcp.json"
-    
+
     if (-not (Test-Path $mcpDir)) {
         New-Item -ItemType Directory -Path $mcpDir -Force | Out-Null
     }
-    
+
     $mcpJson = @{
         servers = @{
             "megazord-hog" = @{
@@ -140,7 +140,7 @@ if (-not $SkipMCP) {
             }
         }
     } | ConvertTo-Json -Depth 4
-    
+
     $mcpJson | Out-File -FilePath $mcpConfig -Encoding utf8 -Force
     Write-Host "  [OK] MCP configurado: $mcpConfig" -ForegroundColor Green
 }
@@ -176,19 +176,19 @@ Write-Host @"
   INSTALACAO CONCLUIDA COM SUCESSO!
 
   COMO USAR:
-  
+
   1. No VS Code, pressione Ctrl+Shift+P
   2. Digite "Tasks: Run Task"
   3. Escolha uma task [HOG]
 
   COMANDOS RAPIDOS:
-  
+
   # Sanitizar codigo
   python translator.py encode --file seu_arquivo.py
-  
+
   # HTTP Toolkit interativo
   python http_toolkit.py interactive
-  
+
   # Iniciar MCP Server
   python mcp_server.py
 

@@ -31,7 +31,15 @@
       "id": "httpMethod",
       "type": "pickString",
       "description": "Metodo HTTP:",
-      "options": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+      "options": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "HEAD",
+        "OPTIONS"
+      ],
       "default": "GET"
     }
   ],
@@ -413,7 +421,9 @@
       "label": "[HOG] MCP SERVER - Iniciar",
       "type": "shell",
       "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-      "args": ["mcp_server.py"],
+      "args": [
+        "mcp_server.py"
+      ],
       "isBackground": true,
       "presentation": {
         "reveal": "always",
@@ -444,7 +454,9 @@
         "panel": "dedicated",
         "focus": true
       },
-      "icon": {"id": "radio-tower"},
+      "icon": {
+        "id": "radio-tower"
+      },
       "problemMatcher": [],
       "detail": "Abre a interface de manipulacao de requisicoes com protecao HOG"
     },
@@ -460,7 +472,9 @@
         "reveal": "always",
         "panel": "dedicated"
       },
-      "icon": {"id": "globe"},
+      "icon": {
+        "id": "globe"
+      },
       "problemMatcher": [],
       "detail": "Testa um endpoint com protecao HOG integrada"
     },
@@ -472,7 +486,9 @@
         "reveal": "always",
         "panel": "dedicated"
       },
-      "icon": {"id": "search"},
+      "icon": {
+        "id": "search"
+      },
       "problemMatcher": [],
       "detail": "Executa logic_stress_analysis no endpoint"
     }
