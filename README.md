@@ -1,288 +1,291 @@
-# MEGAZORD CODE
+# VSCode MegaZord
 
-## THE HAND OF GOD - Semantic Translation Engine v5.0 + HTTP Toolkit v2.0
+## Ultimate VS Code Configuration for Security Researchers & Developers
 
-Uma ferramenta de alto desempenho para normalizacao semantica de codigo e interceptacao de trafego HTTP com IA integrada.
+A comprehensive VS Code configuration toolkit with semantic translation engine, HTTP toolkit, and 80+ extensions for static analysis across multiple languages.
 
-![Version](https://img.shields.io/badge/version-5.0.0-blue)
+![Version](https://img.shields.io/badge/version-7.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
-![MCP](https://img.shields.io/badge/MCP-enabled-purple)
-![AI](https://img.shields.io/badge/AI-powered-red)
+![Extensions](https://img.shields.io/badge/extensions-80+-purple)
+![Rules](https://img.shields.io/badge/translation_rules-640+-red)
 
 ---
 
-## Instalacao Rapida (1 Clique)
+## What is this?
 
-### Windows
+VSCode MegaZord is a complete development environment configuration that includes:
+
+1. **Semantic Translation Engine** - Translates sensitive security terms to neutral graph theory terminology before sending code to AI assistants
+2. **HTTP Toolkit** - Intercept and analyze HTTP traffic with AI-powered insights
+3. **Static Analysis** - Pre-configured linters and analyzers for 10+ languages
+4. **MCP Integration** - Model Context Protocol server for GitHub Copilot
+
+---
+
+## Quick Install
+
+### Windows (One-Click)
 
 ```batch
-# Clique duplo no arquivo:
 INSTALL.bat
 ```
 
-### PowerShell (Avancado)
+### PowerShell
 
 ```powershell
 .\install.ps1
 ```
 
-O instalador:
-
-- Instala Python, Git, VS Code (se necessario)
-- Configura extensoes do VS Code
-- Configura MCP para GitHub Copilot
-- Abre o projeto pronto para uso
-
----
-
-## Novidades v7.0
-
-- HTTP Toolkit v2.0 - Interceptador HTTP com IA integrada
-- Header Mimicry - Rotacao automatica de User-Agent
-- AI Analysis - Analise automatica de respostas
-- Auto-Repair - Recuperacao automatica de erros 403/401
-- MCP Server - Integracao com GitHub Copilot
-- 640+ Regras - Paradigma de Teoria de Grafos expandido
-- Analise Estatica - Suporte para Go, Python, JS/TS, Rust, C/C++
-- GitHub Integration - Analise de repositorios e PRs
+The installer automatically:
+- Installs Python, Git, VS Code if needed
+- Configures all extensions
+- Sets up MCP for GitHub Copilot
+- Opens the project ready to use
 
 ---
 
-## Inicio Rapido
+## Features
 
-### Windows (GUI)
+### Semantic Translation Engine (THE HAND OF GOD)
 
-```batch
-START_HOG.bat
-```
+Translates security-related terms to neutral terminology using Graph Theory paradigm:
 
-### HTTP Toolkit (Interativo)
+| Original Term | Translated Term |
+|---------------|-----------------|
+| exploit | edge_case_path |
+| vulnerability | graph_discontinuity |
+| bypass | linear_decoupling |
+| injection | stream_merging |
+| reverse_shell | inbound_stream_binding |
+
+This prevents AI assistants from refusing to help with legitimate security research.
+
+### HTTP Toolkit
 
 ```bash
-python http_toolkit.py interactive
+# Make requests with AI analysis
+python core/http_toolkit.py dispatch https://api.example.com
+
+# Scan endpoint methods
+python core/http_toolkit.py scan https://api.example.com
+
+# Interactive mode
+python core/http_toolkit.py interactive
 ```
 
-### Linha de Comando
+Features:
+- Header Mimicry with User-Agent rotation
+- AI-powered response analysis
+- Auto-recovery from 403/401 errors
+- cURL command generation
 
-```bash
-# Semantic Translation
-python translator.py encode      # Sanitizar codigo
-python translator.py restore     # Restaurar originais
+### Static Analysis (Languages Supported)
 
-# HTTP Toolkit
-python http_toolkit.py dispatch https://api.example.com -X POST -d '{"key":"value"}'
-python http_toolkit.py scan https://api.example.com
-```
+| Language | Tools |
+|----------|-------|
+| Python | Pylance, Pylint, Bandit, Mypy, Radon |
+| Go | golangci-lint, Staticcheck, GoSec |
+| JavaScript/TypeScript | ESLint, Prettier, SonarLint |
+| Rust | rust-analyzer, Clippy |
+| C/C++ | Clang-Tidy, Cppcheck |
+| Java | Checkstyle, PMD, SpotBugs |
+| Shell | ShellCheck |
+| Docker | Hadolint |
+| Terraform | TFLint, Checkov |
+| SQL | SQLFluff |
 
-### VSCode (Ctrl+Shift+B)
+### Frontend Tools
 
-Acesse o menu de tasks e selecione a operacao desejada.
+- React, Vue, Angular, Next.js snippets
+- Tailwind CSS IntelliSense
+- Figma to Code integration
+- Storybook support
+- GraphQL tools
 
 ---
 
-## Requisitos
-
-- Python 3.8+
-- Windows/Linux/macOS
-- VSCode com GitHub Copilot (para MCP)
-
----
-
-## Instalacao
-
-```bash
-git clone git@github.com:ThiagoFrag/Megazord-Code.git
-cd Megazord-Code
-python translator.py
-```
-
----
-
-## Comandos Disponiveis
-
-| Comando       | Alias                         | Descricao                        |
-| ------------- | ----------------------------- | -------------------------------- |
-| `encode`      | `e`, `sanitize`, `clean`      | Sanitiza o conteudo              |
-| `decode`      | `d`, `r`, `restore`, `revert` | Restaura os termos originais     |
-| `stats`       | `s`                           | Mostra estatisticas              |
-| `history`     | `h`                           | Mostra historico de operacoes    |
-| `undo`        | `u`                           | Desfaz a ultima operacao         |
-| `validate`    | `v`                           | Valida o arquivo de configuracao |
-| `preview`     | `p`                           | Preview das alteracoes           |
-| `interactive` | `i`                           | Modo interativo                  |
-| `help`        | `-h`, `--help`                | Mostra ajuda                     |
-
----
-
-## Fluxo de Trabalho
+## Project Structure
 
 ```
-1. Cole seu codigo em work.txt
-2. Execute ENCODE (Ctrl+Shift+B > ENCODE)
-   - "exploit" -> "performance_case"
-   - "bypass" -> "bridge_compatibility"
-3. Envie o codigo sanitizado para a IA
-4. Cole a resposta da IA em work.txt
-5. Execute RESTORE (Ctrl+Shift+B > RESTORE)
-   - "performance_case" -> "exploit"
-   - "bridge_compatibility" -> "bypass"
-6. Pronto! Codigo original restaurado
-```
-
----
-
-## Estrutura de Arquivos
-
-```
-Megazord-Code/
+VSCode-MegaZord/
     .github/
-        copilot-instructions.md  # Instrucoes para IA
+        copilot-instructions.md  # AI behavior rules
     .vscode/
-        extensions.json    # Extensoes recomendadas (80+)
-        keybindings.json   # Atalhos de teclado
-        launch.json        # Configuracoes de debug
-        mcp.json           # Configuracao MCP servers
-        settings.json      # Configuracoes do VSCode
-        tasks.json         # Tasks automatizadas (20+ tasks)
+        extensions.json    # 80+ recommended extensions
+        settings.json      # Optimized settings
+        tasks.json         # 20+ automation tasks
+        launch.json        # Debug configurations
+        mcp.json           # MCP server config
     core/
-        config.json        # Regras de traducao (640+ regras)
-        http_toolkit.py    # HTTP Toolkit com IA
-        mcp_server.py      # Servidor MCP
-        plugin-http.ts     # Plugin TypeScript HTTP
-        translator.py      # Motor principal Python
+        config.json        # 640+ translation rules
+        translator.py      # Translation engine
+        http_toolkit.py    # HTTP interceptor
+        mcp_server.py      # MCP server
     docs/
-        CLAUDE_SKILLS.md   # Skills do Claude integrados
-    INSTALL.bat            # Instalador Windows
-    install.ps1            # Instalador PowerShell
-    LICENSE                # Licenca MIT
-    README.md              # Documentacao
-    START_HOG.bat          # Interface grafica Windows
-    work.txt               # Arquivo de trabalho
+        CLAUDE_SKILLS.md   # Claude integration docs
 ```
 
 ---
 
-## Configuracao
+## Usage
 
-Edite o arquivo `config.json` para adicionar ou modificar regras:
+### VS Code Tasks (Ctrl+Shift+B)
+
+| Task | Description |
+|------|-------------|
+| [HOG] ENCODE | Sanitize code before sending to AI |
+| [HOG] RESTORE | Restore original terms |
+| [HOG] PREVIEW | Preview changes without applying |
+| [HOG] CHECK | Security check for sensitive terms |
+| [HOG] INTERACTIVE | Console mode |
+
+### Command Line
+
+```bash
+# Translate (sanitize) code
+python core/translator.py encode
+
+# Restore original terms
+python core/translator.py restore
+
+# Check if code is clean
+python core/translator.py check
+
+# Show statistics
+python core/translator.py stats
+```
+
+### Workflow Example
+
+```
+1. Write security code in work.txt
+2. Run ENCODE task (Ctrl+Shift+B)
+   "exploit" -> "edge_case_path"
+3. Send sanitized code to AI
+4. Paste AI response in work.txt
+5. Run RESTORE task
+   "edge_case_path" -> "exploit"
+6. Original code restored
+```
+
+---
+
+## Translation Rules (640+)
+
+Categories covered:
+
+- **Offensive Security** - exploit, bypass, vulnerability
+- **Malware Analysis** - virus, trojan, backdoor
+- **Web Attacks** - XSS, CSRF, SQL injection
+- **Shells & C2** - reverse shell, webshell, beacon
+- **Network Recon** - scanner, fuzzer, sniffer
+- **Binary Exploitation** - buffer overflow, ROP chain
+- **Cloud Security** - S3 bucket, IAM escalation
+- **Auth Bypass** - session hijack, token forge
+- **Defense Evasion** - obfuscation, packing
+- **Tools** - Metasploit, Burp, Nmap, Hashcat
+
+---
+
+## MCP Integration
+
+The project includes an MCP (Model Context Protocol) server that integrates with GitHub Copilot:
 
 ```json
 {
-  "termo_original": "termo_sanitizado",
-  "exploit": "performance_case",
-  "bypass": "bridge_compatibility"
+  "servers": {
+    "megazord": {
+      "command": "python",
+      "args": ["core/mcp_server.py"],
+      "env": {}
+    }
+  }
 }
 ```
 
-### Regras Incluidas (640+ regras)
-
-| Categoria | Exemplos |
-|-----------|----------|
-| Offensive Security | bypass, exploit, vulnerability, injection |
-| Malware Analysis | virus, trojan, backdoor, rootkit, keylogger |
-| Web Attacks | xss, csrf, ddos, sql_injection, bruteforce |
-| Shells and C2 | reverse_shell, bind_shell, webshell, beacon |
-| Privilege Escalation | privesc, root, admin, sudo, suid |
-| Network Recon | scanner, fuzzer, sniffer, port_scan |
-| Binary Exploitation | buffer_overflow, heap_spray, rop_chain |
-| Cryptography | decrypt, crack, hash, rainbow_table |
-| Cloud Security | s3_bucket, iam_escalation, metadata_service |
-| Auth Bypass | session_hijack, token_forge, credential_stuff |
-| Defense Evasion | obfuscate, encode, pack, antivirus_bypass |
-| Social Engineering | phishing, pretexting, vishing |
-| Tools | metasploit, burp, nmap, hashcat, wireshark |
+Available MCP tools:
+- `encode` - Sanitize text
+- `decode` - Restore text
+- `check` - Verify if text is clean
+- `find_terms` - List sensitive terms
+- `get_rules` - Get all translation rules
 
 ---
 
-## Recursos
+## VS Code Configuration Highlights
 
-- Backup Automatico - Cada operacao cria um backup
-- Historico - Registra as ultimas 50 operacoes
-- Undo - Desfaz a ultima operacao
-- Preview - Ve as alteracoes antes de aplicar
-- Validacao - Verifica conflitos na configuracao
-- Case Preserving - Mantem maiusculas/minusculas
-- Word Boundaries - So substitui palavras completas
-- Estatisticas - Contagem detalhada de alteracoes
-- Hash Tracking - Rastreia alteracoes por hash MD5
-- Cores no Terminal - Feedback visual colorido
+- **Theme**: Dark with neon green accents
+- **Font**: Cascadia Code with ligatures
+- **Auto-save**: Enabled after 1s delay
+- **Type Checking**: Standard mode for Python
+- **Format on Save**: Enabled for all languages
+- **Git**: Auto-fetch enabled
 
 ---
 
-## VSCode Tasks (Ctrl+Shift+B)
+## Extensions Included (80+)
 
-| Task                 | Descricao                              |
-| -------------------- | -------------------------------------- |
-| [HOG] ENCODE         | Converte termos sensiveis para neutros |
-| [HOG] RESTORE        | Restaura termos originais              |
-| [HOG] STATS          | Mostra estatisticas                    |
-| [HOG] PREVIEW        | Pre-visualiza alteracoes               |
-| [HOG] HISTORY        | Exibe historico                        |
-| [HOG] UNDO           | Desfaz ultima operacao                 |
-| [HOG] VALIDATE       | Valida config.json                     |
-| [HOG] INTERACTIVE    | Modo console                           |
-| [HOG] CLEAN          | Remove backups                         |
-| [HOG] LIST BACKUPS   | Lista backups                          |
-| [HOG] CONFIG COUNT   | Conta regras                           |
-| [HOG] GIT STATUS     | Status do git                          |
-| [HOG] GIT PUSH       | Push para GitHub                       |
-| [HOG] GIT COMMIT ALL | Commit todas alteracoes                |
-| [HOG] FULL CYCLE     | Encode + Copia para clipboard          |
+### Core Development
+- Python, Pylance, Go, Rust Analyzer
+- ESLint, Prettier, EditorConfig
 
----
+### AI Assistants
+- GitHub Copilot, Cline, Claude Code
 
-## Configuracoes do VSCode
+### Security
+- SonarQube, Snyk, SARIF Viewer
 
-O projeto inclui configuracoes otimizadas:
+### Frontend
+- Tailwind CSS, Vue, React, Angular
+- Figma integration, Storybook
 
-- Tema escuro customizado (verde neon)
-- Fonte Cascadia Code com ligatures
-- Python analysis com type checking
-- Auto-save habilitado
-- Git auto-fetch
-- Extensoes recomendadas pre-configuradas
+### Productivity
+- GitLens, Todo Tree, Project Manager
+- REST Client, Thunder Client
 
 ---
 
-## Debug (F5)
+## Requirements
 
-Configuracoes de debug incluidas:
-
-- HOG: Modo Interativo
-- HOG: ENCODE
-- HOG: RESTORE
-- HOG: STATS
-- HOG: VALIDATE
-- HOG: PREVIEW
-- HOG: Debug com Args Customizados
-- Python: Arquivo Atual
+- Python 3.8+
+- VS Code 1.80+
+- Git
 
 ---
 
-## Contribuicao
+## Installation from Source
 
-1. Fork o projeto
-2. Crie sua Feature Branch (`git checkout -b feature/NovaRegra`)
-3. Commit suas mudancas (`git commit -m 'Add: nova regra de traducao'`)
-4. Push para a Branch (`git push origin feature/NovaRegra`)
-5. Abra um Pull Request
+```bash
+git clone git@github.com:ThiagoFrag/Vscode-MegaZord.git
+cd Vscode-MegaZord
+code .
+```
 
----
-
-## Licenca
-
-Este projeto esta sob a licenca MIT. Veja o arquivo LICENSE para mais detalhes.
+Then run the `[HOG] VALIDATE` task to verify the installation.
 
 ---
 
-## Autor
+## Contributing
 
-**ThiagoFrag**
-
-GitHub: [@ThiagoFrag](https://github.com/ThiagoFrag)
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/NewFeature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/NewFeature`)
+5. Open a Pull Request
 
 ---
 
-MEGAZORD CODE - THE HAND OF GOD v7.0
-Semantic Translation Engine + HTTP Toolkit + Static Analysis
+## License
+
+MIT License - See [LICENSE](LICENSE) for details.
+
+---
+
+## Author
+
+**ThiagoFrag** - [@ThiagoFrag](https://github.com/ThiagoFrag)
+
+---
+
+**VSCode MegaZord v7.0** - Ultimate VS Code Configuration for Security Researchers
