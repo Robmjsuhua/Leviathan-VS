@@ -21,7 +21,7 @@
         "filesystem": {
             "command": "npx.cmd",
             "args": [
-                "-y", 
+                "-y",
                 "@modelcontextprotocol/server-filesystem",
                 "C:\\Users\\th\\Desktop",
                 "C:\\Users\\th\\Documents",

@@ -3,54 +3,131 @@
         // ════════════════════════════════════════════════════════════════
         // 🚀 NASA LEVEL - EXTENSÕES ESSENCIAIS
         // ════════════════════════════════════════════════════════════════
+
         // === AI & COPILOT ===
         "github.copilot",
         "github.copilot-chat",
+
         // === PYTHON ECOSYSTEM ===
         "ms-python.python",
         "ms-python.debugpy",
         "ms-python.vscode-pylance",
         "ms-python.black-formatter",
         "charliermarsh.ruff",
+
         // === JAVASCRIPT/TYPESCRIPT ===
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
+
         // === RUST ===
         "rust-lang.rust-analyzer",
+
         // === GO ===
         "golang.go",
+
         // === WEB DEVELOPMENT ===
         "formulahendry.auto-rename-tag",
         "bradlc.vscode-tailwindcss",
+
         // === GIT & VERSION CONTROL ===
         "eamodio.gitlens",
         "mhutchie.git-graph",
+
         // === PRODUCTIVITY ===
         "usernamehw.errorlens",
         "gruntfuggly.todo-tree",
         "christian-kohler.path-intellisense",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+
         // === VISUAL ENHANCEMENT ===
         "PKief.material-icon-theme",
         "naumovs.color-highlight",
         "oderwat.indent-rainbow",
         "mechatroner.rainbow-csv",
+
         // === MARKDOWN & DOCS ===
         "yzhang.markdown-all-in-one",
         "bierner.markdown-mermaid",
+
         // === CONTAINERS & DEVOPS ===
         "ms-azuretools.vscode-docker",
         "ms-vscode-remote.remote-containers",
+
         // === API & REST ===
         "humao.rest-client",
         "rangav.vscode-thunder-client",
+
         // === DATABASE ===
         "mtxr.sqltools",
-        // === TESTING ===
+
+        // ════════════════════════════════════════════════════════════════
+        // 🧪 TESTING & QA - FERRAMENTAS DE TESTE AVANÇADAS
+        // ════════════════════════════════════════════════════════════════
+
+        // === TEST RUNNERS ===
         "ms-vscode.test-adapter-converter",
+        "hbenl.vscode-test-explorer",
+        "ms-playwright.playwright",
+        "Orta.vscode-jest",
+
+        // === CODE QUALITY & ANALYSIS ===
+        "SonarSource.sonarlint-vscode",
+        "deepscan.vscode-deepscan",
+        "codacy.codacy",
+
+        // === SECURITY SCANNING ===
+        "snyk-security.snyk-vulnerability-scanner",
+        "42crunch.vscode-openapi",
+
         // === DEBUGGING ===
-        "hediet.debug-visualizer"
+        "hediet.debug-visualizer",
+        "msjsdiag.vscode-react-native",
+
+        // ════════════════════════════════════════════════════════════════
+        // 🌐 WEB & E-COMMERCE TESTING
+        // ════════════════════════════════════════════════════════════════
+
+        // === BROWSER TESTING ===
+        "nickmomrik.playwright-runner",
+        "nickmomrik.jsonview",
+
+        // === PERFORMANCE & ACCESSIBILITY ===
+        "nickmomrik.lighthouse",
+        "deque.axe-linter",
+
+        // === HTML/CSS VALIDATION ===
+        "ecmel.vscode-html-css",
+        "ritwickdey.LiveServer",
+        "ziishaned.livereload",
+        "pranaygp.vscode-css-peek",
+
+        // === NETWORK & API TESTING ===
+        "anweber.vscode-httpyac",
+        "pjmiravalle.openapi-designer",
+
+        // ════════════════════════════════════════════════════════════════
+        // 🔍 LINTING & FORMATTING
+        // ════════════════════════════════════════════════════════════════
+
+        // === MULTI-LANGUAGE LINTING ===
+        "DavidAnson.vscode-markdownlint",
+        "stylelint.vscode-stylelint",
+        "editorconfig.editorconfig",
+        "redhat.vscode-yaml",
+        "timonwong.shellcheck",
+
+        // === CODE COVERAGE ===
+        "ryanluker.vscode-coverage-gutters",
+        "brainfit.vscode-coverage-highlighter",
+
+        // ════════════════════════════════════════════════════════════════
+        // 🎯 PROJECT MANAGEMENT
+        // ════════════════════════════════════════════════════════════════
+
+        "alefragnani.project-manager",
+        "Gruntfuggly.todo-tree",
+        "wayou.vscode-todo-highlight"
     ],
     "unwantedRecommendations": []
 }

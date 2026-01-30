@@ -242,29 +242,6 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Tokyo Night",
     "workbench.productIconTheme": "material-product-icons",
-        "terminal.background": "#0a0a0a",
-        "terminal.foreground": "#00ff88",
-        "statusBar.background": "#0a0a0a",
-        "statusBar.foreground": "#00ff88",
-        "statusBar.debuggingBackground": "#ff0055",
-        "tab.activeBackground": "#1a1a1a",
-        "tab.activeForeground": "#00ff88",
-        "tab.inactiveBackground": "#0a0a0a",
-        "tab.inactiveForeground": "#666666",
-        "tab.activeBorder": "#00ff88",
-        "list.activeSelectionBackground": "#00ff8833",
-        "list.activeSelectionForeground": "#00ff88",
-        "list.hoverBackground": "#1a1a1a",
-        "button.background": "#00ff88",
-        "button.foreground": "#000000",
-        "badge.background": "#00ff88",
-        "badge.foreground": "#000000",
-        "panel.background": "#0a0a0a",
-        "panelTitle.activeForeground": "#00ff88",
-        "panelTitle.activeBorder": "#00ff88"
-    },
-    "workbench.productIconTheme": "material-product-icons",
-
     // ═══════════════════════════════════════════════════════════════════
     // 📝 LINGUAGENS ESPECÍFICAS
     // ═══════════════════════════════════════════════════════════════════
@@ -502,5 +479,107 @@
     "window.zoomLevel": 0,
     "breadcrumbs.enabled": true,
     "breadcrumbs.filePath": "on",
-    "breadcrumbs.symbolPath": "on"
+    "breadcrumbs.symbolPath": "on",
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🧪 TESTING - CONFIGURAÇÃO DE TESTES
+    // ═══════════════════════════════════════════════════════════════════
+    "testing.alwaysRevealTestOnStateChange": true,
+    "testing.automaticallyOpenPeekView": "failureInVisibleDocument",
+    "testing.countBadge": "failed",
+    "testing.defaultGutterClickAction": "run",
+    "testing.followRunningTest": true,
+    "testing.gutterEnabled": true,
+    "testing.openTesting": "openOnTestStart",
+    "testing.showAllMessages": true,
+
+    // Python Testing
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.testing.pytestArgs": ["-v", "--tb=short"],
+
+    // Jest Testing (JavaScript/TypeScript)
+    "jest.autoRun": {
+        "watch": true,
+        "onSave": "test-src-file"
+    },
+    "jest.showCoverageOnLoad": true,
+
+    // Playwright Testing
+    "playwright.reuseBrowser": true,
+    "playwright.showTrace": true,
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🔍 CODE QUALITY - ANÁLISE DE QUALIDADE
+    // ═══════════════════════════════════════════════════════════════════
+
+    // SonarLint
+    "sonarlint.rules": {},
+    "sonarlint.output.showVerboseLogs": false,
+    "sonarlint.pathToNodeExecutable": "",
+
+    // DeepScan
+    "deepscan.enable": true,
+    "deepscan.ignorePatterns": ["node_modules", "dist", "build"],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🔒 SECURITY SCANNING - SCANNER DE SEGURANÇA
+    // ═══════════════════════════════════════════════════════════════════
+
+    // Snyk Security
+    "snyk.advanced.additionalParameters": "",
+    "snyk.features.openSourceSecurity": true,
+    "snyk.features.codeSecurity": true,
+    "snyk.features.codeQuality": true,
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 📊 CODE COVERAGE - COBERTURA DE CÓDIGO
+    // ═══════════════════════════════════════════════════════════════════
+    "coverage-gutters.showLineCoverage": true,
+    "coverage-gutters.showRulerCoverage": true,
+    "coverage-gutters.showGutterCoverage": true,
+    "coverage-gutters.highlightdark": "rgba(0, 255, 136, 0.2)",
+    "coverage-gutters.noHighlightDark": "rgba(255, 0, 85, 0.2)",
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🌐 LIVE SERVER - SERVIDOR DE DESENVOLVIMENTO
+    // ═══════════════════════════════════════════════════════════════════
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "liveServer.settings.NoBrowser": false,
+    "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 📝 LINTING AVANÇADO
+    // ═══════════════════════════════════════════════════════════════════
+
+    // ESLint
+    "eslint.enable": true,
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "eslint.codeActionsOnSave.mode": "problems",
+
+    // Stylelint
+    "stylelint.enable": true,
+    "stylelint.validate": ["css", "scss", "less"],
+
+    // Markdown Lint
+    "markdownlint.config": {
+        "MD033": false,
+        "MD041": false
+    },
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🔧 HTTPYAC - API TESTING AVANÇADO
+    // ═══════════════════════════════════════════════════════════════════
+    "httpyac.responseViewMode": "preview",
+    "httpyac.responseViewPrettyPrint": true,
+    "httpyac.responseViewColumn": "beside",
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🎯 PROJECT MANAGER
+    // ═══════════════════════════════════════════════════════════════════
+    "projectManager.git.baseFolders": ["C:\\Users\\th\\Desktop"],
+    "projectManager.sortList": "Recent"
 }
