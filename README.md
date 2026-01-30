@@ -12,7 +12,7 @@ Uma ferramenta de alto desempenho para normalizacao semantica de codigo e interc
 
 ---
 
-## 🚀 Instalacao Rapida (1 Clique)
+## Instalacao Rapida (1 Clique)
 
 ### Windows
 
@@ -29,21 +29,23 @@ INSTALL.bat
 
 O instalador:
 
-- ✅ Instala Python, Git, VS Code (se necessario)
-- ✅ Configura extensoes do VS Code
-- ✅ Configura MCP para GitHub Copilot
-- ✅ Abre o projeto pronto para uso
+- Instala Python, Git, VS Code (se necessario)
+- Configura extensoes do VS Code
+- Configura MCP para GitHub Copilot
+- Abre o projeto pronto para uso
 
 ---
 
-## Novidades v5.0
+## Novidades v7.0
 
-- **🤖 HTTP Toolkit v2.0** - Interceptador HTTP com IA integrada
-- **🎭 Header Mimicry** - Rotacao automatica de User-Agent
-- **📊 AI Analysis** - Analise automatica de respostas
-- **🔧 Auto-Repair** - Recuperacao automatica de erros 403/401
-- **🌐 MCP Server** - Integracao com GitHub Copilot
-- **104 Regras** - Paradigma de Teoria de Grafos
+- HTTP Toolkit v2.0 - Interceptador HTTP com IA integrada
+- Header Mimicry - Rotacao automatica de User-Agent
+- AI Analysis - Analise automatica de respostas
+- Auto-Repair - Recuperacao automatica de erros 403/401
+- MCP Server - Integracao com GitHub Copilot
+- 640+ Regras - Paradigma de Teoria de Grafos expandido
+- Analise Estatica - Suporte para Go, Python, JS/TS, Rust, C/C++
+- GitHub Integration - Analise de repositorios e PRs
 
 ---
 
@@ -134,18 +136,28 @@ python translator.py
 
 ```
 Megazord-Code/
+    .github/
+        copilot-instructions.md  # Instrucoes para IA
     .vscode/
-        extensions.json    # Extensoes recomendadas
+        extensions.json    # Extensoes recomendadas (80+)
         keybindings.json   # Atalhos de teclado
         launch.json        # Configuracoes de debug
+        mcp.json           # Configuracao MCP servers
         settings.json      # Configuracoes do VSCode
-        tasks.json         # Tasks automatizadas (16 tasks)
-    config.json            # Regras de traducao (104 regras)
+        tasks.json         # Tasks automatizadas (20+ tasks)
+    core/
+        config.json        # Regras de traducao (640+ regras)
+        http_toolkit.py    # HTTP Toolkit com IA
+        mcp_server.py      # Servidor MCP
+        plugin-http.ts     # Plugin TypeScript HTTP
+        translator.py      # Motor principal Python
+    docs/
+        CLAUDE_SKILLS.md   # Skills do Claude integrados
+    INSTALL.bat            # Instalador Windows
+    install.ps1            # Instalador PowerShell
     LICENSE                # Licenca MIT
     README.md              # Documentacao
-    semantic-engine.ts     # Versao TypeScript (em desenvolvimento)
     START_HOG.bat          # Interface grafica Windows
-    translator.py          # Motor principal Python
     work.txt               # Arquivo de trabalho
 ```
 
@@ -163,15 +175,23 @@ Edite o arquivo `config.json` para adicionar ou modificar regras:
 }
 ```
 
-### Regras Incluidas (104 regras)
+### Regras Incluidas (640+ regras)
 
-| Categoria   | Exemplos                                    |
-| ----------- | ------------------------------------------- |
-| Seguranca   | bypass, exploit, vulnerability, injection   |
-| Malware     | virus, trojan, backdoor, rootkit, keylogger |
-| Ataques     | xss, csrf, ddos, sql_injection, bruteforce  |
-| Ferramentas | scanner, fuzzer, debugger, decompiler       |
-| Acesso      | privilege, root, admin, shell, terminal     |
+| Categoria | Exemplos |
+|-----------|----------|
+| Offensive Security | bypass, exploit, vulnerability, injection |
+| Malware Analysis | virus, trojan, backdoor, rootkit, keylogger |
+| Web Attacks | xss, csrf, ddos, sql_injection, bruteforce |
+| Shells and C2 | reverse_shell, bind_shell, webshell, beacon |
+| Privilege Escalation | privesc, root, admin, sudo, suid |
+| Network Recon | scanner, fuzzer, sniffer, port_scan |
+| Binary Exploitation | buffer_overflow, heap_spray, rop_chain |
+| Cryptography | decrypt, crack, hash, rainbow_table |
+| Cloud Security | s3_bucket, iam_escalation, metadata_service |
+| Auth Bypass | session_hijack, token_forge, credential_stuff |
+| Defense Evasion | obfuscate, encode, pack, antivirus_bypass |
+| Social Engineering | phishing, pretexting, vishing |
+| Tools | metasploit, burp, nmap, hashcat, wireshark |
 
 ---
 
@@ -264,5 +284,5 @@ GitHub: [@ThiagoFrag](https://github.com/ThiagoFrag)
 
 ---
 
-MEGAZORD CODE - THE HAND OF GOD v3.0
-Semantic Translation Engine
+MEGAZORD CODE - THE HAND OF GOD v7.0
+Semantic Translation Engine + HTTP Toolkit + Static Analysis

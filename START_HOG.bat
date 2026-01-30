@@ -1,6 +1,6 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul 2>&1
-title THE HAND OF GOD - Semantic Engine v3.0
+title THE HAND OF GOD - Semantic Engine v7.0
 cd /d "%~dp0"
 color 0A
 
@@ -52,7 +52,7 @@ echo   [96m||[0m   [93m| | | | |_    | |  _| | | | | | |                   [0m[9
 echo   [96m||[0m   [93m| |_| |  _|   | |_| | |_| | |_| |                   [0m[96m||[0m
 echo   [96m||[0m   [93m \___/|_|      \____|\___/|____/                    [0m[96m||[0m
 echo   [96m||[0m                                                        [96m||[0m
-echo   [96m||[0m        [97mSemantic Translation Engine v3.0[0m               [96m||[0m
+echo   [96m||[0m        [97mSemantic Translation Engine v7.0[0m               [96m||[0m
 echo   [96m||                                                        ||[0m
 echo   [96m============================================================[0m
 echo.
@@ -102,7 +102,7 @@ echo   [96m============================================================[0m
 echo   [96m         ENCODE MODE - Preparando para IA...[0m
 echo   [96m============================================================[0m
 echo.
-%PYTHON_CMD% translator.py encode
+%PYTHON_CMD% core/translator.py encode
 echo.
 echo   [96m============================================================[0m
 pause
@@ -115,7 +115,7 @@ echo   [96m============================================================[0m
 echo   [96m        RESTORE MODE - Restaurando termos...[0m
 echo   [96m============================================================[0m
 echo.
-%PYTHON_CMD% translator.py restore
+%PYTHON_CMD% core/translator.py restore
 echo.
 echo   [96m============================================================[0m
 pause
@@ -128,7 +128,7 @@ echo   [96m============================================================[0m
 echo   [96m              PREVIEW - Visualizacao[0m
 echo   [96m============================================================[0m
 echo.
-%PYTHON_CMD% translator.py preview
+%PYTHON_CMD% core/translator.py preview
 echo.
 echo   [96m============================================================[0m
 pause
@@ -137,14 +137,14 @@ goto menu
 :stats
 cls
 echo.
-%PYTHON_CMD% translator.py stats
+%PYTHON_CMD% core/translator.py stats
 pause
 goto menu
 
 :history
 cls
 echo.
-%PYTHON_CMD% translator.py history
+%PYTHON_CMD% core/translator.py history
 pause
 goto menu
 
@@ -155,7 +155,7 @@ echo   [96m============================================================[0m
 echo   [96m              UNDO - Desfazendo...[0m
 echo   [96m============================================================[0m
 echo.
-%PYTHON_CMD% translator.py undo
+%PYTHON_CMD% core/translator.py undo
 echo.
 pause
 goto menu
@@ -167,7 +167,7 @@ echo   [96m============================================================[0m
 echo   [96m         VALIDATE - Verificando configuracao...[0m
 echo   [96m============================================================[0m
 echo.
-%PYTHON_CMD% translator.py validate
+%PYTHON_CMD% core/translator.py validate
 echo.
 pause
 goto menu
@@ -182,12 +182,12 @@ start "" notepad work.txt
 goto menu
 
 :config
-if not exist config.json (
-    echo   [91m[!] config.json nao encontrado![0m
+if not exist core/config.json (
+    echo   [91m[!] core/config.json nao encontrado![0m
     pause
     goto menu
 )
-start "" notepad config.json
+start "" notepad core/config.json
 goto menu
 
 :backup
@@ -223,7 +223,7 @@ goto menu
 
 :interactive
 cls
-%PYTHON_CMD% translator.py interactive
+%PYTHON_CMD% core/translator.py interactive
 goto menu
 
 :exitapp
@@ -233,7 +233,7 @@ echo   [96m============================================================[0m
 echo   [96m||                                                        ||[0m
 echo   [96m||[0m      [92mObrigado por usar THE HAND OF GOD![0m               [96m||[0m
 echo   [96m||[0m                                                        [96m||[0m
-echo   [96m||[0m           [93mSemantic Engine v3.0[0m                        [96m||[0m
+echo   [96m||[0m           [93mSemantic Engine v7.0[0m                        [96m||[0m
 echo   [96m||[0m                                                        [96m||[0m
 echo   [96m||[0m               [97mAte a proxima![0m                          [96m||[0m
 echo   [96m||                                                        ||[0m
@@ -241,3 +241,4 @@ echo   [96m============================================================[0m
 echo.
 timeout /t 3 >nul
 exit
+

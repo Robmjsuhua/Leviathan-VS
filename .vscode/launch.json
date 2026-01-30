@@ -1,11 +1,11 @@
-{
+﻿{
     "version": "0.2.0",
     "configurations": [
         {
             "name": "HOG: Modo Interativo",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/translator.py",
+            "program": "${workspaceFolder}/core/translator.py",
             "console": "integratedTerminal",
             "args": ["interactive"],
             "justMyCode": true,
@@ -17,7 +17,7 @@
             "name": "HOG: ENCODE",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/translator.py",
+            "program": "${workspaceFolder}/core/translator.py",
             "console": "integratedTerminal",
             "args": ["encode"],
             "justMyCode": true,
@@ -29,7 +29,7 @@
             "name": "HOG: RESTORE",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/translator.py",
+            "program": "${workspaceFolder}/core/translator.py",
             "console": "integratedTerminal",
             "args": ["restore"],
             "justMyCode": true,
@@ -41,7 +41,7 @@
             "name": "HOG: STATS",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/translator.py",
+            "program": "${workspaceFolder}/core/translator.py",
             "console": "integratedTerminal",
             "args": ["stats"],
             "justMyCode": true
@@ -50,7 +50,7 @@
             "name": "HOG: VALIDATE",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/translator.py",
+            "program": "${workspaceFolder}/core/translator.py",
             "console": "integratedTerminal",
             "args": ["validate"],
             "justMyCode": true
@@ -59,7 +59,7 @@
             "name": "HOG: PREVIEW",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/translator.py",
+            "program": "${workspaceFolder}/core/translator.py",
             "console": "integratedTerminal",
             "args": ["preview"],
             "justMyCode": true
@@ -68,7 +68,7 @@
             "name": "HOG: Debug com Args Customizados",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/translator.py",
+            "program": "${workspaceFolder}/core/translator.py",
             "console": "integratedTerminal",
             "args": ["${input:customArgs}"],
             "justMyCode": false,
@@ -102,3 +102,4 @@
         }
     ]
 }
+
