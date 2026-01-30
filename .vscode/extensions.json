@@ -1,7 +1,7 @@
 {
     "recommendations": [
         // ════════════════════════════════════════════════════════════════
-        // 🚀 NASA LEVEL - EXTENSÕES ESSENCIAIS
+        // NASA LEVEL - EXTENSOES ESSENCIAIS
         // ════════════════════════════════════════════════════════════════
 
         // === AI & COPILOT ===
@@ -62,7 +62,7 @@
         "mtxr.sqltools",
 
         // ════════════════════════════════════════════════════════════════
-        // 🧪 TESTING & QA - FERRAMENTAS DE TESTE AVANÇADAS
+        // TESTING & QA - FERRAMENTAS DE TESTE AVANCADAS
         // ════════════════════════════════════════════════════════════════
 
         // === TEST RUNNERS ===
@@ -72,16 +72,16 @@
         "Orta.vscode-jest",
 
         // === CODE QUALITY & ANALYSIS ===
-        "SonarSource.sonarlint-vscode",
+        "sonarsource.sonarlint-vscode",
         "deepscan.vscode-deepscan",
-        "codacy.codacy",
+        "codacy-app.codacy",
 
         // === SECURITY SCANNING ===
         "snyk-security.snyk-vulnerability-scanner",
         "42crunch.vscode-openapi",
 
         // ════════════════════════════════════════════════════════════════
-        // 🔬 STATIC ANALYSIS - ANÁLISE ESTÁTICA AVANÇADA
+        // STATIC ANALYSIS - ANALISE ESTATICA AVANCADA
         // ════════════════════════════════════════════════════════════════
 
         // === GO - Staticcheck, GoSec, Errcheck, Gocyclo ===
@@ -93,10 +93,38 @@
         "ms-python.flake8",
         "matangover.mypy",
 
-        // === JAVASCRIPT/TYPESCRIPT - ESLint, TSLint, Complexity ===
+        // === JAVASCRIPT/TYPESCRIPT - ESLint, Complexity ===
         "dbaeumer.vscode-eslint",
         "kisstkondansen.vscode-gutter-preview",
         "jbockle.jbockle-format-files",
+
+        // ════════════════════════════════════════════════════════════════
+        // GITHUB & CODE REVIEW - ANALISE DE PROJETOS GITHUB
+        // ════════════════════════════════════════════════════════════════
+
+        // === GitHub Integration ===
+        "GitHub.vscode-pull-request-github",
+        "GitHub.remotehub",
+        "GitHub.codespaces",
+
+        // === Code Review & Analysis ===
+        "sourcery.sourcery",
+        "codescene.codescene-vscode",
+        "geekmasher.codeql-scanner-vscode",
+
+        // === Multi-language Meta-Linters ===
+        "trunk.io",
+        "meterian.meterian-heidi",
+
+        // === AI Code Review ===
+        "bito.bito",
+
+        // === Accessibility & HTML ===
+        "deque-systems.vscode-axe-linter",
+        "htmlhint.vscode-htmlhint",
+
+        // === Datadog Observability ===
+        "datadog.datadog-vscode",
 
         // === RUST - Clippy (via rust-analyzer) ===
         "rust-lang.rust-analyzer",
@@ -108,15 +136,20 @@
         "ms-vscode.cpptools-extension-pack",
         "llvm-vs-code-extensions.vscode-clangd",
         "jbenden.c-cpp-flylint",
+        "parasoft.vscode-cpptest",
 
         // === JAVA - SpotBugs, PMD, Checkstyle ===
         "redhat.java",
         "vscjava.vscode-java-pack",
         "shengchen.vscode-checkstyle",
+        "chuckjonas.apex-pmd",
+
+        // === .NET - Static Analysis ===
+        "parasoft.vscode-dottest",
 
         // === PHP - PHPStan, Psalm, PHP_CodeSniffer ===
         "bmewburn.vscode-intelephense-client",
-        "phpstan.vscode-phpstan",
+        "sanderronde.phpstan-vscode",
 
         // === SHELL/BASH - ShellCheck ===
         "timonwong.shellcheck",
@@ -135,13 +168,17 @@
         // === YAML/JSON - Schema Validation ===
         "redhat.vscode-yaml",
         "ZainChen.json",
+        "darioajr.yaml-doctor",
+
+        // === SECURITY SCANNERS ===
+        "wayneashleyberry.entropy-scanner",
 
         // === DEBUGGING ===
         "hediet.debug-visualizer",
         "msjsdiag.vscode-react-native",
 
         // ════════════════════════════════════════════════════════════════
-        // 🌐 WEB & E-COMMERCE TESTING
+        // WEB & E-COMMERCE TESTING
         // ════════════════════════════════════════════════════════════════
 
         // === BROWSER TESTING ===
@@ -163,7 +200,7 @@
         "pjmiravalle.openapi-designer",
 
         // ════════════════════════════════════════════════════════════════
-        // 🔍 LINTING & FORMATTING
+        // LINTING & FORMATTING
         // ════════════════════════════════════════════════════════════════
 
         // === MULTI-LANGUAGE LINTING ===
@@ -178,7 +215,7 @@
         "brainfit.vscode-coverage-highlighter",
 
         // ════════════════════════════════════════════════════════════════
-        // 🎯 PROJECT MANAGEMENT
+        // PROJECT MANAGEMENT
         // ════════════════════════════════════════════════════════════════
 
         "alefragnani.project-manager",
