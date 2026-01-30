@@ -699,5 +699,86 @@
     // === SQL: SQLFluff ===
     "sqlfluff.executablePath": "",
     "sqlfluff.dialect": "postgres",
-    "sqlfluff.linter.run": "onSave"
+    "sqlfluff.linter.run": "onSave",
+
+    // ═══════════════════════════════════════════════════════════════════
+    // FRONTEND FRAMEWORKS - CONFIGURAÇÕES AVANÇADAS
+    // ═══════════════════════════════════════════════════════════════════
+
+    // === REACT/JSX ===
+    "react.snippets.suggestions.enable": true,
+    "javascript.suggest.autoImports": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.suggest.autoImports": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+
+    // === VUE (Volar) ===
+    "vue.inlayHints.inlineHandlerLeading": true,
+    "vue.inlayHints.missingProps": true,
+    "vue.autoInsert.dotValue": true,
+    "vue.splitEditors.layout.left": ["script", "scriptSetup"],
+    "vue.splitEditors.layout.right": ["template", "style"],
+
+    // === TAILWIND CSS ===
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.includeLanguages": {
+        "javascript": "javascript",
+        "typescript": "typescript",
+        "javascriptreact": "javascript",
+        "typescriptreact": "javascript",
+        "vue": "html",
+        "html": "html"
+    },
+    "tailwindCSS.classAttributes": ["class", "className", "ngClass", "classList"],
+    "tailwindCSS.experimental.classRegex": [
+        ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ],
+
+    // === CSS-IN-JS (Styled Components, Emotion) ===
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "css.lint.unknownAtRules": "ignore",
+
+    // === NEXT.JS ===
+    "typescript.preferences.importModuleSpecifierEnding": "minimal",
+
+    // === STORYBOOK ===
+    "storybook.enableEditorFeatures": true,
+
+    // === GRAPHQL ===
+    "graphql-config.load.rootDir": ".",
+    "graphql-config.dotEnvPath": ".env",
+
+    // === PRETTIER (Frontend Formatter) ===
+    "prettier.singleQuote": true,
+    "prettier.jsxSingleQuote": false,
+    "prettier.trailingComma": "es5",
+    "prettier.bracketSpacing": true,
+    "prettier.bracketSameLine": false,
+
+    // === EMMET (HTML/JSX) ===
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact",
+        "vue-html": "html",
+        "vue": "html"
+    },
+    "emmet.triggerExpansionOnTab": true,
+
+    // === AUTO RENAME TAG ===
+    "auto-rename-tag.activationOnLanguage": ["html", "xml", "vue", "javascriptreact", "typescriptreact"],
+
+    // === COLOR HIGHLIGHT ===
+    "color-highlight.markerType": "background",
+    "color-highlight.matchRgbWithNoFunction": true,
+
+    // === IMPORT COST ===
+    "importCost.smallPackageSize": 10,
+    "importCost.mediumPackageSize": 50,
+    "importCost.smallPackageColor": "#7cc36e",
+    "importCost.mediumPackageColor": "#e2c618",
+    "importCost.largePackageColor": "#d44e40"
 }

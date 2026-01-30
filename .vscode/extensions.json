@@ -126,6 +126,60 @@
         // === Datadog Observability ===
         "datadog.datadog-vscode",
 
+        // ════════════════════════════════════════════════════════════════
+        // FRONTEND FRAMEWORKS - React, Vue, Angular, Next.js, Tailwind
+        // ════════════════════════════════════════════════════════════════
+
+        // === React Ecosystem ===
+        "styled-components.vscode-styled-components",
+        "yoavbls.pretty-ts-errors",
+        "chakrounanas.turbo-console-log",
+        "ofhumanbondage.react-proptypes-intellisense",
+        "riccardoforina.storybook-helper",
+
+        // === Vue Ecosystem ===
+        "vue.volar",
+        "hollowtree.vue-snippets",
+
+        // === Angular Ecosystem ===
+        "angular.ng-template",
+        "alexiv.vscode-angular2-files",
+        "obenjiro.arrr",
+
+        // === Next.js and T3 Stack ===
+        "imgildev.vscode-nextjs-generator",
+        "kristiyanvelkov.nextjs-cli",
+
+        // === Astro and Modern Frameworks ===
+        "astro-build.astro-vscode",
+
+        // === Tailwind CSS ===
+        "lightyen.tailwindcss-intellisense-twin",
+
+        // === Design to Code - Figma Integration ===
+        "animaapp.vscode-anima",
+        "kombai.kombai",
+        "aquilalabs.superflex",
+
+        // === Component Preview and Testing ===
+        "jinno.codelens-sample",
+        "ardevia.sculptui-vscode",
+
+        // === GraphQL ===
+        "graphql.vscode-graphql-syntax",
+
+        // === CSS-in-JS ===
+        "blanu.vscode-styled-jsx",
+        "mrmlnc.vscode-scss",
+
+        // === UI Development ===
+        "vsblox.blox",
+        "saposs.vscode-ui5-language-assistant",
+
+        // === Frontend AI Agents ===
+        "purecodeai.purecode-ai",
+        "dhiwisepvtltd.dhiwisecodesync",
+
         // === RUST - Clippy (via rust-analyzer) ===
         "rust-lang.rust-analyzer",
         "vadimcn.vscode-lldb",
@@ -220,7 +274,30 @@
 
         "alefragnani.project-manager",
         "Gruntfuggly.todo-tree",
-        "wayou.vscode-todo-highlight"
+        "wayou.vscode-todo-highlight",
+
+        // ════════════════════════════════════════════════════════════════
+        // FRONTEND AI TOOLS - DESIGN TO CODE
+        // ════════════════════════════════════════════════════════════════
+
+        // === Figma to Code - AI Conversion ===
+        "sindujaramaraj.app-developer-copilot",
+        "codespellai.codespellai-vscode",
+        "nicepkg.aide-pro",
+
+        // === Live Component Preview ===
+        "sureshnettur.ccaia",
+        "bugzi.forge-webbuilder",
+
+        // === AI Code Generation and UI ===
+        "gocodeo.gocodeo",
+        "andrepimenta.claude-code-chat",
+        "futuretechnexus.getbotai",
+        "auratechnologies.claude-code-ui-overlay",
+
+        // === Multi-Agent Development ===
+        "multi.multi-nightly",
+        "ecloud.zhanlu"
     ],
     "unwantedRecommendations": []
 }

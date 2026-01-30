@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 ================================================================================
@@ -162,11 +162,11 @@ class MCPServer:
         self.request_id = 0
         self.running = True
     
-    async def handle_request(self, request: Dict) -> Dict:
+    async def handle_request(self, request: Dict) -> Optional[Dict]:
         """Processa uma requisicao MCP."""
         method = request.get("method", "")
         params = request.get("params", {})
-        request_id = request.get("id")
+        request_id: Optional[int] = request.get("id")
         
         logger.info(f"Requisicao: {method}")
         
@@ -211,7 +211,7 @@ class MCPServer:
                 "error": {"code": -32603, "message": str(e)}
             }
     
-    def _handle_initialize(self, request_id: int, params: Dict) -> Dict:
+    def _handle_initialize(self, request_id: Optional[int], params: Dict) -> Dict:
         """Inicializa o servidor MCP."""
         return {
             "jsonrpc": "2.0",
@@ -230,7 +230,7 @@ class MCPServer:
             }
         }
     
-    def _handle_tools_list(self, request_id: int) -> Dict:
+    def _handle_tools_list(self, request_id: Optional[int]) -> Dict:
         """Lista ferramentas disponiveis."""
         return {
             "jsonrpc": "2.0",
@@ -315,7 +315,7 @@ class MCPServer:
             }
         }
     
-    async def _handle_tool_call(self, request_id: int, params: Dict) -> Dict:
+    async def _handle_tool_call(self, request_id: Optional[int], params: Dict) -> Dict:
         """Executa uma ferramenta."""
         tool_name = params.get("name", "")
         arguments = params.get("arguments", {})
@@ -477,7 +477,7 @@ class MCPServer:
             "error": {"code": -32601, "message": f"Ferramenta nao encontrada: {tool_name}"}
         }
     
-    def _handle_resources_list(self, request_id: int) -> Dict:
+    def _handle_resources_list(self, request_id: Optional[int]) -> Dict:
         """Lista recursos disponiveis."""
         return {
             "jsonrpc": "2.0",
@@ -500,7 +500,7 @@ class MCPServer:
             }
         }
     
-    def _handle_resource_read(self, request_id: int, params: Dict) -> Dict:
+    def _handle_resource_read(self, request_id: Optional[int], params: Dict) -> Dict:
         """Le um recurso."""
         uri = params.get("uri", "")
         
@@ -546,7 +546,7 @@ class MCPServer:
             "error": {"code": -32602, "message": f"Recurso nao encontrado: {uri}"}
         }
     
-    def _handle_prompts_list(self, request_id: int) -> Dict:
+    def _handle_prompts_list(self, request_id: Optional[int]) -> Dict:
         """Lista prompts disponiveis."""
         return {
             "jsonrpc": "2.0",
@@ -638,3 +638,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

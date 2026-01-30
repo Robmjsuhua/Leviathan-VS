@@ -19,17 +19,13 @@ import hashlib
 import argparse
 import urllib.request
 import urllib.error
-import urllib.parse
 import ssl
-import sys
 import os
 import re
-import subprocess
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict, field
 from datetime import datetime
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 VERSION = "2.0.0"
 CONFIG_FILE = Path(__file__).parent / "config.json"
@@ -165,7 +161,7 @@ class AIIntegration:
             "internal_path": (r"(/var/|/home/|c:\\)", "Internal paths exposed"),
         }
 
-        for name, (regex, desc) in patterns.items():
+        for _, (regex, desc) in patterns.items():
             if re.search(regex, body_lower):
                 analysis["patterns_detected"].append(desc)
                 analysis["risk_level"] = "high" if "credential" in desc else "medium"
@@ -217,7 +213,7 @@ class HeaderMimicry:
         self.rotation_interval = 5
         self.custom_headers: Dict[str, str] = {}
 
-    def get_random_ua(self, profile: str = None) -> str:
+    def get_random_ua(self, profile: Optional[str] = None) -> str:
         agents = USER_AGENTS.get(profile or self.current_profile, USER_AGENTS["chrome_windows"])
         return random.choice(agents)
 
@@ -341,7 +337,7 @@ class HOGDispatcher:
             pass
 
     def dispatch(self, url: str, method: str = "GET", payload: Any = None,
-                 headers: Dict[str, str] = None, analyze: bool = True) -> ResponseData:
+                 headers: Optional[Dict[str, str]] = None, analyze: bool = True) -> Optional[ResponseData]:
         start = time.time()
 
         body = None
@@ -436,7 +432,8 @@ class HOGDispatcher:
         results = []
         for m in methods:
             r = self.dispatch(url, m, analyze=False)
-            results.append({"method": m, "status": r.status, "duration": r.timing["duration"]})
+            if r:
+                results.append({"method": m, "status": r.status, "duration": r.timing["duration"]})
             time.sleep(0.3)
         return results
 
@@ -471,12 +468,16 @@ def cmd_dispatch(args):
     r = d.dispatch(args.url, args.method, payload, headers)
 
     print(f"\n{'='*70}")
-    print(f"Status: {r.status} {r.status_text}")
-    print(f"Duration: {r.timing['duration']}ms")
-    if r.ai_analysis:
-        print(f"Risk: {r.ai_analysis.get('risk_level', 'N/A').upper()}")
-    print('='*70)
-    print(f"\nBody:\n{r.body[:2000]}{'...' if len(r.body) > 2000 else ''}")
+    if r:
+        print(f"Status: {r.status} {r.status_text}")
+        print(f"Duration: {r.timing['duration']}ms")
+        if r.ai_analysis:
+            print(f"Risk: {r.ai_analysis.get('risk_level', 'N/A').upper()}")
+        print('='*70)
+        print(f"\nBody:\n{r.body[:2000]}{'...' if len(r.body) > 2000 else ''}")
+    else:
+        print("Request failed - no response")
+        print('='*70)
 
     if args.curl:
         print(f"\nCurl: {d.get_curl(args.url, args.method, payload)}")
@@ -549,9 +550,12 @@ def cmd_interactive(args):
             else:
                 r = d.dispatch(cmd)
 
-            print(f"\nStatus: {r.status} {r.status_text} ({r.timing['duration']:.0f}ms)")
-            if r.body:
-                print(f"Body: {r.body[:500]}...")
+            if r:
+                print(f"\nStatus: {r.status} {r.status_text} ({r.timing['duration']:.0f}ms)")
+                if r.body:
+                    print(f"Body: {r.body[:500]}...")
+            else:
+                print("\nRequest failed - no response")
 
         except KeyboardInterrupt:
             print("\nBye!")

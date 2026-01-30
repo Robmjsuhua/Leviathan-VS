@@ -17,16 +17,12 @@
 import json
 import re
 import sys
-import os
-import shutil
 import hashlib
-import argparse
 from pathlib import Path
-from typing import Dict, Tuple, List, Optional, Set
+from typing import Dict, Tuple, List, Optional
 from datetime import datetime
-from dataclasses import dataclass, field
- from enum import Enum
-from collections import Counter
+from dataclasses import dataclass
+from enum import Enum
 
 # ============================================================================
 # CONSTANTES E CONFIGURACOES
@@ -163,7 +159,7 @@ class SemanticTranslator:
             try:
                 with open(self.history_path, 'r', encoding='utf-8') as f:
                     self.history = json.load(f)
-            except:
+            except Exception:
                 self.history = []
 
     def _save_history(self, entry: dict) -> None:
@@ -863,7 +859,7 @@ class CLI:
 
         else:
             print(f"{Colors.RED}[ERRO] Comando desconhecido: {command}{Colors.RESET}")
-            print(f"       Use 'python translator.py help' para ver os comandos.")
+            print("       Use 'python translator.py help' para ver os comandos.")
             sys.exit(1)
 
 # ============================================================================
