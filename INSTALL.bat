@@ -94,7 +94,7 @@ echo   "servers": { >> "%MCP_CONFIG%"
 echo     "megazord-hog": { >> "%MCP_CONFIG%"
 echo       "type": "stdio", >> "%MCP_CONFIG%"
 echo       "command": "python", >> "%MCP_CONFIG%"
-echo       "args": ["%CD:\=/%/mcp_server.py"], >> "%MCP_CONFIG%"
+echo       "args": ["%CD:\=/%/core/mcp_server.py"], >> "%MCP_CONFIG%"
 echo       "env": {} >> "%MCP_CONFIG%"
 echo     } >> "%MCP_CONFIG%"
 echo   } >> "%MCP_CONFIG%"
@@ -105,7 +105,7 @@ echo.
 echo [7/8] Validando instalacao...
 python -c "import json; print('[OK] JSON OK')" 2>nul || echo [X] Erro no modulo JSON
 python -c "import urllib.request; print('[OK] HTTP OK')" 2>nul || echo [X] Erro no modulo HTTP
-python translator.py validate >nul 2>&1 && echo [OK] Translator validado || echo [!] Translator precisa de config.json
+python core\translator.py validate >nul 2>&1 && echo [OK] Translator validado || echo [!] Translator precisa de config.json
 
 echo.
 echo [8/8] Abrindo VS Code com o projeto...
@@ -120,18 +120,18 @@ echo ║   COMO USAR:                                                           
 echo ║                                                                           ║
 echo ║   1. No VS Code, pressione Ctrl+Shift+P                                   ║
 echo ║   2. Digite "Tasks: Run Task"                                             ║
-echo ║   3. Escolha uma task [HOG] para executar                                 ║
-echo ║                                                                           ║
-echo ║   TASKS DISPONIVEIS:                                                      ║
-echo ║   - [HOG] ENCODE          : Sanitiza codigo para IA                       ║
-echo ║   - [HOG] RESTORE         : Restaura termos originais                     ║
-echo ║   - [HOG] HTTP TOOLKIT    : Interceptador de requisicoes                  ║
-echo ║   - [HOG] MCP SERVER      : Servidor para GitHub Copilot                  ║
+echo    3. Escolha uma task [LEVIATHAN] para executar
+echo
+echo    TASKS DISPONIVEIS:
+echo    - [LEVIATHAN] ENCODE    : Sanitiza codigo para IA
+echo    - [LEVIATHAN] RESTORE   : Restaura termos originais
+echo    - [LEVIATHAN] HTTP TOOLKIT : Interceptador de requisicoes
+echo    - [LEVIATHAN] MCP SERVER   : Servidor para GitHub Copilot
 echo ║                                                                           ║
 echo ║   MODO INTERATIVO:                                                        ║
-echo ║   python http_toolkit.py interactive                                      ║
+echo ║   python core\http_toolkit.py interactive                                 ║
 echo ║                                                                           ║
-echo ║   GitHub: https://github.com/ThiagoFrag/Megazord-Code                     ║
+echo    GitHub: https://github.com/ThiagoFrag/Leviathan-VS
 echo ║                                                                           ║
 echo ╚═══════════════════════════════════════════════════════════════════════════╝
 echo.

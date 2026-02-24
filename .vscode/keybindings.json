@@ -5,68 +5,64 @@
     // INSTRUÇÃO: Copie para seu keybindings.json global
     // (Ctrl+K Ctrl+S > Abrir JSON de Atalhos do Teclado)
     // ════════════════════════════════════════════════════════════════════
-
     "version": "2.0.0",
     "keybindings": [
-        // ═══════════════ HOG - TRADUÇÃO SEMÂNTICA ═══════════════
+        // ═══════════════ LEVIATHAN - TRADUÇÃO SEMÂNTICA ═══════════════
         {
             "key": "ctrl+shift+e",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] ENCODE - Preparar para IA",
+            "args": "[LEVIATHAN] ENCODE - Preparar para IA",
             "when": "editorTextFocus"
         },
         {
             "key": "ctrl+shift+d",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] RESTORE - Restaurar Original",
+            "args": "[LEVIATHAN] RESTORE - Restaurar Original",
             "when": "editorTextFocus"
         },
         {
             "key": "ctrl+alt+s",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] STATS - Estatisticas"
+            "args": "[LEVIATHAN] STATS - Estatisticas"
         },
         {
             "key": "ctrl+alt+p",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] PREVIEW - Ver Alteracoes",
+            "args": "[LEVIATHAN] PREVIEW - Ver Alteracoes",
             "when": "editorTextFocus"
         },
         {
             "key": "ctrl+alt+z",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] UNDO - Desfazer Ultima"
+            "args": "[LEVIATHAN] UNDO - Desfazer Ultima"
         },
-
         // ═══════════════ HTTP TOOLKIT ═══════════════
         {
             "key": "ctrl+alt+h",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] HTTP - Request Simples"
+            "args": "[LEVIATHAN] HTTP TOOLKIT - Testar Endpoint"
         },
         {
             "key": "ctrl+alt+i",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] HTTP - Intercept (Modo AI)"
+            "args": "[LEVIATHAN] HTTP TOOLKIT - Iniciar Interceptador"
         },
-
         // ═══════════════ GIT SHORTCUTS ═══════════════
         {
             "key": "ctrl+shift+g ctrl+shift+p",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] GIT PUSH"
+            "args": "[LEVIATHAN] GIT PUSH"
         },
         {
             "key": "ctrl+shift+g ctrl+shift+c",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] GIT COMMIT ALL"
+            "args": "[LEVIATHAN] GIT COMMIT ALL"
         },
         {
             "key": "ctrl+shift+g ctrl+shift+d",
             "command": "workbench.action.tasks.runTask",
-            "args": "[HOG] GIT - SAFE DEPLOY"
+            "args": "[LEVIATHAN] GIT - SAFE DEPLOY"
         },
-
         // ═══════════════ NAVIGATION BOOST ═══════════════
         {
             "key": "ctrl+tab",
@@ -96,7 +92,6 @@
             "key": "alt+5",
             "command": "workbench.action.openEditorAtIndex5"
         },
-
         // ═══════════════ EDITOR POWER MOVES ═══════════════
         {
             "key": "ctrl+d",
@@ -128,7 +123,6 @@
             "command": "editor.action.deleteLines",
             "when": "editorTextFocus && !editorReadonly"
         },
-
         // ═══════════════ TERMINAL ═══════════════
         {
             "key": "ctrl+`",
@@ -143,7 +137,6 @@
             "command": "workbench.action.terminal.copySelection",
             "when": "terminalFocus && terminalTextSelected"
         },
-
         // ═══════════════ SIDEBAR ═══════════════
         {
             "key": "ctrl+b",
@@ -163,7 +156,6 @@
             "command": "workbench.view.scm",
             "when": "!editorTextFocus"
         },
-
         // ═══════════════ COPILOT POWER ═══════════════
         {
             "key": "ctrl+i",
@@ -179,7 +171,6 @@
             "command": "github.copilot.acceptPanelSuggestion",
             "when": "github.copilot.panelVisible"
         },
-
         // ═══════════════ MULTI-CURSOR MASTERY ═══════════════
         {
             "key": "ctrl+alt+up",
@@ -196,7 +187,6 @@
             "command": "editor.action.selectHighlights",
             "when": "editorFocus"
         },
-
         // ═══════════════ CODE ACTIONS ═══════════════
         {
             "key": "ctrl+.",
@@ -223,7 +213,6 @@
             "command": "editor.action.goToReferences",
             "when": "editorHasReferenceProvider && editorTextFocus"
         },
-
         // ═══════════════ FORMATTING ═══════════════
         {
             "key": "shift+alt+f",
@@ -235,7 +224,6 @@
             "command": "editor.action.formatSelection",
             "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus"
         },
-
         // ═══════════════ BOOKMARKS (QUICK JUMPS) ═══════════════
         {
             "key": "ctrl+f2",
@@ -246,6 +234,227 @@
             "key": "f2",
             "command": "bookmarks.jumpToNext",
             "when": "editorTextFocus && !editorHasRenameProvider"
+        },
+        // ═══════════════ DEBUG MASTERY ═══════════════
+        {
+            "key": "f5",
+            "command": "workbench.action.debug.start",
+            "when": "!inDebugMode"
+        },
+        {
+            "key": "f5",
+            "command": "workbench.action.debug.continue",
+            "when": "inDebugMode"
+        },
+        {
+            "key": "ctrl+f5",
+            "command": "workbench.action.debug.run",
+            "when": "!inDebugMode"
+        },
+        {
+            "key": "shift+f5",
+            "command": "workbench.action.debug.stop",
+            "when": "inDebugMode"
+        },
+        {
+            "key": "ctrl+shift+f5",
+            "command": "workbench.action.debug.restart",
+            "when": "inDebugMode"
+        },
+        {
+            "key": "f9",
+            "command": "editor.debug.action.toggleBreakpoint",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "f10",
+            "command": "workbench.action.debug.stepOver",
+            "when": "inDebugMode"
+        },
+        {
+            "key": "f11",
+            "command": "workbench.action.debug.stepInto",
+            "when": "inDebugMode"
+        },
+        {
+            "key": "shift+f11",
+            "command": "workbench.action.debug.stepOut",
+            "when": "inDebugMode"
+        },
+        // ═══════════════ FOLDING / UNFOLDING ═══════════════
+        {
+            "key": "ctrl+shift+[",
+            "command": "editor.fold",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+shift+]",
+            "command": "editor.unfold",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+k ctrl+0",
+            "command": "editor.foldAll",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+k ctrl+j",
+            "command": "editor.unfoldAll",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+k ctrl+1",
+            "command": "editor.foldLevel1",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+k ctrl+2",
+            "command": "editor.foldLevel2",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+k ctrl+3",
+            "command": "editor.foldLevel3",
+            "when": "editorTextFocus"
+        },
+        // ═══════════════ SPLIT EDITOR ═══════════════
+        {
+            "key": "ctrl+\\",
+            "command": "workbench.action.splitEditor"
+        },
+        {
+            "key": "ctrl+alt+right",
+            "command": "workbench.action.moveEditorToNextGroup"
+        },
+        {
+            "key": "ctrl+alt+left",
+            "command": "workbench.action.moveEditorToPreviousGroup"
+        },
+        {
+            "key": "ctrl+1",
+            "command": "workbench.action.focusFirstEditorGroup"
+        },
+        {
+            "key": "ctrl+2",
+            "command": "workbench.action.focusSecondEditorGroup"
+        },
+        {
+            "key": "ctrl+3",
+            "command": "workbench.action.focusThirdEditorGroup"
+        },
+        // ═══════════════ PANEL CONTROL ═══════════════
+        {
+            "key": "ctrl+shift+m",
+            "command": "workbench.actions.view.problems"
+        },
+        {
+            "key": "ctrl+shift+u",
+            "command": "workbench.action.output.toggleOutput"
+        },
+        {
+            "key": "ctrl+shift+y",
+            "command": "workbench.debug.action.toggleRepl"
+        },
+        {
+            "key": "ctrl+k ctrl+h",
+            "command": "workbench.action.output.show.channel.gitLog"
+        },
+        // ═══════════════ COMMENT TOGGLE ═══════════════
+        {
+            "key": "ctrl+/",
+            "command": "editor.action.commentLine",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+            "key": "shift+alt+a",
+            "command": "editor.action.blockComment",
+            "when": "editorTextFocus && !editorReadonly"
+        },
+        // ═══════════════ MORE TAB NAVIGATION ═══════════════
+        {
+            "key": "alt+6",
+            "command": "workbench.action.openEditorAtIndex6"
+        },
+        {
+            "key": "alt+7",
+            "command": "workbench.action.openEditorAtIndex7"
+        },
+        {
+            "key": "alt+8",
+            "command": "workbench.action.openEditorAtIndex8"
+        },
+        {
+            "key": "alt+9",
+            "command": "workbench.action.lastEditorInGroup"
+        },
+        {
+            "key": "ctrl+w",
+            "command": "workbench.action.closeActiveEditor"
+        },
+        {
+            "key": "ctrl+k ctrl+w",
+            "command": "workbench.action.closeAllEditors"
+        },
+        // ═══════════════ ZOOM ═══════════════
+        {
+            "key": "ctrl+=",
+            "command": "workbench.action.zoomIn"
+        },
+        {
+            "key": "ctrl+-",
+            "command": "workbench.action.zoomOut"
+        },
+        {
+            "key": "ctrl+0",
+            "command": "workbench.action.zoomReset"
+        },
+        // ═══════════════ SELECTION POWER ═══════════════
+        {
+            "key": "ctrl+shift+space",
+            "command": "editor.action.triggerParameterHints",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+shift+\\",
+            "command": "editor.action.jumpToBracket",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+l",
+            "command": "expandLineSelection",
+            "when": "editorTextFocus"
+        },
+        // ═══════════════ QUICK OPEN ═══════════════
+        {
+            "key": "ctrl+p",
+            "command": "workbench.action.quickOpen"
+        },
+        {
+            "key": "ctrl+shift+p",
+            "command": "workbench.action.showCommands"
+        },
+        {
+            "key": "ctrl+shift+o",
+            "command": "workbench.action.gotoSymbol"
+        },
+        {
+            "key": "ctrl+t",
+            "command": "workbench.action.showAllSymbols"
+        },
+        {
+            "key": "ctrl+g",
+            "command": "workbench.action.gotoLine"
+        },
+        // ═══════════════ LEVIATHAN WORKFLOWS ═══════════════
+        {
+            "key": "ctrl+alt+f",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[LEVIATHAN] FIND TERMS - Scan Document"
+        },
+        {
+            "key": "ctrl+alt+r",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[LEVIATHAN] RELOAD RULES"
         }
     ]
 }

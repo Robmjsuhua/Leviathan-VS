@@ -1,0 +1,92 @@
+{
+  "_comment": "LEVIATHAN VS - LDPlayer MCP Configuration v4.0",
+  "_version": "4.0.0",
+  "ldplayer": {
+    "install_path": "C:\\LDPlayer\\LDPlayer9",
+    "ldconsole": "ldconsole.exe",
+    "adb_path": "adb.exe",
+    "shared_folder": "C:\\Users\\%USERNAME%\\Documents\\LDPlayer",
+    "default_instance": "LDPlayer",
+    "default_index": 0,
+    "auto_launch": false,
+    "launch_timeout": 60,
+    "quit_timeout": 30
+  },
+  "adb": {
+    "host": "127.0.0.1",
+    "base_port": 5555,
+    "port_step": 2,
+    "timeout": 30,
+    "retry_count": 3,
+    "retry_delay": 2,
+    "auto_connect": true,
+    "auto_root": false,
+    "shell_timeout": 15
+  },
+  "frida": {
+    "server_path": "/data/local/tmp/frida-server",
+    "server_name": "frida-server",
+    "port": 27042,
+    "auto_start": true,
+    "auto_push": false,
+    "default_timeout": 10,
+    "scripts_dir": "frida_scripts",
+    "spawn_gating": false,
+    "enable_jit": true,
+    "message_buffer_size": 10000,
+    "local_frida_server": ""
+  },
+  "protection_bypass": {
+    "auto_bypass_on_attach": false,
+    "default_bypasses": [
+      "ssl",
+      "root",
+      "emulator",
+      "frida"
+    ],
+    "device_profile": "pixel_8",
+    "spoof_fingerprint": true,
+    "bypass_timeout": 10,
+    "scan_on_attach": true,
+    "custom_patterns": []
+  },
+  "performance": {
+    "monitor_interval": 1.0,
+    "cpu_threshold": 80,
+    "memory_threshold": 85,
+    "fps_target": 60,
+    "log_to_file": true,
+    "max_log_size_mb": 50
+  },
+  "logcat": {
+    "buffer_size": 10000,
+    "default_filter": "*:W",
+    "save_to_file": false,
+    "output_dir": "logs",
+    "rotate_logs": true,
+    "max_files": 10
+  },
+  "screen": {
+    "screenshot_dir": "screenshots",
+    "recording_dir": "recordings",
+    "default_format": "png",
+    "recording_bitrate": "8M",
+    "recording_size": "1280x720",
+    "recording_max_duration": 300
+  },
+  "network": {
+    "proxy_host": "",
+    "proxy_port": 0,
+    "dns_servers": [],
+    "capture_dir": "captures",
+    "enable_ssl_intercept": false,
+    "cert_path": ""
+  },
+  "server": {
+    "log_level": "INFO",
+    "log_format": "%(asctime)s [%(levelname)s] %(message)s",
+    "max_message_size": 10485760,
+    "heartbeat_interval": 30,
+    "graceful_shutdown_timeout": 10
+  }
+}

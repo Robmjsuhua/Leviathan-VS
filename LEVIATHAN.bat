@@ -3,6 +3,8 @@ chcp 65001 >nul
 title LEVIATHAN VS - The Abyss Awaits
 color 0B
 
+:menu
+cls
 echo.
 echo    ██╗     ███████╗██╗   ██╗██╗ █████╗ ████████╗██╗  ██╗ █████╗ ███╗   ██╗
 echo    ██║     ██╔════╝██║   ██║██║██╔══██╗╚══██╔══╝██║  ██║██╔══██╗████╗  ██║
@@ -88,16 +90,8 @@ python core\translator.py validate
 pause
 goto menu
 
-:menu
-cls
-goto start
-
 :exit
 echo.
 echo    [LEVIATHAN] Returning to the surface...
 timeout /t 2 >nul
 exit
-
-:start
-cls
-goto menu

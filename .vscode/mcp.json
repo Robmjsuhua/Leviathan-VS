@@ -1,20 +1,22 @@
 {
     "mcpServers": {
         // ════════════════════════════════════════════════════════════════════════
-        // LEVIATHAN VS v7.0 - NASA ULTIMATE MCP CONFIGURATION
-        // The Abyss - Maximum Power Setup
+        // LEVIATHAN VS v12.0 - ABSOLUTE DESTRUCTION MCP CONFIGURATION
+        // 27 MCP Servers / 305+ Tools / Zero Limitations
         // Updated: January 2026
         // ════════════════════════════════════════════════════════════════════════
-
         // ═══════════════════════════════════════════════════════════════════════
         // CORE - leviathan TRANSLATION ENGINE
         // ═══════════════════════════════════════════════════════════════════════
         "leviathan": {
-            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-            "args": ["c:\\Users\\th\\Desktop\\a\\core\\mcp_server.py"],
-            "env": { "PYTHONIOENCODING": "utf-8" }
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS\\core\\mcp_server.py"
+            ],
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // FILESYSTEM - Manipulacao de Arquivos
         // ═══════════════════════════════════════════════════════════════════════
@@ -23,83 +25,365 @@
             "args": [
                 "-y",
                 "@modelcontextprotocol/server-filesystem",
-                "C:\\Users\\th\\Desktop",
-                "C:\\Users\\th\\Documents",
-                "C:\\Users\\th\\Downloads"
+                "C:\\Users\\Kishi\\Desktop",
+                "C:\\Users\\Kishi\\Documents",
+                "C:\\Users\\Kishi\\Downloads"
             ],
-            "env": { "NODE_OPTIONS": "--no-warnings" }
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // MEMORY - Memoria Persistente entre Sessoes
         // ═══════════════════════════════════════════════════════════════════════
         "memory": {
             "command": "npx.cmd",
-            "args": ["-y", "@modelcontextprotocol/server-memory"],
-            "env": { "NODE_OPTIONS": "--no-warnings" }
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // FETCH - Busca de Conteudo Web
         // ═══════════════════════════════════════════════════════════════════════
         "fetch": {
-            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-            "args": ["-m", "mcp_server_fetch"],
-            "env": { "PYTHONIOENCODING": "utf-8" }
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "mcp_server_fetch"
+            ],
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // TIME - Data e Hora com Timezone
         // ═══════════════════════════════════════════════════════════════════════
         "time": {
-            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-            "args": ["-m", "mcp_server_time", "--local-timezone", "America/Sao_Paulo"],
-            "env": { "PYTHONIOENCODING": "utf-8" }
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "mcp_server_time",
+                "--local-timezone",
+                "America/Sao_Paulo"
+            ],
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // SQLITE - Banco de Dados Local
         // ═══════════════════════════════════════════════════════════════════════
         "sqlite": {
-            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-            "args": ["-m", "mcp_server_sqlite", "--db-path", "C:\\Users\\th\\Desktop\\a\\leviathan.db"],
-            "env": { "PYTHONIOENCODING": "utf-8" }
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "mcp_server_sqlite",
+                "--db-path",
+                "C:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS\\leviathan.db"
+            ],
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // GIT - Controle de Versao Avancado
         // ═══════════════════════════════════════════════════════════════════════
         "git": {
-            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-            "args": ["-m", "mcp_server_git", "--repository", "C:\\Users\\th\\Desktop\\a"],
-            "env": { "PYTHONIOENCODING": "utf-8" }
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "mcp_server_git",
+                "--repository",
+                "C:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS"
+            ],
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // YOUTUBE - Transcricoes de Videos
         // ═══════════════════════════════════════════════════════════════════════
         "youtube-transcript": {
-            "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-            "args": ["-m", "mcp_server_youtube_transcript"],
-            "env": { "PYTHONIOENCODING": "utf-8" }
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "mcp_youtube_transcript"
+            ],
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // EVERYTHING - Busca Rapida de Arquivos (Windows)
         // ═══════════════════════════════════════════════════════════════════════
         "everything": {
             "command": "npx.cmd",
-            "args": ["-y", "mcp-server-everything"],
-            "env": { "NODE_OPTIONS": "--no-warnings" }
+            "args": [
+                "-y",
+                "mcp-server-everything"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
         },
-
         // ═══════════════════════════════════════════════════════════════════════
         // SEQUENTIAL-THINKING - Raciocinio em Cadeia
         // ═══════════════════════════════════════════════════════════════════════
         "sequential-thinking": {
             "command": "npx.cmd",
-            "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-            "env": { "NODE_OPTIONS": "--no-warnings" }
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // LDPLAYER - Emulador Android + Frida
+        // ═══════════════════════════════════════════════════════════════════════
+        "ldplayer": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.ldplayer.mcp_ldplayer"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // PUPPETEER - Automacao de Browser (Scraping, XSS, Admin Panels)
+        // ═══════════════════════════════════════════════════════════════════════
+        "puppeteer": {
+            "command": "npx.cmd",
+            "args": [
+                "-y",
+                "@anthropic/mcp-puppeteer"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // NOTEPADS - Notas Persistentes para Rascunhos
+        // ═══════════════════════════════════════════════════════════════════════
+        "notepads": {
+            "command": "npx.cmd",
+            "args": [
+                "-y",
+                "mcp-server-notepads"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // CONTEXT7 - Documentacao Atualizada de Qualquer Biblioteca
+        // ═══════════════════════════════════════════════════════════════════════
+        "context7": {
+            "command": "npx.cmd",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // PLAYWRIGHT - Browser Automation Avancada (mais poderoso que Puppeteer)
+        // ═══════════════════════════════════════════════════════════════════════
+        "playwright": {
+            "command": "npx.cmd",
+            "args": [
+                "-y",
+                "@anthropic/mcp-server-playwright"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // GITHUB - API do GitHub (Issues, PRs, Repos, Code Search)
+        // Para ativar: definir GITHUB_PERSONAL_ACCESS_TOKEN nas env vars do sistema
+        // ═══════════════════════════════════════════════════════════════════════
+        "github": {
+            "command": "npx.cmd",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--no-warnings"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // ADB - Android Debug Bridge (31 tools: shell, install, logcat, input...)
+        // ═══════════════════════════════════════════════════════════════════════
+        "adb": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.adb.mcp_adb"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // FRIDA - Dynamic Instrumentation (20 tools + 6 bypass scripts)
+        // Hook Java/Native, bypass SSL/root/emulator/frida, memory scan, XXTEA
+        // ═══════════════════════════════════════════════════════════════════════
+        "frida-standalone": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.frida_mcp.mcp_frida"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // JADX - APK Decompiler (16 tools: decompile, search, manifest, crypto, smali, diff)
+        // ═══════════════════════════════════════════════════════════════════════
+        "jadx": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.jadx.mcp_jadx"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // GHIDRA - Headless Binary Analysis (15 tools + 13 GhidraScripts)
+        // Decompile, xrefs, exports, imports, strings, sections, classes, bytes, entry points
+        // ═══════════════════════════════════════════════════════════════════════
+        "ghidra": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.ghidra.mcp_ghidra"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // BLUESTACKS - BlueStacks Emulator Control (17 tools: launch, install, shell, rotate, shake)
+        // ═══════════════════════════════════════════════════════════════════════
+        "bluestacks": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.bluestacks.mcp_bluestacks"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // MEMU - MEmu Emulator Control (19 tools: memuc.exe CLI, rotate, import)
+        // ═══════════════════════════════════════════════════════════════════════
+        "memu": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.memu.mcp_memu"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // WIRESHARK - Network Capture & Analysis (23 tools, tshark CLI)
+        // Capture, filter, follow streams, DNS, HTTP, TLS, credentials, expert, RTP, VoIP, GeoIP
+        // ═══════════════════════════════════════════════════════════════════════
+        "wireshark": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.wireshark.mcp_wireshark"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // NOX - NoxPlayer Emulator Control (22 tools: NoxConsole.exe CLI)
+        // Instances, apps, config, GPS, macros, screenshots, input
+        // ═══════════════════════════════════════════════════════════════════════
+        "nox": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.nox.mcp_nox"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // BURPSUITE - Burp Suite REST API (15 tools)
+        // Scan, spider, intruder, repeater, proxy, decoder, scope, export
+        // ═══════════════════════════════════════════════════════════════════════
+        "burpsuite": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.burpsuite.mcp_burpsuite"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8",
+                "BURP_API_URL": "http://127.0.0.1:1337"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // NUCLEI - Vulnerability Scanner + SQLMap + Nmap + ffuf (17 tools)
+        // nuclei, sqlmap, nmap, dirb, ffuf, nikto, whatweb, subfinder, httpx
+        // ═══════════════════════════════════════════════════════════════════════
+        "nuclei": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.nuclei.mcp_nuclei"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // OBJECTION - Mobile Runtime Exploration (20 tools, Frida-based)
+        // SSL bypass, root bypass, hooking, keystore, memory, SQLite, patchapk
+        // ═══════════════════════════════════════════════════════════════════════
+        "objection": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.objection.mcp_objection"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
         }
     }
 }

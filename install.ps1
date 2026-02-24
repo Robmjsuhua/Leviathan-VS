@@ -179,7 +179,7 @@ Write-Host @"
 
   1. No VS Code, pressione Ctrl+Shift+P
   2. Digite "Tasks: Run Task"
-  3. Escolha uma task [HOG]
+  3. Escolha uma task [LEVIATHAN]
 
   COMANDOS RAPIDOS:
 
@@ -192,7 +192,7 @@ Write-Host @"
   # Iniciar MCP Server
   python mcp_server.py
 
-  GitHub: https://github.com/ThiagoFrag/Megazord-Code
+  GitHub: https://github.com/ThiagoFrag/Leviathan-VS
 
 "@ -ForegroundColor White
 

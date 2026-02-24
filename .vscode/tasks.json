@@ -3,7 +3,7 @@
   "options": {
     "cwd": "${workspaceFolder}",
     "env": {
-      "PATH": "${env:PATH};C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312",
+      "PATH": "${env:PATH};C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314",
       "PYTHONIOENCODING": "utf-8",
       "PYTHONUNBUFFERED": "1"
     }
@@ -47,7 +47,7 @@
     {
       "label": "[LEVIATHAN] ENCODE - Preparar para IA",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "encode",
@@ -70,7 +70,7 @@
     {
       "label": "[LEVIATHAN] RESTORE - Restaurar Original",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "restore",
@@ -90,7 +90,7 @@
     {
       "label": "[LEVIATHAN] SMART RESTORE - Restaurar e Abrir",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe translator.py restore --file ${input:customFile}; code ${input:customFile}",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe translator.py restore --file ${input:customFile}; code ${input:customFile}",
       "presentation": {
         "reveal": "silent",
         "panel": "shared",
@@ -102,7 +102,7 @@
     {
       "label": "[LEVIATHAN] FULL CYCLE - Encode + Copy",
       "type": "shell",
-      "command": "$file = '${input:customFile}'; $result = C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe translator.py encode --file $file 2>&1; Write-Host $result; if ($LASTEXITCODE -eq 0) { $content = Get-Content $file -Raw -ErrorAction SilentlyContinue; if ($content -and $content.Trim()) { Set-Clipboard -Value $content; Write-Host \"`n>>> MEGAZORD: CONTEUDO SANITIZADO E COPIADO PARA CLIPBOARD!\" -ForegroundColor Green } else { Write-Host \"`n>>> ERRO: Arquivo vazio!\" -ForegroundColor Red } } else { Write-Host \"`n>>> ERRO: Falha no encode\" -ForegroundColor Red }",
+      "command": "$file = '${input:customFile}'; $result = C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe translator.py encode --file $file 2>&1; Write-Host $result; if ($LASTEXITCODE -eq 0) { $content = Get-Content $file -Raw -ErrorAction SilentlyContinue; if ($content -and $content.Trim()) { Set-Clipboard -Value $content; Write-Host \"`n>>> MEGAZORD: CONTEUDO SANITIZADO E COPIADO PARA CLIPBOARD!\" -ForegroundColor Green } else { Write-Host \"`n>>> ERRO: Arquivo vazio!\" -ForegroundColor Red } } else { Write-Host \"`n>>> ERRO: Falha no encode\" -ForegroundColor Red }",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
@@ -115,7 +115,7 @@
     {
       "label": "[LEVIATHAN] STATS - Estatisticas",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "stats"
@@ -133,7 +133,7 @@
     {
       "label": "[LEVIATHAN] PREVIEW - Ver Alteracoes",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "preview",
@@ -153,7 +153,7 @@
     {
       "label": "[LEVIATHAN] CHECK - Verificar Seguranca",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "check",
@@ -173,7 +173,7 @@
     {
       "label": "[LEVIATHAN] HISTORY - Historico",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "history"
@@ -191,7 +191,7 @@
     {
       "label": "[LEVIATHAN] UNDO - Desfazer Ultima",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "undo"
@@ -209,7 +209,7 @@
     {
       "label": "[LEVIATHAN] VALIDATE - Validar Config",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "validate"
@@ -227,7 +227,7 @@
     {
       "label": "[LEVIATHAN] INTERACTIVE - Modo Console",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "interactive"
@@ -245,7 +245,7 @@
     {
       "label": "[LEVIATHAN] OBFUSCATE - Ofuscar Variaveis",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "obfuscate",
@@ -265,7 +265,7 @@
     {
       "label": "[LEVIATHAN] DEOBFUSCATE - Restaurar Variaveis",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "deobfuscate",
@@ -285,7 +285,7 @@
     {
       "label": "[LEVIATHAN] FULL TRANSFORM - Encode + Obfuscate",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/translator.py",
         "full",
@@ -305,7 +305,7 @@
     {
       "label": "[LEVIATHAN] GIT - SAFE DEPLOY",
       "type": "shell",
-      "command": "$check = C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe translator.py check 2>&1; if ($LASTEXITCODE -eq 0) { Write-Host '>>> Arquivo limpo - iniciando deploy...' -ForegroundColor Green; git add .; git commit -m '${input:commitMessage}'; git push origin main; Write-Host '>>> DEPLOY CONCLUIDO!' -ForegroundColor Green } else { Write-Host $check; Write-Host '>>> DEPLOY BLOQUEADO: Remova termos sensiveis antes do push!' -ForegroundColor Red }",
+      "command": "$check = C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe translator.py check 2>&1; if ($LASTEXITCODE -eq 0) { Write-Host '>>> Arquivo limpo - iniciando deploy...' -ForegroundColor Green; git add .; git commit -m '${input:commitMessage}'; git push origin main; Write-Host '>>> DEPLOY CONCLUIDO!' -ForegroundColor Green } else { Write-Host $check; Write-Host '>>> DEPLOY BLOQUEADO: Remova termos sensiveis antes do push!' -ForegroundColor Red }",
       "presentation": {
         "reveal": "always",
         "panel": "shared",
@@ -388,7 +388,7 @@
     {
       "label": "[LEVIATHAN] CONFIG COUNT - Contar Regras",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "-c",
         "import json; d=json.load(open('core/config.json','r',encoding='utf-8')); r={k:v for k,v in d.items() if not k.startswith('_')}; print(f'Total de regras de traducao: {len(r)}')"
@@ -420,7 +420,7 @@
     {
       "label": "[LEVIATHAN] MCP SERVER - Iniciar",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "core/mcp_server.py"
       ],
@@ -436,7 +436,7 @@
     {
       "label": "[LEVIATHAN] MCP TEST - Testar Servidor",
       "type": "shell",
-      "command": "echo '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}' | C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe mcp_server.py",
+      "command": "echo '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}' | C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe mcp_server.py",
       "presentation": {
         "reveal": "always",
         "panel": "shared",
@@ -463,7 +463,7 @@
     {
       "label": "[LEVIATHAN] HTTP TOOLKIT - Testar Endpoint",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
       "args": [
         "-c",
         "import json; from http_toolkit import HOGDispatcher; d = HOGDispatcher(); print(json.dumps(d.dispatch('${input:targetUrl}', '${input:httpMethod}'), indent=2))"
@@ -481,7 +481,7 @@
     {
       "label": "[LEVIATHAN] HTTP TOOLKIT - Scan Rapido",
       "type": "shell",
-      "command": "C:\\Users\\th\\AppData\\Local\\Programs\\Python\\Python312\\python.exe http_toolkit.py scan --url ${input:targetUrl}",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe http_toolkit.py scan --url ${input:targetUrl}",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
