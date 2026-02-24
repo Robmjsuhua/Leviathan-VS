@@ -7,19 +7,21 @@
     ██║     ██╔══╝  ╚██╗ ██╔╝██║██╔══██║   ██║   ██╔══██║██╔══██║██║╚██╗██║
     ███████╗███████╗ ╚████╔╝ ██║██║  ██║   ██║   ██║  ██║██║  ██║██║ ╚████║
     ╚══════╝╚══════╝  ╚═══╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
-                        
+
                     [ VS Code Environment for the Deep ]
 ```
 
 ## The Abyss Awaits - Ultimate Development Configuration
 
-A monstrous VS Code configuration that rises from the depths. Semantic translation engine, HTTP interceptor, and 80+ extensions forged in the darkness of the deep sea.
+A monstrous VS Code configuration that rises from the depths. Semantic translation engine, HTTP interceptor, 12 MCP security servers with 324+ tools, 4 emulator controllers, and 80+ extensions forged in the darkness of the deep sea.
 
-![Version](https://img.shields.io/badge/version-7.0.0-0d1117?style=for-the-badge&labelColor=161b22)
+![Version](https://img.shields.io/badge/version-13.0.0-0d1117?style=for-the-badge&labelColor=161b22)
 ![Python](https://img.shields.io/badge/python-3.8+-1f6feb?style=for-the-badge&labelColor=0d1117)
 ![License](https://img.shields.io/badge/license-MIT-238636?style=for-the-badge&labelColor=0d1117)
 ![Extensions](https://img.shields.io/badge/extensions-80+-8957e5?style=for-the-badge&labelColor=0d1117)
 ![Rules](https://img.shields.io/badge/translation_rules-640+-f85149?style=for-the-badge&labelColor=0d1117)
+![MCP Tools](https://img.shields.io/badge/MCP_tools-324+-ff6600?style=for-the-badge&labelColor=0d1117)
+![Tasks](https://img.shields.io/badge/VS_Code_tasks-90+-00ccff?style=for-the-badge&labelColor=0d1117)
 
 ---
 
@@ -27,12 +29,21 @@ A monstrous VS Code configuration that rises from the depths. Semantic translati
 
 Leviathan VS is a complete development environment that emerges from the abyss:
 
-| Component | Description |
-|-----------|-------------|
-| **Kraken Engine** | Semantic translation - transforms sensitive terms into deep sea terminology |
-| **Abyssal Interceptor** | HTTP toolkit with AI-powered analysis |
-| **Deep Scan** | Static analysis for 10+ languages |
-| **Tentacle Protocol** | MCP integration for GitHub Copilot |
+| Component               | Description                                                                 |
+| ----------------------- | --------------------------------------------------------------------------- |
+| **Kraken Engine**       | Semantic translation - transforms sensitive terms into deep sea terminology |
+| **Abyssal Interceptor** | HTTP toolkit with AI-powered analysis                                       |
+| **Deep Scan**           | Static analysis for 10+ languages                                           |
+| **Tentacle Protocol**   | 12 MCP servers / 324+ tools for GitHub Copilot                              |
+| **ADB Module**          | 41 Android Debug Bridge tools                                               |
+| **Frida Module**        | 28 dynamic instrumentation + 89 tools in LDPlayer composite                 |
+| **Ghidra Module**       | 15 headless binary analysis tools                                           |
+| **JADX Module**         | 16 APK decompilation tools                                                  |
+| **Wireshark Module**    | 23 network capture & analysis tools                                         |
+| **Emulator Control**    | LDPlayer (89) + BlueStacks (18) + MEmu (20) + Nox (22) tools                |
+| **Burp Suite Module**   | 15 web security testing tools                                               |
+| **Nuclei Module**       | 17 vuln scanners (nuclei + sqlmap + nmap + ffuf)                            |
+| **Objection Module**    | 20 mobile runtime exploration tools                                         |
 
 ---
 
@@ -62,18 +73,18 @@ The summoning ritual:
 
 Translates security terms using Deep Sea terminology:
 
-| Surface Term | Abyssal Translation |
-|--------------|---------------------|
-| exploit | pressure_point |
-| vulnerability | hull_breach |
-| bypass | current_redirect |
-| injection | ink_injection |
-| reverse_shell | sonar_callback |
-| payload | depth_charge |
-| backdoor | sea_gate |
-| rootkit | barnacle_cluster |
-| keylogger | echo_recorder |
-| botnet | shoal_network |
+| Surface Term  | Abyssal Translation |
+| ------------- | ------------------- |
+| exploit       | pressure_point      |
+| vulnerability | hull_breach         |
+| bypass        | current_redirect    |
+| injection     | ink_injection       |
+| reverse_shell | sonar_callback      |
+| payload       | depth_charge        |
+| backdoor      | sea_gate            |
+| rootkit       | barnacle_cluster    |
+| keylogger     | echo_recorder       |
+| botnet        | shoal_network       |
 
 This allows AI assistants to help with legitimate security research without triggering content filters.
 
@@ -102,18 +113,18 @@ Capabilities:
 
 ## Deep Scan (Static Analysis)
 
-| Language | Hunters |
-|----------|---------|
-| Python | Pylance, Pylint, Bandit, Mypy, Radon |
-| Go | golangci-lint, Staticcheck, GoSec |
-| JavaScript/TypeScript | ESLint, Prettier, SonarLint |
-| Rust | rust-analyzer, Clippy |
-| C/C++ | Clang-Tidy, Cppcheck |
-| Java | Checkstyle, PMD, SpotBugs |
-| Shell | ShellCheck |
-| Docker | Hadolint |
-| Terraform | TFLint, Checkov |
-| SQL | SQLFluff |
+| Language              | Hunters                              |
+| --------------------- | ------------------------------------ |
+| Python                | Pylance, Pylint, Bandit, Mypy, Radon |
+| Go                    | golangci-lint, Staticcheck, GoSec    |
+| JavaScript/TypeScript | ESLint, Prettier, SonarLint          |
+| Rust                  | rust-analyzer, Clippy                |
+| C/C++                 | Clang-Tidy, Cppcheck                 |
+| Java                  | Checkstyle, PMD, SpotBugs            |
+| Shell                 | ShellCheck                           |
+| Docker                | Hadolint                             |
+| Terraform             | TFLint, Checkov                      |
+| SQL                   | SQLFluff                             |
 
 ---
 
@@ -126,31 +137,186 @@ Leviathan-VS/
     .vscode/
         extensions.json    # 80+ tentacles (extensions)
         settings.json      # Lair configuration
-        tasks.json         # 20+ hunting tasks
+        tasks.json         # 90+ hunting tasks
         launch.json        # Debug depth charges
-        mcp.json           # Tentacle Protocol config
+        mcp.json           # 12 MCP servers / 324+ tools
+        keybindings.json   # Combat shortcuts
     core/
         config.json        # 640+ translation runes
         translator.py      # Kraken Engine
         http_toolkit.py    # Abyssal Interceptor
         mcp_server.py      # Tentacle Protocol Server
+        adb/               # ADB MCP (41 tools)
+        frida_mcp/         # Frida Standalone MCP (28 tools)
+        ghidra/            # Ghidra Headless MCP (15 tools)
+        jadx/              # JADX Decompiler MCP (16 tools)
+        ldplayer/          # LDPlayer Composite MCP (89 tools)
+            frida_scripts/ # 8 bypass/interceptor scripts
+        bluestacks/        # BlueStacks MCP (18 tools)
+        memu/              # MEmu MCP (20 tools)
+        nox/               # NoxPlayer MCP (22 tools)
+        wireshark/         # Wireshark MCP (23 tools)
+        burpsuite/         # Burp Suite MCP (15 tools)
+        nuclei/            # Nuclei + SQLMap + Nmap MCP (17 tools)
+        objection/         # Objection MCP (20 tools)
     docs/
         CLAUDE_SKILLS.md   # Servant documentation
 ```
 
 ---
 
-## Hunting Commands
+## Hunting Commands (90+ Tasks)
 
-### VS Code Tasks (Ctrl+Shift+B)
+All tasks accessible via `Ctrl+Shift+P` > `Tasks: Run Task` or `Ctrl+Shift+B`
 
-| Task | Description |
-|------|-------------|
-| [LEVIATHAN] ENCODE | Submerge code into the deep |
-| [LEVIATHAN] RESTORE | Surface with original terms |
-| [LEVIATHAN] PREVIEW | Peek before diving |
-| [LEVIATHAN] CHECK | Scan for surface contamination |
-| [LEVIATHAN] INTERACTIVE | Enter the abyss console |
+### Kraken Engine (Translation)
+
+| Task                          | Description                    |
+| ----------------------------- | ------------------------------ |
+| `[LEVIATHAN] ENCODE`          | Submerge code into the deep    |
+| `[LEVIATHAN] RESTORE`         | Surface with original terms    |
+| `[LEVIATHAN] PREVIEW`         | Peek before diving             |
+| `[LEVIATHAN] CHECK`           | Scan for surface contamination |
+| `[LEVIATHAN] INTERACTIVE`     | Enter the abyss console        |
+| `[LEVIATHAN] FULL CYCLE`      | Encode + Copy to clipboard     |
+| `[LEVIATHAN] OBFUSCATE`       | Rename sensitive variables     |
+| `[LEVIATHAN] DEOBFUSCATE`     | Restore variable names         |
+| `[LEVIATHAN] FULL TRANSFORM`  | Encode + Obfuscate in one step |
+| `[LEVIATHAN] Status Completo` | Check ALL tools status         |
+
+### ADB - Android Debug Bridge (16 tasks)
+
+| Task                           | Description                              |
+| ------------------------------ | ---------------------------------------- |
+| `[ADB] Listar Dispositivos`    | List connected devices with details      |
+| `[ADB] Shell Interativo`       | Open interactive shell on device         |
+| `[ADB] Instalar APK`           | Install APK with reinstall + permissions |
+| `[ADB] Extrair APK de App`     | Extract installed APK from device        |
+| `[ADB] Screenshot`             | Capture device screenshot                |
+| `[ADB] Listar Apps Instalados` | List all third-party apps                |
+| `[ADB] Logcat Filtrado`        | Filtered logcat by package               |
+| `[ADB] Force Stop App`         | Force stop application                   |
+| `[ADB] Limpar Dados do App`    | Clear all app data and cache             |
+| `[ADB] Configurar Proxy`       | Set HTTP proxy on device                 |
+| `[ADB] Remover Proxy`          | Remove HTTP proxy                        |
+| `[ADB] Port Forward`           | Forward Frida ports (27042/27043)        |
+| `[ADB] Info do Dispositivo`    | Full device info (model, RAM, disk)      |
+| `[ADB] Gravar Tela`            | Record screen for 30 seconds             |
+| `[ADB] TCP Dump`               | Capture network traffic with tcpdump     |
+| `[ADB] Conectar WiFi`          | Switch to wireless ADB                   |
+
+### Frida - Dynamic Instrumentation (14 tasks)
+
+| Task                                | Description                                            |
+| ----------------------------------- | ------------------------------------------------------ |
+| `[FRIDA] Setup Server no Device`    | Auto-download & start frida-server                     |
+| `[FRIDA] Listar Processos`          | List running processes via USB                         |
+| `[FRIDA] Listar Apps`               | List installed apps via Frida                          |
+| `[FRIDA] Bypass SSL Pinning`        | Spawn with 21-layer SSL bypass                         |
+| `[FRIDA] Bypass Root Detection`     | Spawn with root detection bypass                       |
+| `[FRIDA] Bypass Emulator Detection` | Spawn with emulator detection bypass                   |
+| `[FRIDA] Bypass ALL (Nuclear)`      | Spawn with ALL bypasses (SSL+Root+Emu+Frida+Integrity) |
+| `[FRIDA] Interceptar Crypto`        | Intercept Cipher, Mac, MessageDigest, Keys             |
+| `[FRIDA] Interceptar Rede`          | Intercept send/recv/HTTP/OkHttp                        |
+| `[FRIDA] Game Inspector`            | Unity/Cocos2d game hooks                               |
+| `[FRIDA] Dump Classes Java`         | List loaded Java classes (filtered)                    |
+| `[FRIDA] Hook Metodo Java`          | Hook method - log args & return                        |
+| `[FRIDA] Trace com frida-trace`     | Auto-trace matching calls                              |
+| `[FRIDA] Attach a App Rodando`      | Attach to running app (REPL)                           |
+
+### Ghidra - Binary Analysis (4 tasks)
+
+| Task                              | Description                            |
+| --------------------------------- | -------------------------------------- |
+| `[GHIDRA] Analisar Binario`       | Headless analysis (ELF, PE, .so, .dll) |
+| `[GHIDRA] Listar Funcoes`         | List all functions with addresses      |
+| `[GHIDRA] Buscar Strings`         | Find all strings (URLs, keys, paths)   |
+| `[GHIDRA] Listar Exports/Imports` | List exported/imported symbols         |
+
+### JADX - APK Decompilation (7 tasks)
+
+| Task                               | Description                         |
+| ---------------------------------- | ----------------------------------- |
+| `[JADX] Decompilar APK`            | Decompile with deobfuscation        |
+| `[JADX] Extrair Manifest`          | Extract decoded AndroidManifest.xml |
+| `[JADX] Buscar URLs/IPs no Codigo` | Find hardcoded URLs/IPs             |
+| `[JADX] Buscar Crypto no Codigo`   | Find crypto implementations         |
+| `[JADX] Buscar API Keys/Secrets`   | Find hardcoded secrets              |
+| `[JADX] Listar Permissoes`         | Extract all permissions             |
+| `[JADX] Listar Native Libs`        | List .so native libraries           |
+
+### Emulators - LDPlayer / BlueStacks / MEmu / Nox (16 tasks)
+
+| Task                                 | Description                                        |
+| ------------------------------------ | -------------------------------------------------- |
+| `[LDPLAYER] Listar Instancias`       | List all LDPlayer instances                        |
+| `[LDPLAYER] Iniciar/Parar Instancia` | Start/stop instance by index                       |
+| `[LDPLAYER] Parar Todas`             | Stop all instances                                 |
+| `[LDPLAYER] Instalar APK`            | Install APK in instance                            |
+| `[LDPLAYER] Perfil Device Real`      | Apply real device profile (Samsung, Pixel, Xiaomi) |
+| `[LDPLAYER] Randomizar Device`       | Randomize IMEI, MAC, Android ID, phone             |
+| `[LDPLAYER] Definir GPS`             | Set fake GPS coordinates                           |
+| `[LDPLAYER] Clonar Instancia`        | Clone existing instance                            |
+| `[LDPLAYER] Ativar Root`             | Enable root on instance                            |
+| `[BLUESTACKS] Listar/Conectar`       | List instances, connect ADB                        |
+| `[MEMU] Listar/Iniciar/Conectar`     | Manage MEmu instances                              |
+| `[NOX] Listar/Iniciar/Conectar`      | Manage Nox instances                               |
+| `[NOX] Parar Todas`                  | Stop all Nox instances                             |
+
+### Wireshark - Network Analysis (9 tasks)
+
+| Task                                | Description                         |
+| ----------------------------------- | ----------------------------------- |
+| `[WIRESHARK] Capturar Trafego`      | Capture packets for 60s             |
+| `[WIRESHARK] Analisar PCAP`         | I/O stats, conversations, endpoints |
+| `[WIRESHARK] Extrair DNS Queries`   | Extract all DNS queries             |
+| `[WIRESHARK] Extrair HTTP Requests` | Extract HTTP method/host/URI        |
+| `[WIRESHARK] Buscar Credenciais`    | Find cleartext credentials          |
+| `[WIRESHARK] TLS Handshakes`        | Extract SNI, cipher, version        |
+| `[WIRESHARK] Seguir Stream TCP`     | Follow first TCP stream             |
+| `[WIRESHARK] Hierarquia Protocolos` | Protocol hierarchy stats            |
+| `[WIRESHARK] Listar Interfaces`     | List available network interfaces   |
+
+### Burp Suite - Web Security (3 tasks)
+
+| Task                         | Description                    |
+| ---------------------------- | ------------------------------ |
+| `[BURP] Iniciar Active Scan` | Start active scan via REST API |
+| `[BURP] Ver Issues/Vulns`    | List found vulnerabilities     |
+| `[BURP] Historico do Proxy`  | Show last 50 proxy requests    |
+
+### Nuclei / Nmap / SQLMap (7 tasks)
+
+| Task                           | Description                             |
+| ------------------------------ | --------------------------------------- |
+| `[NUCLEI] Scan Completo`       | Full nuclei scan (critical+high+medium) |
+| `[NUCLEI] Scan CVE Especifico` | CVE-focused scan                        |
+| `[NMAP] Port Scan`             | Nmap with scripts + version detection   |
+| `[NMAP] Scan Vuln Scripts`     | Nmap vulnerability scripts              |
+| `[SQLMAP] SQL Injection Test`  | SQLMap level 3, risk 2                  |
+| `[FFUF] Directory Fuzzing`     | Directory brute-force with ffuf         |
+| `[SUBFINDER] Enum Subdominios` | Subdomain enumeration                   |
+
+### Objection - Mobile Runtime (6 tasks)
+
+| Task                                 | Description                        |
+| ------------------------------------ | ---------------------------------- |
+| `[OBJECTION] Explore App`            | Interactive objection session      |
+| `[OBJECTION] Disable SSL Pinning`    | Start with SSL pinning disabled    |
+| `[OBJECTION] Disable Root Detection` | Start with root detection disabled |
+| `[OBJECTION] Dump Keystore`          | Dump Android Keystore entries      |
+| `[OBJECTION] Patch APK`              | Inject Frida gadget into APK       |
+| `[OBJECTION] Listar Activities`      | List app activities                |
+
+### Workflows - Automated Pipelines (5 tasks)
+
+| Task                              | Description                                             |
+| --------------------------------- | ------------------------------------------------------- |
+| `[WORKFLOW] Full App Pentest`     | Extract APK -> Decompile -> Secrets -> Bypass -> Attach |
+| `[WORKFLOW] Quick Intercept`      | SSL bypass + Network + Crypto interceptors              |
+| `[WORKFLOW] Full Network Capture` | Simultaneous device + local traffic capture             |
+| `[WORKFLOW] Emulator Farm`        | Clone 3 instances with randomized identities            |
+| `[WORKFLOW] APK Security Audit`   | Decompile -> Perms -> URLs -> Crypto -> Secrets         |
 
 ### Command Line
 
@@ -166,21 +332,6 @@ python core/translator.py check
 
 # Depth report
 python core/translator.py stats
-```
-
----
-
-## The Hunt (Workflow)
-
-```
-1. Write your code in work.txt
-2. Run ENCODE (Ctrl+Shift+B)
-   "exploit" -> "pressure_point"
-3. Send submerged code to AI
-4. Paste AI response in work.txt
-5. Run RESTORE
-   "pressure_point" -> "exploit"
-6. Original code surfaces
 ```
 
 ---
@@ -201,26 +352,32 @@ Categories from the deep:
 
 ---
 
-## Tentacle Protocol (MCP)
+## Tentacle Protocol (MCP) - 27 Servers / 324+ Tools
 
 ```json
+// .vscode/mcp.json - configured automatically on install
 {
   "servers": {
-    "leviathan": {
-      "command": "python",
-      "args": ["core/mcp_server.py"],
-      "env": {}
-    }
+    "leviathan": "core/mcp_server.py",
+    "adb": "core/adb/mcp_adb.py",
+    "frida-standalone": "core/frida_mcp/mcp_frida.py",
+    "ghidra": "core/ghidra/mcp_ghidra.py",
+    "jadx": "core/jadx/mcp_jadx.py",
+    "ldplayer": "core/ldplayer/mcp_ldplayer.py",
+    "bluestacks": "core/bluestacks/mcp_bluestacks.py",
+    "memu": "core/memu/mcp_memu.py",
+    "nox": "core/nox/mcp_nox.py",
+    "wireshark": "core/wireshark/mcp_wireshark.py",
+    "burpsuite": "core/burpsuite/mcp_burpsuite.py",
+    "nuclei": "core/nuclei/mcp_nuclei.py",
+    "objection": "core/objection/mcp_objection.py",
+    "+ 14 utility servers": "filesystem, memory, fetch, time, sqlite, git, ..."
   }
 }
 ```
 
-Available tentacles:
-- `encode` - Submerge text
-- `decode` - Surface text
-- `check` - Scan for contamination
-- `find_terms` - Detect surface terms
-- `get_rules` - List all runes
+All 324+ tools available to Copilot/Cline/Claude via MCP protocol.
+Run `[LEVIATHAN] Status Completo` to verify all servers are operational.
 
 ---
 
@@ -268,12 +425,12 @@ Available tentacles:
 ## Summon from Source
 
 ```bash
-git clone https://github.com/ThiagoFrag/Vscode-MegaZord.git
-cd Vscode-MegaZord
+git clone https://github.com/ThiagoFrag/Leviathan-VS.git
+cd Leviathan-VS
 code .
 ```
 
-Run `[LEVIATHAN] VALIDATE` to verify the summoning.
+Run `[LEVIATHAN] Status Completo` to verify all 324+ tools are operational.
 
 ---
 
@@ -325,6 +482,6 @@ MIT License - Free to roam the depths
               `._\                 _.'
                  `--..._     ___..'
                         `-..'
-                
+
         LEVIATHAN VS - Rising from the Abyss
 ```

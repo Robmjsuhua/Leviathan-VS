@@ -41,6 +41,125 @@
         "OPTIONS"
       ],
       "default": "GET"
+    },
+    {
+      "id": "packageName",
+      "type": "promptString",
+      "description": "Package name do app (ex: com.example.app):",
+      "default": ""
+    },
+    {
+      "id": "apkPath",
+      "type": "promptString",
+      "description": "Caminho do APK:",
+      "default": ""
+    },
+    {
+      "id": "binaryPath",
+      "type": "promptString",
+      "description": "Caminho do binario (.so, .dll, .elf):",
+      "default": ""
+    },
+    {
+      "id": "adbDevice",
+      "type": "promptString",
+      "description": "Device ADB (vazio para auto-detect):",
+      "default": "emulator-5554"
+    },
+    {
+      "id": "ldInstance",
+      "type": "promptString",
+      "description": "Instancia LDPlayer (nome ou index):",
+      "default": "0"
+    },
+    {
+      "id": "captureInterface",
+      "type": "promptString",
+      "description": "Interface de rede para captura:",
+      "default": "Ethernet"
+    },
+    {
+      "id": "captureFilter",
+      "type": "promptString",
+      "description": "Filtro de captura (BPF):",
+      "default": "tcp port 80 or tcp port 443"
+    },
+    {
+      "id": "pcapFile",
+      "type": "promptString",
+      "description": "Arquivo .pcap para analisar:",
+      "default": ""
+    },
+    {
+      "id": "fridaScript",
+      "type": "pickString",
+      "description": "Script Frida para injetar:",
+      "options": [
+        "ssl_bypass",
+        "root_bypass",
+        "emulator_bypass",
+        "frida_bypass",
+        "network_interceptor",
+        "crypto_interceptor",
+        "game_inspector",
+        "universal_bypass"
+      ],
+      "default": "ssl_bypass"
+    },
+    {
+      "id": "emulatorType",
+      "type": "pickString",
+      "description": "Emulador Android:",
+      "options": [
+        "LDPlayer",
+        "BlueStacks",
+        "MEmu",
+        "Nox"
+      ],
+      "default": "LDPlayer"
+    },
+    {
+      "id": "scanTarget",
+      "type": "promptString",
+      "description": "Alvo do scan (IP, URL ou dominio):",
+      "default": ""
+    },
+    {
+      "id": "className",
+      "type": "promptString",
+      "description": "Nome da classe Java (ex: com.app.MainActivity):",
+      "default": ""
+    },
+    {
+      "id": "functionName",
+      "type": "promptString",
+      "description": "Nome da funcao para analisar:",
+      "default": ""
+    },
+    {
+      "id": "gpsLat",
+      "type": "promptString",
+      "description": "Latitude GPS:",
+      "default": "-23.5505"
+    },
+    {
+      "id": "gpsLng",
+      "type": "promptString",
+      "description": "Longitude GPS:",
+      "default": "-46.6333"
+    },
+    {
+      "id": "deviceProfile",
+      "type": "pickString",
+      "description": "Perfil de dispositivo real:",
+      "options": [
+        "samsung_s23",
+        "pixel_8",
+        "xiaomi_14",
+        "oneplus_12",
+        "huawei_p60"
+      ],
+      "default": "samsung_s23"
     }
   ],
   "tasks": [
@@ -491,7 +610,1428 @@
       },
       "problemMatcher": [],
       "detail": "Executa logic_stress_analysis no endpoint"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // ADB - Android Debug Bridge Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[ADB] Listar Dispositivos",
+      "type": "shell",
+      "command": "adb devices -l",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "device-mobile"
+      },
+      "detail": "Lista todos os dispositivos ADB conectados com detalhes"
+    },
+    {
+      "label": "[ADB] Shell Interativo",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} shell",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "terminal"
+      },
+      "detail": "Abre shell interativo no dispositivo Android"
+    },
+    {
+      "label": "[ADB] Instalar APK",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} install -r -g \"${input:apkPath}\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "package"
+      },
+      "detail": "Instala APK com reinstall e grant de permissoes"
+    },
+    {
+      "label": "[ADB] Extrair APK de App",
+      "type": "shell",
+      "command": "$path = adb -s ${input:adbDevice} shell pm path ${input:packageName} | ForEach-Object { $_ -replace 'package:','' }; adb -s ${input:adbDevice} pull $path.Trim() .\\${input:packageName}.apk; Write-Host \"APK salvo: ${input:packageName}.apk\" -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "cloud-download"
+      },
+      "detail": "Extrai APK instalado do dispositivo para o PC"
+    },
+    {
+      "label": "[ADB] Screenshot",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} exec-out screencap -p > screenshot_$(Get-Date -Format 'yyyyMMdd_HHmmss').png; Write-Host 'Screenshot salvo!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "device-camera"
+      },
+      "detail": "Captura screenshot do dispositivo"
+    },
+    {
+      "label": "[ADB] Listar Apps Instalados",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} shell pm list packages -3 | Sort-Object",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "list-unordered"
+      },
+      "detail": "Lista todos os apps de terceiros instalados"
+    },
+    {
+      "label": "[ADB] Logcat Filtrado",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} logcat -d | Select-String -Pattern '${input:packageName}'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "output"
+      },
+      "detail": "Captura logcat filtrado por package"
+    },
+    {
+      "label": "[ADB] Force Stop App",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} shell am force-stop ${input:packageName}; Write-Host 'App parado: ${input:packageName}' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "debug-stop"
+      },
+      "detail": "Forca parada de um app"
+    },
+    {
+      "label": "[ADB] Limpar Dados do App",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} shell pm clear ${input:packageName}; Write-Host 'Dados limpos: ${input:packageName}' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "trash"
+      },
+      "detail": "Limpa todos os dados e cache do app"
+    },
+    {
+      "label": "[ADB] Configurar Proxy",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} shell settings put global http_proxy $(hostname -I | ForEach-Object { $_.Trim() }):8080; Write-Host 'Proxy configurado!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "globe"
+      },
+      "detail": "Configura proxy HTTP no dispositivo apontando para este PC"
+    },
+    {
+      "label": "[ADB] Remover Proxy",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} shell settings put global http_proxy :0; Write-Host 'Proxy removido!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "close"
+      },
+      "detail": "Remove proxy HTTP do dispositivo"
+    },
+    {
+      "label": "[ADB] Port Forward",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} forward tcp:27042 tcp:27042; adb -s ${input:adbDevice} forward tcp:27043 tcp:27043; Write-Host 'Port forward 27042/27043 (Frida) ativo!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "arrow-swap"
+      },
+      "detail": "Configura port forward para Frida (27042/27043)"
+    },
+    {
+      "label": "[ADB] Info do Dispositivo",
+      "type": "shell",
+      "command": "Write-Host '=== DEVICE INFO ===' -ForegroundColor Cyan; adb -s ${input:adbDevice} shell getprop ro.product.model; adb -s ${input:adbDevice} shell getprop ro.build.version.release; adb -s ${input:adbDevice} shell getprop ro.product.manufacturer; Write-Host '=== MEMORIA ===' -ForegroundColor Cyan; adb -s ${input:adbDevice} shell cat /proc/meminfo | Select-Object -First 3; Write-Host '=== DISCO ===' -ForegroundColor Cyan; adb -s ${input:adbDevice} shell df -h /data | Select-Object -First 2",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "info"
+      },
+      "detail": "Mostra info completa do dispositivo (modelo, Android, RAM, disco)"
+    },
+    {
+      "label": "[ADB] Gravar Tela",
+      "type": "shell",
+      "command": "Write-Host 'Gravando por 30s... Ctrl+C para parar' -ForegroundColor Yellow; adb -s ${input:adbDevice} shell screenrecord /sdcard/recording.mp4 --time-limit 30; adb -s ${input:adbDevice} pull /sdcard/recording.mp4 .; Write-Host 'Video salvo: recording.mp4' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "record"
+      },
+      "detail": "Grava tela do dispositivo por 30 segundos"
+    },
+    {
+      "label": "[ADB] TCP Dump (Captura Rede)",
+      "type": "shell",
+      "command": "Write-Host 'Capturando trafego por 30s...' -ForegroundColor Yellow; adb -s ${input:adbDevice} shell su -c 'tcpdump -i any -w /sdcard/capture.pcap -c 5000'; adb -s ${input:adbDevice} pull /sdcard/capture.pcap .; Write-Host 'Captura salva: capture.pcap' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "radio-tower"
+      },
+      "detail": "Captura trafego de rede do dispositivo com tcpdump"
+    },
+    {
+      "label": "[ADB] Conectar WiFi",
+      "type": "shell",
+      "command": "adb -s ${input:adbDevice} tcpip 5555; Start-Sleep -Seconds 2; $ip = (adb -s ${input:adbDevice} shell ip addr show wlan0 | Select-String 'inet ' | ForEach-Object { ($_ -split '\\s+')[2] -split '/' | Select-Object -First 1 }); adb connect \"$ip`:5555\"; Write-Host \"Conectado via WiFi: $ip`:5555\" -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "radio-tower"
+      },
+      "detail": "Conecta ADB via WiFi (dispositivo deve estar conectado via USB)"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // FRIDA - Dynamic Instrumentation Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[FRIDA] Setup Server no Device",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import subprocess,platform,urllib.request,zipfile,os,shutil; arch='x86' if 'x86' in subprocess.getoutput('adb shell getprop ro.product.cpu.abi') else 'arm64'; print(f'Arch: {arch}'); ver=subprocess.getoutput('frida --version').strip(); print(f'Frida: {ver}'); url=f'https://github.com/frida/frida/releases/download/{ver}/frida-server-{ver}-android-{arch}.xz'; print(f'Downloading {url}...'); urllib.request.urlretrieve(url, 'frida-server.xz'); os.system('adb push frida-server /data/local/tmp/frida-server'); os.system('adb shell chmod 755 /data/local/tmp/frida-server'); os.system('adb shell su -c /data/local/tmp/frida-server &'); print('Frida server running!')\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "zap"
+      },
+      "detail": "Auto-detecta arch, baixa frida-server correto e inicia no device"
+    },
+    {
+      "label": "[FRIDA] Listar Processos",
+      "type": "shell",
+      "command": "frida-ps -U",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "list-ordered"
+      },
+      "detail": "Lista todos os processos rodando via USB"
+    },
+    {
+      "label": "[FRIDA] Listar Apps",
+      "type": "shell",
+      "command": "frida-ps -Uai",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "package"
+      },
+      "detail": "Lista todos os apps instalados via Frida"
+    },
+    {
+      "label": "[FRIDA] Bypass SSL Pinning",
+      "type": "shell",
+      "command": "frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/ssl_bypass.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "shield"
+      },
+      "detail": "Spawna app com bypass SSL (21 camadas: OkHttp, Conscrypt, Flutter, OpenSSL)"
+    },
+    {
+      "label": "[FRIDA] Bypass Root Detection",
+      "type": "shell",
+      "command": "frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/root_bypass.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "lock"
+      },
+      "detail": "Spawna app com bypass de deteccao de root"
+    },
+    {
+      "label": "[FRIDA] Bypass Emulator Detection",
+      "type": "shell",
+      "command": "frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/emulator_bypass.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "vm"
+      },
+      "detail": "Spawna app com bypass de deteccao de emulador"
+    },
+    {
+      "label": "[FRIDA] Bypass ALL (Nuclear)",
+      "type": "shell",
+      "command": "frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/universal_bypass.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "flame"
+      },
+      "detail": "Spawna app com TODOS os bypasses (SSL + Root + Emulator + Frida + Integrity)"
+    },
+    {
+      "label": "[FRIDA] Interceptar Crypto",
+      "type": "shell",
+      "command": "frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/crypto_interceptor.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "key"
+      },
+      "detail": "Intercepta Cipher, Mac, MessageDigest, SecretKey - mostra chaves e dados"
+    },
+    {
+      "label": "[FRIDA] Interceptar Rede",
+      "type": "shell",
+      "command": "frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/network_interceptor.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "radio-tower"
+      },
+      "detail": "Intercepta send/recv/HTTP/OkHttp - mostra URL, headers, body"
+    },
+    {
+      "label": "[FRIDA] Game Inspector",
+      "type": "shell",
+      "command": "frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/game_inspector.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "game"
+      },
+      "detail": "Inspector para jogos mobile - hooks de Unity, Cocos2d, protocolo, memoria"
+    },
+    {
+      "label": "[FRIDA] Dump Classes Java",
+      "type": "shell",
+      "command": "frida -U ${input:packageName} -e \"Java.perform(function(){Java.enumerateLoadedClasses({onMatch:function(c){if(c.includes('${input:className}'))console.log(c)},onComplete:function(){console.log('Done')}})})\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "symbol-class"
+      },
+      "detail": "Lista classes Java carregadas filtrando pelo padrao informado"
+    },
+    {
+      "label": "[FRIDA] Hook Metodo Java",
+      "type": "shell",
+      "command": "frida -U ${input:packageName} -e \"Java.perform(function(){var cls=Java.use('${input:className}');cls['${input:functionName}'].overloads.forEach(function(o){o.implementation=function(){console.log('[HOOK] '+JSON.stringify(arguments));var ret=o.apply(this,arguments);console.log('[RET] '+ret);return ret}})})\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "debug-alt"
+      },
+      "detail": "Hook metodo Java - mostra args e retorno em tempo real"
+    },
+    {
+      "label": "[FRIDA] Trace com frida-trace",
+      "type": "shell",
+      "command": "frida-trace -U ${input:packageName} -j \"*${input:className}*!*\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "pulse"
+      },
+      "detail": "Trace automatico de todas as chamadas que matcham o padrao"
+    },
+    {
+      "label": "[FRIDA] Attach a App Rodando",
+      "type": "shell",
+      "command": "frida -U ${input:packageName}",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "plug"
+      },
+      "detail": "Attach Frida a app ja em execucao (REPL interativo)"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // GHIDRA - Binary Analysis Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[GHIDRA] Analisar Binario",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import subprocess; r=subprocess.run(['analyzeHeadless','ghidra_projects','auto_project','-import','${input:binaryPath}','-overwrite','-postScript','ListFunctions.py','-scriptPath','core/ghidra'],capture_output=True,text=True); print(r.stdout[-3000:] if len(r.stdout)>3000 else r.stdout); print(r.stderr[-1000:] if r.stderr else '')\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "beaker"
+      },
+      "detail": "Analise headless completa do binario (ELF, PE, .so, .dll)"
+    },
+    {
+      "label": "[GHIDRA] Listar Funcoes",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import subprocess; r=subprocess.run(['analyzeHeadless','ghidra_projects','auto_project','-process','*','-noanalysis','-postScript','ListFunctions.py'],capture_output=True,text=True); print(r.stdout[-5000:])\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "symbol-function"
+      },
+      "detail": "Lista todas as funcoes do ultimo binario analisado"
+    },
+    {
+      "label": "[GHIDRA] Buscar Strings",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import subprocess; r=subprocess.run(['analyzeHeadless','ghidra_projects','auto_project','-process','*','-noanalysis','-postScript','SearchStrings.py'],capture_output=True,text=True); print(r.stdout[-5000:])\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "search"
+      },
+      "detail": "Busca todas as strings no binario (URLs, chaves, paths)"
+    },
+    {
+      "label": "[GHIDRA] Listar Exports",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import subprocess; r=subprocess.run(['analyzeHeadless','ghidra_projects','auto_project','-process','*','-noanalysis','-postScript','ListExports.py'],capture_output=True,text=True); print(r.stdout[-5000:])\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "symbol-interface"
+      },
+      "detail": "Lista simbolos exportados do binario"
+    },
+    {
+      "label": "[GHIDRA] Listar Imports",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import subprocess; r=subprocess.run(['analyzeHeadless','ghidra_projects','auto_project','-process','*','-noanalysis','-postScript','ListImports.py'],capture_output=True,text=True); print(r.stdout[-5000:])\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "references"
+      },
+      "detail": "Lista simbolos importados do binario"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // JADX - APK Decompilation Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[JADX] Decompilar APK",
+      "type": "shell",
+      "command": "jadx -d jadx_output --deobf \"${input:apkPath}\"; Write-Host 'Decompilado em: jadx_output/' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "file-code"
+      },
+      "detail": "Decompila APK para codigo Java com deobfuscacao"
+    },
+    {
+      "label": "[JADX] Extrair Manifest",
+      "type": "shell",
+      "command": "jadx -d jadx_output --single-class AndroidManifest \"${input:apkPath}\" 2>$null; if (Test-Path jadx_output/resources/AndroidManifest.xml) { Get-Content jadx_output/resources/AndroidManifest.xml } else { Write-Host 'Decompilando primeiro...' -ForegroundColor Yellow; jadx -d jadx_output \"${input:apkPath}\" 2>$null; Get-Content jadx_output/resources/AndroidManifest.xml }",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "file-text"
+      },
+      "detail": "Extrai AndroidManifest.xml decodificado"
+    },
+    {
+      "label": "[JADX] Buscar URLs/IPs no Codigo",
+      "type": "shell",
+      "command": "Get-ChildItem -Path jadx_output -Recurse -Include *.java | Select-String -Pattern 'https?://[^\\s\"'']+|\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b' | Select-Object -First 100",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "globe"
+      },
+      "detail": "Busca URLs e IPs hardcoded no codigo decompilado"
+    },
+    {
+      "label": "[JADX] Buscar Crypto no Codigo",
+      "type": "shell",
+      "command": "Get-ChildItem -Path jadx_output -Recurse -Include *.java | Select-String -Pattern 'AES|DES|RSA|XXTEA|Cipher|SecretKey|MessageDigest|SHA|MD5|encrypt|decrypt' | Select-Object -First 100",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "key"
+      },
+      "detail": "Busca implementacoes criptograficas no codigo"
+    },
+    {
+      "label": "[JADX] Buscar API Keys/Secrets",
+      "type": "shell",
+      "command": "Get-ChildItem -Path jadx_output -Recurse -Include *.java | Select-String -Pattern 'api[_-]?key|secret|token|password|credential|auth.*key|private.*key|Bearer' -CaseSensitive:$false | Select-Object -First 100",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "unlock"
+      },
+      "detail": "Busca API keys, secrets e tokens hardcoded"
+    },
+    {
+      "label": "[JADX] Listar Permissoes",
+      "type": "shell",
+      "command": "if (Test-Path jadx_output/resources/AndroidManifest.xml) { Select-String -Path jadx_output/resources/AndroidManifest.xml -Pattern 'uses-permission' } else { Write-Host 'Decompile o APK primeiro com [JADX] Decompilar APK' -ForegroundColor Red }",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "shield"
+      },
+      "detail": "Extrai todas as permissoes do AndroidManifest"
+    },
+    {
+      "label": "[JADX] Listar Native Libs (.so)",
+      "type": "shell",
+      "command": "Get-ChildItem -Path jadx_output -Recurse -Include *.so | ForEach-Object { Write-Host $_.FullName -ForegroundColor Cyan }",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "library"
+      },
+      "detail": "Lista bibliotecas nativas (.so) do APK decompilado"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // LDPLAYER - Emulator Management Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[LDPLAYER] Listar Instancias",
+      "type": "shell",
+      "command": "ldconsole.exe list2",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "vm"
+      },
+      "detail": "Lista todas as instancias LDPlayer com detalhes"
+    },
+    {
+      "label": "[LDPLAYER] Iniciar Instancia",
+      "type": "shell",
+      "command": "ldconsole.exe launch --index ${input:ldInstance}; Write-Host 'Instancia ${input:ldInstance} iniciada!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "play"
+      },
+      "detail": "Inicia instancia LDPlayer pelo index"
+    },
+    {
+      "label": "[LDPLAYER] Parar Instancia",
+      "type": "shell",
+      "command": "ldconsole.exe quit --index ${input:ldInstance}; Write-Host 'Instancia ${input:ldInstance} parada!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "debug-stop"
+      },
+      "detail": "Para instancia LDPlayer pelo index"
+    },
+    {
+      "label": "[LDPLAYER] Parar Todas",
+      "type": "shell",
+      "command": "ldconsole.exe quitall; Write-Host 'Todas as instancias paradas!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "stop-circle"
+      },
+      "detail": "Para todas as instancias LDPlayer"
+    },
+    {
+      "label": "[LDPLAYER] Instalar APK",
+      "type": "shell",
+      "command": "ldconsole.exe installapp --index ${input:ldInstance} --filename \"${input:apkPath}\"; Write-Host 'APK instalado!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "package"
+      },
+      "detail": "Instala APK na instancia LDPlayer"
+    },
+    {
+      "label": "[LDPLAYER] Perfil Device Real",
+      "type": "shell",
+      "command": "ldconsole.exe modify --index ${input:ldInstance} --manufacturer Samsung --model SM-S911B --pname ${input:deviceProfile}; Write-Host 'Perfil aplicado: ${input:deviceProfile}' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "device-mobile"
+      },
+      "detail": "Aplica perfil de dispositivo real (Samsung, Pixel, Xiaomi, etc)"
+    },
+    {
+      "label": "[LDPLAYER] Randomizar Device",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import random,subprocess,string; imei=''.join([str(random.randint(0,9)) for _ in range(15)]); mac=':'.join(['%02x'%random.randint(0,255) for _ in range(6)]); aid=''.join(random.choices(string.hexdigits[:16],k=16)); phone='+55119'+str(random.randint(10000000,99999999)); subprocess.run(['ldconsole.exe','modify','--index','${input:ldInstance}','--imei',imei,'--mac',mac,'--androidid',aid,'--phonenum',phone]); print(f'IMEI: {imei}'); print(f'MAC: {mac}'); print(f'AID: {aid}'); print(f'Phone: {phone}')\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "refresh"
+      },
+      "detail": "Randomiza IMEI, MAC, Android ID e telefone da instancia"
+    },
+    {
+      "label": "[LDPLAYER] Definir GPS",
+      "type": "shell",
+      "command": "ldconsole.exe setprop --index ${input:ldInstance} --key location --value \"1,${input:gpsLng},${input:gpsLat}\"; Write-Host 'GPS: ${input:gpsLat}, ${input:gpsLng}' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "location"
+      },
+      "detail": "Define localizacao GPS fake na instancia"
+    },
+    {
+      "label": "[LDPLAYER] Clonar Instancia",
+      "type": "shell",
+      "command": "ldconsole.exe copy --from ${input:ldInstance}; Write-Host 'Instancia clonada!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "files"
+      },
+      "detail": "Clona instancia LDPlayer existente"
+    },
+    {
+      "label": "[LDPLAYER] Ativar/Desativar Root",
+      "type": "shell",
+      "command": "ldconsole.exe modify --index ${input:ldInstance} --root 1; Write-Host 'Root ativado na instancia ${input:ldInstance}!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "terminal-linux"
+      },
+      "detail": "Ativa root na instancia LDPlayer"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // BLUESTACKS - Emulator Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[BLUESTACKS] Listar Instancias",
+      "type": "shell",
+      "command": "Get-ChildItem 'C:\\ProgramData\\BlueStacks_nxt\\Engine' -Directory | ForEach-Object { Write-Host $_.Name -ForegroundColor Cyan }",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "vm"
+      },
+      "detail": "Lista instancias do BlueStacks"
+    },
+    {
+      "label": "[BLUESTACKS] Conectar ADB",
+      "type": "shell",
+      "command": "adb connect localhost:5555; adb devices",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "plug"
+      },
+      "detail": "Conecta ADB ao BlueStacks (porta padrao 5555)"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // MEMU - Emulator Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[MEMU] Listar Instancias",
+      "type": "shell",
+      "command": "memuc listvms",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "vm"
+      },
+      "detail": "Lista todas as instancias MEmu"
+    },
+    {
+      "label": "[MEMU] Iniciar Instancia",
+      "type": "shell",
+      "command": "memuc start -i ${input:ldInstance}; Write-Host 'MEmu instancia iniciada!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "play"
+      },
+      "detail": "Inicia instancia MEmu pelo index"
+    },
+    {
+      "label": "[MEMU] Conectar ADB",
+      "type": "shell",
+      "command": "adb connect localhost:21503; adb devices",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "plug"
+      },
+      "detail": "Conecta ADB ao MEmu (porta padrao 21503)"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // NOX - Emulator Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[NOX] Listar Instancias",
+      "type": "shell",
+      "command": "NoxConsole.exe list",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "vm"
+      },
+      "detail": "Lista todas as instancias NoxPlayer"
+    },
+    {
+      "label": "[NOX] Iniciar Instancia",
+      "type": "shell",
+      "command": "NoxConsole.exe launch -name:nox-${input:ldInstance}; Write-Host 'NoxPlayer instancia iniciada!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "play"
+      },
+      "detail": "Inicia instancia NoxPlayer"
+    },
+    {
+      "label": "[NOX] Conectar ADB",
+      "type": "shell",
+      "command": "adb connect localhost:62001; adb devices",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "plug"
+      },
+      "detail": "Conecta ADB ao NoxPlayer (porta padrao 62001)"
+    },
+    {
+      "label": "[NOX] Parar Todas",
+      "type": "shell",
+      "command": "NoxConsole.exe quitall; Write-Host 'Todas as instancias Nox paradas!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "stop-circle"
+      },
+      "detail": "Para todas as instancias NoxPlayer"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // WIRESHARK - Network Analysis Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[WIRESHARK] Capturar Trafego",
+      "type": "shell",
+      "command": "Write-Host 'Capturando por 60s na interface ${input:captureInterface}...' -ForegroundColor Yellow; tshark -i '${input:captureInterface}' -f '${input:captureFilter}' -w capture_$(Get-Date -Format 'yyyyMMdd_HHmmss').pcap -a duration:60; Write-Host 'Captura salva!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "radio-tower"
+      },
+      "detail": "Captura trafego de rede por 60 segundos"
+    },
+    {
+      "label": "[WIRESHARK] Analisar PCAP",
+      "type": "shell",
+      "command": "tshark -r '${input:pcapFile}' -q -z io,stat,1 -z conv,tcp -z endpoints,ip",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "graph"
+      },
+      "detail": "Analisa pcap com estatisticas de I/O, conversas e endpoints"
+    },
+    {
+      "label": "[WIRESHARK] Extrair DNS Queries",
+      "type": "shell",
+      "command": "tshark -r '${input:pcapFile}' -Y dns.qry.name -T fields -e dns.qry.name | Sort-Object -Unique",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "globe"
+      },
+      "detail": "Extrai todas as queries DNS do pcap"
+    },
+    {
+      "label": "[WIRESHARK] Extrair HTTP Requests",
+      "type": "shell",
+      "command": "tshark -r '${input:pcapFile}' -Y 'http.request' -T fields -e http.request.method -e http.host -e http.request.uri -E separator='|'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "link"
+      },
+      "detail": "Extrai requests HTTP (method, host, URI)"
+    },
+    {
+      "label": "[WIRESHARK] Buscar Credenciais",
+      "type": "shell",
+      "command": "tshark -r '${input:pcapFile}' -Y 'http.authorization or ftp.request.command == USER or ftp.request.command == PASS or smtp.auth or pop.request' -T fields -e ip.src -e ip.dst -e http.authorization -e ftp.request.arg",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "unlock"
+      },
+      "detail": "Busca credenciais em texto claro (HTTP Basic, FTP, SMTP)"
+    },
+    {
+      "label": "[WIRESHARK] TLS Handshakes",
+      "type": "shell",
+      "command": "tshark -r '${input:pcapFile}' -Y 'tls.handshake.type == 1' -T fields -e ip.dst -e tls.handshake.extensions_server_name -e tls.handshake.version -E separator='|'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "shield"
+      },
+      "detail": "Extrai info de TLS handshakes (SNI, versao)"
+    },
+    {
+      "label": "[WIRESHARK] Seguir Stream TCP",
+      "type": "shell",
+      "command": "tshark -r '${input:pcapFile}' -q -z follow,tcp,ascii,0",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "git-merge"
+      },
+      "detail": "Segue primeira stream TCP (mostra dados completos)"
+    },
+    {
+      "label": "[WIRESHARK] Hierarquia de Protocolos",
+      "type": "shell",
+      "command": "tshark -r '${input:pcapFile}' -q -z io,phs",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "list-tree"
+      },
+      "detail": "Mostra hierarquia de protocolos do pcap"
+    },
+    {
+      "label": "[WIRESHARK] Listar Interfaces",
+      "type": "shell",
+      "command": "tshark -D",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "list-unordered"
+      },
+      "detail": "Lista interfaces de rede disponiveis para captura"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // BURP SUITE - Web Security Testing Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[BURP] Iniciar Active Scan",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import requests,json; r=requests.post('http://127.0.0.1:1337/v0.1/scan',json={'urls':['${input:scanTarget}']}); print(json.dumps(r.json(),indent=2))\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "bug"
+      },
+      "detail": "Inicia active scan no Burp Suite via REST API"
+    },
+    {
+      "label": "[BURP] Ver Issues/Vulns",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import requests,json; r=requests.get('http://127.0.0.1:1337/v0.1/scan'); data=r.json(); [print(f\\\"[{i.get('severity','?')}] {i.get('name','?')} - {i.get('origin','')}{i.get('path','')}\\\") for i in data.get('issue_events',[])]\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "warning"
+      },
+      "detail": "Lista vulnerabilidades encontradas pelo Burp"
+    },
+    {
+      "label": "[BURP] Historico do Proxy",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import requests,json; r=requests.get('http://127.0.0.1:1337/v0.1/proxy/history'); data=r.json(); [print(f\\\"{i.get('method','')} {i.get('host','')}{i.get('url','')}\\\") for i in data[:50]]\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "history"
+      },
+      "detail": "Mostra ultimas 50 requisicoes do proxy Burp"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // NUCLEI / NMAP / SQLMAP - Vulnerability Scanning Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[NUCLEI] Scan Completo",
+      "type": "shell",
+      "command": "nuclei -u ${input:scanTarget} -severity critical,high,medium -o nuclei_results.txt; Write-Host 'Resultados em nuclei_results.txt' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "shield"
+      },
+      "detail": "Scan nuclei completo (critical + high + medium)"
+    },
+    {
+      "label": "[NUCLEI] Scan CVE Especifico",
+      "type": "shell",
+      "command": "nuclei -u ${input:scanTarget} -tags cve -severity critical,high -o nuclei_cve.txt; Write-Host 'CVEs em nuclei_cve.txt' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "bug"
+      },
+      "detail": "Scan focado em CVEs criticos e altos"
+    },
+    {
+      "label": "[NMAP] Port Scan",
+      "type": "shell",
+      "command": "nmap -sC -sV -oN nmap_scan.txt ${input:scanTarget}; Write-Host 'Resultado em nmap_scan.txt' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "radio-tower"
+      },
+      "detail": "Nmap scan com scripts e deteccao de versao"
+    },
+    {
+      "label": "[NMAP] Scan Vuln Scripts",
+      "type": "shell",
+      "command": "nmap --script vuln -oN nmap_vuln.txt ${input:scanTarget}; Write-Host 'Resultado em nmap_vuln.txt' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "warning"
+      },
+      "detail": "Nmap com scripts de vulnerabilidade"
+    },
+    {
+      "label": "[SQLMAP] SQL Injection Test",
+      "type": "shell",
+      "command": "sqlmap -u \"${input:targetUrl}\" --batch --level=3 --risk=2 --output-dir=sqlmap_output",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "database"
+      },
+      "detail": "Testa SQL injection com SQLMap (nivel 3, risco 2)"
+    },
+    {
+      "label": "[FFUF] Directory Fuzzing",
+      "type": "shell",
+      "command": "ffuf -u ${input:scanTarget}/FUZZ -w /usr/share/wordlists/dirb/common.txt -o ffuf_results.json -of json",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "search"
+      },
+      "detail": "Fuzzing de diretorios com ffuf"
+    },
+    {
+      "label": "[SUBFINDER] Enum Subdominios",
+      "type": "shell",
+      "command": "subfinder -d ${input:scanTarget} -o subdomains.txt; Write-Host 'Subdominios em subdomains.txt' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "list-tree"
+      },
+      "detail": "Enumeracao de subdominios"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // OBJECTION - Mobile Runtime Exploration Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[OBJECTION] Explore App",
+      "type": "shell",
+      "command": "objection --gadget ${input:packageName} explore",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "telescope"
+      },
+      "detail": "Inicia sessao interativa objection explore no app"
+    },
+    {
+      "label": "[OBJECTION] Disable SSL Pinning",
+      "type": "shell",
+      "command": "objection --gadget ${input:packageName} explore --startup-command 'android sslpinning disable'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "shield"
+      },
+      "detail": "Inicia objection com SSL pinning desativado"
+    },
+    {
+      "label": "[OBJECTION] Disable Root Detection",
+      "type": "shell",
+      "command": "objection --gadget ${input:packageName} explore --startup-command 'android root disable'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "lock"
+      },
+      "detail": "Inicia objection com deteccao de root desativada"
+    },
+    {
+      "label": "[OBJECTION] Dump Keystore",
+      "type": "shell",
+      "command": "objection --gadget ${input:packageName} explore --startup-command 'android keystore list'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "key"
+      },
+      "detail": "Dump de entradas do Android Keystore"
+    },
+    {
+      "label": "[OBJECTION] Patch APK (Inject Frida)",
+      "type": "shell",
+      "command": "objection patchapk --source \"${input:apkPath}\"; Write-Host 'APK patcheado com Frida gadget!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "wrench"
+      },
+      "detail": "Patcha APK com Frida gadget para injecao persistente"
+    },
+    {
+      "label": "[OBJECTION] Listar Activities",
+      "type": "shell",
+      "command": "objection --gadget ${input:packageName} explore --startup-command 'android hooking list activities'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "list-ordered"
+      },
+      "detail": "Lista activities do app Android"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // WORKFLOWS - Pipelines Automatizados
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[WORKFLOW] Full App Pentest",
+      "type": "shell",
+      "command": "Write-Host '=== LEVIATHAN FULL APP PENTEST ===' -ForegroundColor Magenta; Write-Host '[1/6] Extraindo APK...' -ForegroundColor Cyan; $p=(adb -s ${input:adbDevice} shell pm path ${input:packageName}).Replace('package:','').Trim(); adb -s ${input:adbDevice} pull $p app_target.apk; Write-Host '[2/6] Decompilando...' -ForegroundColor Cyan; jadx -d jadx_output --deobf app_target.apk; Write-Host '[3/6] Buscando secrets...' -ForegroundColor Cyan; Get-ChildItem jadx_output -Recurse -Include *.java | Select-String -Pattern 'api.key|secret|token|password|AES|DES|XXTEA|http://|https://' -CaseSensitive:$false | Select-Object -First 50; Write-Host '[4/6] Bypass + Attach...' -ForegroundColor Cyan; frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/universal_bypass.js --no-pause -e 'setTimeout(function(){console.log(\"Ready\")},3000)'; Write-Host '[5/6] Concluido!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "flame"
+      },
+      "detail": "Pipeline completo: Extract APK -> Decompile -> Search Secrets -> Bypass -> Attach"
+    },
+    {
+      "label": "[WORKFLOW] Quick Intercept",
+      "type": "shell",
+      "command": "Write-Host '=== QUICK INTERCEPT ===' -ForegroundColor Magenta; Write-Host 'Aplicando bypasses e interceptores...' -ForegroundColor Cyan; frida -U -f ${input:packageName} -l core/ldplayer/frida_scripts/ssl_bypass.js -l core/ldplayer/frida_scripts/network_interceptor.js -l core/ldplayer/frida_scripts/crypto_interceptor.js --no-pause",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "zap"
+      },
+      "detail": "Inicia app com SSL bypass + Network interceptor + Crypto interceptor"
+    },
+    {
+      "label": "[WORKFLOW] Full Network Capture",
+      "type": "shell",
+      "command": "Write-Host '=== FULL NETWORK CAPTURE ===' -ForegroundColor Magenta; $ts=Get-Date -Format 'yyyyMMdd_HHmmss'; Write-Host '[1/3] Capturando trafego do dispositivo...' -ForegroundColor Cyan; adb -s ${input:adbDevice} shell su -c 'tcpdump -i any -w /sdcard/device_cap.pcap -c 10000' &; Write-Host '[2/3] Capturando trafego local...' -ForegroundColor Cyan; tshark -i '${input:captureInterface}' -w local_$ts.pcap -a duration:60; Write-Host '[3/3] Puxando captura do device...' -ForegroundColor Cyan; adb -s ${input:adbDevice} pull /sdcard/device_cap.pcap device_$ts.pcap; Write-Host \"Capturas salvas: local_$ts.pcap + device_$ts.pcap\" -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "radio-tower"
+      },
+      "detail": "Captura simultanea: trafego do dispositivo + trafego local"
+    },
+    {
+      "label": "[WORKFLOW] Emulator Farm (Multi-Instance)",
+      "type": "shell",
+      "command": "Write-Host '=== EMULATOR FARM ===' -ForegroundColor Magenta; for ($i=0; $i -lt 3; $i++) { Write-Host \"Clonando instancia $i...\" -ForegroundColor Cyan; ldconsole.exe copy --from 0; }; Write-Host 'Randomizando devices...' -ForegroundColor Cyan; C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import random,subprocess; [subprocess.run(['ldconsole.exe','modify','--index',str(i),'--imei',''.join([str(random.randint(0,9)) for _ in range(15)])]) for i in range(1,4)]\"; Write-Host '3 instancias clonadas e randomizadas!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "vm"
+      },
+      "detail": "Cria farm de 3 instancias clonadas com identidades randomizadas"
+    },
+    {
+      "label": "[WORKFLOW] APK Security Audit",
+      "type": "shell",
+      "command": "Write-Host '=== APK SECURITY AUDIT ===' -ForegroundColor Magenta; Write-Host '[1/5] Decompilando...' -ForegroundColor Cyan; jadx -d audit_output --deobf \"${input:apkPath}\"; Write-Host '[2/5] Permissoes...' -ForegroundColor Cyan; Select-String -Path audit_output/resources/AndroidManifest.xml -Pattern 'uses-permission'; Write-Host '[3/5] URLs hardcoded...' -ForegroundColor Cyan; Get-ChildItem audit_output -Recurse -Include *.java | Select-String 'https?://[^\\s]+' | Select-Object -First 20; Write-Host '[4/5] Crypto...' -ForegroundColor Cyan; Get-ChildItem audit_output -Recurse -Include *.java | Select-String 'AES|DES|RSA|Cipher|SecretKey' | Select-Object -First 20; Write-Host '[5/5] Secrets...' -ForegroundColor Cyan; Get-ChildItem audit_output -Recurse -Include *.java | Select-String 'api.key|secret|token|password' -CaseSensitive:$false | Select-Object -First 20; Write-Host 'Audit completo!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "shield"
+      },
+      "detail": "Audit completo: Decompile -> Permissions -> URLs -> Crypto -> Secrets"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // SYSTEM - Status & Utils
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[LEVIATHAN] Status Completo",
+      "type": "shell",
+      "command": "Write-Host '=== LEVIATHAN VS - SYSTEM STATUS ===' -ForegroundColor Magenta; Write-Host '' ; Write-Host '[ADB]' -ForegroundColor Cyan -NoNewline; if (Get-Command adb -ErrorAction SilentlyContinue) { $d=(adb devices | Select-Object -Skip 1 | Where-Object { $_ -match 'device' }).Count; Write-Host \" OK ($d devices)\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Frida]' -ForegroundColor Cyan -NoNewline; if (Get-Command frida -ErrorAction SilentlyContinue) { Write-Host \" OK ($(frida --version))\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Ghidra]' -ForegroundColor Cyan -NoNewline; if (Get-Command analyzeHeadless -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND (add to PATH)' -ForegroundColor Yellow }; Write-Host '[Jadx]' -ForegroundColor Cyan -NoNewline; if (Get-Command jadx -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[tshark]' -ForegroundColor Cyan -NoNewline; if (Get-Command tshark -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Nuclei]' -ForegroundColor Cyan -NoNewline; if (Get-Command nuclei -ErrorAction SilentlyContinue) { Write-Host \" OK ($(nuclei -version 2>&1))\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Nmap]' -ForegroundColor Cyan -NoNewline; if (Get-Command nmap -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Objection]' -ForegroundColor Cyan -NoNewline; if (Get-Command objection -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[LDPlayer]' -ForegroundColor Cyan -NoNewline; if (Get-Command ldconsole.exe -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Python]' -ForegroundColor Cyan -NoNewline; Write-Host \" OK ($(python --version 2>&1))\" -ForegroundColor Green; Write-Host ''; Write-Host '=== MCP MODULES: 12 servers / 324 tools ===' -ForegroundColor Yellow",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "pulse"
+      },
+      "detail": "Verifica status de TODAS as ferramentas (ADB, Frida, Ghidra, Jadx, tshark, Nuclei, Nmap, Objection, LDPlayer)"
     }
   ]
 }
-
