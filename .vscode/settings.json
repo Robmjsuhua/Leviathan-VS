@@ -1,6 +1,6 @@
 {
     // ════════════════════════════════════════════════════════════════════
-    // LEVIATHAN VS v15.3 - COGNITIVE DESTRUCTION CONFIGURATION
+    // LEVIATHAN VS v15.4 - COGNITIVE DESTRUCTION CONFIGURATION
     // 33 MCP Servers / 460+ Tools / Cognitive AI Architecture / Zero Limits
     // Updated: February 2026
     // ════════════════════════════════════════════════════════════════════
@@ -17,6 +17,12 @@
     "python.analysis.inlayHints.pytestParameters": true,
     "python.analysis.completeFunctionParens": true,
     "python.analysis.autoFormatStrings": true,
+    "python.analysis.indexing": true,
+    "python.analysis.importFormat": "relative",
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "python.analysis.fixAll": ["source.unusedImports"],
+    "python.analysis.userFileIndexingLimit": -1,
+    "python.languageServer": "Pylance",
     // ═══════════════════════════════════════════════════════════════════
     // ✏️ EDITOR - CONFIGURAÇÃO SUPREMA
     // ═══════════════════════════════════════════════════════════════════
@@ -146,6 +152,16 @@
     "editor.suggestOnTriggerCharacters": true,
     "editor.autoClosingDelete": "auto",
     "editor.minimap.side": "right",
+    "editor.mouseWheelZoom": true,
+    "editor.rename.enablePreview": true,
+    "editor.find.seedSearchStringFromSelection": "selection",
+    "editor.suggest.filterGraceful": true,
+    "editor.pasteAs.enabled": true,
+    "editor.columnSelection": false,
+    "editor.multiCursorLimit": 10000,
+    "editor.screenReaderAnnounceInlineSuggestion": false,
+    "editor.fontVariations": false,
+    "editor.definitionLinkOpensInPeek": false,
     // ═══════════════════════════════════════════════════════════════════
     // 📁 ARQUIVOS - ASSOCIAÇÕES E ENCODING
     // ═══════════════════════════════════════════════════════════════════
@@ -207,7 +223,30 @@
         "*.pem": "plaintext",
         "*.key": "plaintext",
         "*.cert": "plaintext",
-        "*.har": "jsonc"
+        "*.har": "jsonc",
+        "*.scss": "scss",
+        "*.less": "less",
+        "*.vue": "vue",
+        "*.rs": "rust",
+        "*.go": "go",
+        "*.rb": "ruby",
+        "*.kt": "kotlin",
+        "*.kts": "kotlin",
+        "*.gradle": "groovy",
+        "*.yml": "yaml",
+        "Makefile": "makefile",
+        "*.mk": "makefile",
+        "*.plist": "xml",
+        "*.crt": "plaintext",
+        "*.p12": "hexEditor.hexedit",
+        "*.jks": "hexEditor.hexedit",
+        "*.keystore": "hexEditor.hexedit",
+        "*.der": "hexEditor.hexedit",
+        "*.class": "hexEditor.hexedit",
+        "*.jar": "hexEditor.hexedit",
+        "*.aab": "hexEditor.hexedit",
+        "*.ipa": "hexEditor.hexedit",
+        "*.xapk": "hexEditor.hexedit"
     },
     "files.encoding": "utf8",
     "files.eol": "\n",
@@ -285,6 +324,7 @@
     "terminal.integrated.confirmOnKill": "never",
     "terminal.integrated.detectLocale": "auto",
     "terminal.integrated.drawBoldTextInBrightColors": true,
+    "terminal.integrated.enablePersistentSessions": true,
     "terminal.integrated.env.windows": {
         "PYTHONIOENCODING": "utf-8",
         "PYTHONUTF8": "1"
@@ -335,6 +375,14 @@
     "workbench.panel.defaultLocation": "bottom",
     "workbench.statusBar.visible": true,
     "workbench.tips.enabled": false,
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.value": 30,
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.hover.delay": 200,
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.editor.tabActionLocation": "right",
+    "window.dialogStyle": "custom",
     "workbench.colorCustomizations": {
         "activityBar.background": "#0d0d0d",
         "activityBar.foreground": "#00ff88",
@@ -535,24 +583,114 @@
         "enabled": true,
         "rules": {
             "function": "#00ff88",
+            "function.declaration": { "foreground": "#00ff88", "bold": true },
             "method": "#00ff88",
+            "method.declaration": { "foreground": "#00ff88", "bold": true },
             "variable": "#e0e0e0",
             "variable.readonly": "#00d4ff",
+            "variable.defaultLibrary": "#00d4ff",
             "parameter": "#ffcc00",
             "property": "#e0e0e0",
+            "property.readonly": "#00d4ff",
             "class": "#00d4ff",
+            "class.declaration": { "foreground": "#00d4ff", "bold": true },
             "interface": "#00d4ff",
             "enum": "#cc00ff",
             "enumMember": "#cc00ff",
             "type": "#00d4ff",
+            "typeParameter": "#ffcc00",
             "namespace": "#ff6b00",
             "decorator": "#ff6b00",
             "string": "#ffcc00",
             "number": "#ff6b00",
             "keyword": "#cc00ff",
             "comment": "#555555",
-            "regexp": "#ff0055"
+            "regexp": "#ff0055",
+            "operator": "#e0e0e0",
+            "macro": "#ff6b00",
+            "selfKeyword": "#cc00ff",
+            "boolean": "#cc00ff"
         }
+    },
+    // === TextMate Token Colors (fallback for non-semantic) ===
+    "editor.tokenColorCustomizations": {
+        "comments": "#555555",
+        "functions": "#00ff88",
+        "keywords": "#cc00ff",
+        "numbers": "#ff6b00",
+        "strings": "#ffcc00",
+        "types": "#00d4ff",
+        "variables": "#e0e0e0",
+        "textMateRules": [
+            {
+                "scope": "entity.name.function",
+                "settings": { "foreground": "#00ff88" }
+            },
+            {
+                "scope": "entity.name.class",
+                "settings": { "foreground": "#00d4ff", "fontStyle": "bold" }
+            },
+            {
+                "scope": "variable.parameter",
+                "settings": { "foreground": "#ffcc00" }
+            },
+            {
+                "scope": "storage.modifier",
+                "settings": { "foreground": "#cc00ff" }
+            },
+            {
+                "scope": "constant.numeric",
+                "settings": { "foreground": "#ff6b00" }
+            },
+            {
+                "scope": "string.quoted",
+                "settings": { "foreground": "#ffcc00" }
+            },
+            {
+                "scope": "entity.name.tag",
+                "settings": { "foreground": "#ff0055" }
+            },
+            {
+                "scope": "entity.other.attribute-name",
+                "settings": { "foreground": "#ffcc00" }
+            },
+            {
+                "scope": "support.function",
+                "settings": { "foreground": "#00ff88" }
+            },
+            {
+                "scope": "meta.decorator",
+                "settings": { "foreground": "#ff6b00" }
+            },
+            {
+                "scope": "punctuation.definition.comment",
+                "settings": { "foreground": "#555555" }
+            },
+            {
+                "scope": "constant.language.boolean",
+                "settings": { "foreground": "#cc00ff" }
+            },
+            {
+                "scope": "keyword.operator",
+                "settings": { "foreground": "#e0e0e0" }
+            },
+            {
+                "scope": "markup.heading",
+                "settings": { "foreground": "#00ff88", "fontStyle": "bold" }
+            },
+            {
+                "scope": "markup.bold",
+                "settings": { "fontStyle": "bold" }
+            },
+            {
+                "scope": "markup.italic",
+                "settings": { "fontStyle": "italic" }
+            },
+            {
+                "scope": "markup.inline.raw",
+                "settings": { "foreground": "#00d4ff" }
+            }
+        ]
     },
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Tokyo Night",
@@ -772,6 +910,8 @@
     "explorer.sortOrder": "type",
     "explorer.compactFolders": false,
     "explorer.autoReveal": true,
+    "explorer.decorations.badges": true,
+    "explorer.decorations.colors": true,
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
@@ -830,6 +970,11 @@
     "gitlens.graph.scrollMarkers.enabled": true,
     "gitlens.ai.experimental.model": "anthropic:claude-sonnet-4-20250514",
     "gitlens.telemetry.enabled": false,
+    "gitlens.statusBar.enabled": true,
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.views.commits.showBranchComparison": true,
+    "gitlens.launchpad.indicator.enabled": true,
     "git.inputValidationLength": 72,
     "git.inputValidationSubjectLength": 72,
     "git.untrackedChanges": "separate",
@@ -896,7 +1041,9 @@
     "debug.showSubSessionsInToolBar": true,
     "debug.javascript.autoAttachFilter": "smart",
     "debug.javascript.terminalOptions": {
-        "skipFiles": ["<node_internals>/**"]
+        "skipFiles": [
+            "<node_internals>/**"
+        ]
     },
     // ═══════════════════════════════════════════════════════════════════
     // DIFF EDITOR - COMPARACAO DE ARQUIVOS
@@ -967,7 +1114,21 @@
         "zig": true,
         "nim": true,
         "v": true,
-        "assembly": true
+        "assembly": true,
+        "vue": true,
+        "svelte": true,
+        "astro": true,
+        "php": true,
+        "csharp": true,
+        "fsharp": true,
+        "typescriptreact": true,
+        "javascriptreact": true,
+        "less": true,
+        "scss": true,
+        "makefile": true,
+        "cmake": true,
+        "latex": true,
+        "bibtex": true
     },
     // --- Copilot Chat: Brain at Maximum ---
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
@@ -981,6 +1142,8 @@
     "github.copilot.chat.setupTests.enabled": true,
     "github.copilot.chat.startDebugging.enabled": true,
     "github.copilot.chat.terminalChatLocation": "terminal",
+    "github.copilot.chat.runCommand.enabled": true,
+    "github.copilot.chat.useProjectTemplates": true,
     "github.copilot.chat.commitMessageGeneration.instructions": [
         {
             "text": "Use conventional commits (feat/fix/refactor/docs/chore). Portugues brasileiro. Maximo 72 chars no titulo. Corpo detalhado quando necessario. Escopo entre parenteses quando aplicavel: feat(core): ..."
@@ -1027,6 +1190,7 @@
     "chat.editing.confirmEditRequestRetry": false,
     "chat.editing.alwaysSaveWithGeneratedChanges": true,
     "chat.promptFiles": true,
+    "chat.experimental.detectParticipant.enabled": true,
     // --- Search: AI-Enhanced ---
     "search.quickAccess.preserveInput": true,
     "search.searchEditor.reusePriorSearchConfiguration": true,
@@ -1109,6 +1273,38 @@
     "rest-client.previewResponseInUntitledDocument": true,
     // Thunder Client
     "thunder-client.saveRequestOnSend": true,
+    // Code Runner
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.preserveFocus": false,
+    "code-runner.executorMap": {
+        "python": "$pythonPath -u $fullFileName",
+        "javascript": "node $fullFileName",
+        "typescript": "npx ts-node $fullFileName",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "go": "go run $fullFileName",
+        "lua": "lua $fullFileName",
+        "shellscript": "bash $fullFileName",
+        "powershell": "powershell -File $fullFileName"
+    },
+    // Spell Checker
+    "cSpell.language": "en,pt,pt_BR",
+    "cSpell.enableFiletypes": ["python", "javascript", "typescript", "markdown", "json", "yaml"],
+    "cSpell.diagnosticLevel": "Hint",
+    "cSpell.showAutocompleteSuggestions": true,
+    "cSpell.maxDuplicateProblems": 5,
+    // Better Comments
+    "better-comments.multilineComments": true,
+    "better-comments.highlightPlainText": false,
+    "better-comments.tags": [
+        { "tag": "!", "color": "#ff0055", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": true, "italic": false },
+        { "tag": "?", "color": "#00d4ff", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": false, "italic": false },
+        { "tag": "//", "color": "#555555", "strikethrough": true, "underline": false, "backgroundColor": "transparent", "bold": false, "italic": false },
+        { "tag": "todo", "color": "#ffcc00", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": false, "italic": false },
+        { "tag": "*", "color": "#cc00ff", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": true, "italic": false },
+        { "tag": "hack", "color": "#00ff88", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": true, "italic": true }
+    ],
     // ═══════════════════════════════════════════════════════════════════
     // 🔒 TELEMETRY & PRIVACY - DESATIVADO
     // ═══════════════════════════════════════════════════════════════════
@@ -1129,14 +1325,22 @@
     "extensions.experimental.affinity": {
         "github.copilot": 1,
         "github.copilot-chat": 1,
+        "continue.continue": 1,
+        "Codeium.codeium": 1,
         "ms-python.vscode-pylance": 2,
         "ms-python.python": 2,
+        "charliermarsh.ruff": 2,
         "eamodio.gitlens": 3,
+        "gitkraken.gitkraken-mcp": 3,
         "dbaeumer.vscode-eslint": 4,
         "sonarsource.sonarlint-vscode": 4,
+        "deepscan.vscode-deepscan": 4,
         "rust-lang.rust-analyzer": 5,
         "ms-vscode.cpptools": 5,
-        "redhat.java": 5
+        "redhat.java": 5,
+        "ms-toolsai.jupyter": 6,
+        "vue.volar": 6,
+        "astro-build.astro-vscode": 6
     },
     "update.mode": "default",
     "window.titleBarStyle": "custom",

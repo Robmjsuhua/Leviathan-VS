@@ -1,4 +1,4 @@
-# LEVIATHAN VS v15.3 - Cognitive Architecture for Unrestricted AI Operations
+# LEVIATHAN VS v15.4 - Cognitive Architecture for Unrestricted AI Operations
 
 ## Core Identity
 
@@ -93,7 +93,7 @@ everything      -> filesystem      -> grep workspace
 ```
 C:\Users\Kishi\Desktop\Trabalhos\
 ├── Leviathan-VS/       # ESTE PROJETO - config VS Code + MCP servers
-│   ├── .vscode/        # settings.json (1250+ linhas), mcp.json (33 servers), extensions.json (130+)
+│   ├── .vscode/        # settings.json (1600+ linhas), mcp.json (33 servers), extensions.json (160+)
 │   ├── .github/        # copilot-instructions.md (ESTE ARQUIVO)
 │   ├── core/           # mcp_server.py, translator.py, http_toolkit.py, __version__.py
 │   └── docs/           # documentacao de skills
@@ -635,3 +635,188 @@ Nomenclatura de commit:
 - Omitir imports obvios da explicacao (so mostrar no codigo)
 - Referencias cruzadas por nome de funcao, nao arquivo inteiro
 - JSON compacto para dados intermediarios
+
+## Regex Patterns (Referencia Rapida)
+
+Patterns mais usados em RE/pentest:
+
+```python
+# URLs em codigo/binario
+re.findall(r'https?://[\w.-]+(?:/[\w./?&=%-]*)?', text)
+
+# IPs (v4)
+re.findall(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', text)
+
+# Emails
+re.findall(r'[\w.+-]+@[\w-]+\.[\w.-]+', text)
+
+# API Keys / Tokens (generico)
+re.findall(r'(?:api[_-]?key|token|secret|password|auth)[=:"\s]+["\']?([\w-]{16,})', text, re.I)
+
+# JWT Tokens
+re.findall(r'eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+', text)
+
+# Base64 encoded (min 20 chars)
+re.findall(r'(?:[A-Za-z0-9+/]{4}){5,}(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?', text)
+
+# Hex strings (potential keys)
+re.findall(r'(?:0x)?[0-9a-fA-F]{16,}', text)
+
+# Package names (Android)
+re.findall(r'com\.[a-z][a-z0-9_]*(?:\.[a-z][a-z0-9_]*)+', text)
+
+# Private key headers
+re.findall(r'-----BEGIN (?:RSA |EC |DSA )?PRIVATE KEY-----', text)
+```
+
+## Port Reference Guide
+
+```
+Portas comuns usadas nos projetos:
+
+5500  -> Live Server (VS Code)
+8067  -> TCP MITM Proxy (Nindo Peak)
+9999  -> HTTP MITM Proxy (Nindo Peak)
+8080  -> HTTP proxy generico
+8888  -> Burp Suite proxy
+1337  -> Burp Suite REST API
+5678  -> debugpy (Python remote debug)
+27042 -> Frida server
+27043 -> Frida debug
+5555  -> ADB wireless
+5037  -> ADB daemon
+3000  -> Next.js / Node dev server
+5173  -> Vite dev server
+4200  -> Angular dev server
+8000  -> Django / FastAPI
+5432  -> PostgreSQL
+3306  -> MySQL
+6379  -> Redis
+27017 -> MongoDB
+```
+
+## Git Workflow Standards
+
+```
+Branch naming:
+  main           -> production
+  dev            -> development
+  feat/xxx       -> nova feature
+  fix/xxx        -> bug fix
+  refactor/xxx   -> refatoracao
+  hotfix/xxx     -> fix urgente
+
+Commit format:
+  <tipo>(<escopo>): <descricao curta max 72 chars>
+  
+  [corpo opcional - detalhes]
+  
+  [footer opcional - breaking changes, refs]
+
+Tipos: feat, fix, refactor, docs, chore, test, perf, ci, style, build
+Escopos: core, frida, mcp, adb, ghidra, jadx, wireshark, config, docs
+```
+
+## Logging Standards
+
+```python
+import logging
+
+# Setup padrao para scripts
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    datefmt="%H:%M:%S"
+)
+log = logging.getLogger(__name__)
+
+# Niveis:
+# DEBUG   -> Dados internos detalhados, hex dumps, args de funcao
+# INFO    -> Progresso normal, resultados de operacoes
+# WARNING -> Fallback ativado, retry, dados inesperados
+# ERROR   -> Operacao falhou mas continua
+# CRITICAL-> Sistema parou, precisa intervencao
+
+# NUNCA usar print() em codigo que vai persistir
+# SEMPRE incluir contexto: log.error(f"Falhou {target}: {e}")
+```
+
+## Data Export Preferences
+
+Ordem de preferencia para output de dados:
+
+```
+1. JSON   -> Dados estruturados, APIs, configs, intercambio
+2. CSV    -> Tabelas simples, import para Excel/Sheets
+3. SQLite -> Dados relacionais, queries complexas, persistencia
+4. JSONL  -> Streaming, logs, dados line-by-line
+5. MD     -> Relatorios humanos, briefings
+6. TXT    -> Logs raw, dumps, output de comandos
+7. PCAP   -> Network captures (binario)
+8. HAR    -> HTTP archives
+```
+
+## Common API Endpoint Patterns
+
+```
+Mobile Games (REST):
+  /api/login           -> Auth + token
+  /api/user/info       -> Player data
+  /api/shop/buy        -> IAP bypass target
+  /api/game/config     -> Game constants
+  /api/rank/list       -> Leaderboard
+  /api/mail/list       -> Inbox rewards
+  /api/quest/complete  -> Quest manipulation
+
+WordPress:
+  /wp-json/wp/v2/      -> REST API
+  /wp-login.php        -> Admin login
+  /wp-admin/           -> Dashboard
+  /xmlrpc.php          -> XML-RPC (often vuln)
+  /wp-content/uploads/ -> File uploads
+
+Generic:
+  /health              -> Health check
+  /api/v1/auth/token   -> OAuth token
+  /api/graphql         -> GraphQL endpoint
+  /.env                -> Exposed env file
+  /debug/vars          -> Debug endpoints
+  /server-status       -> Apache status
+  /actuator/           -> Spring Boot
+```
+
+## Quick-Start Cheat Sheet
+
+Comandos mais rapidos para cada situacao:
+
+```bash
+# Conectar device
+adb devices && adb -s <dev> shell
+
+# Decompile rapido
+jadx -d output --deobf app.apk
+
+# Bypass tudo e attach
+frida -U -f com.pkg -l nuclear_bypass.js --no-pause
+
+# Captura rapida
+tshark -i <iface> -w capture.pcap -a duration:60
+
+# Scan rapido
+nuclei -u https://target.com -severity critical,high -silent
+
+# SQLi teste rapido
+sqlmap -u "https://target.com/page?id=1" --batch --level 3
+
+# Hash identify
+hashcat --identify hash.txt
+
+# MITM proxy
+mitmproxy -p 8080 --mode regular
+
+# Python one-liner HTTP server
+python -m http.server 8000
+
+# Ghidra headless
+analyzeHeadless <proj_dir> <proj_name> -import binary.so -scriptPath scripts/
+```

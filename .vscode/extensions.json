@@ -30,6 +30,8 @@
         // === GIT & VERSION CONTROL ===
         "eamodio.gitlens",
         "mhutchie.git-graph",
+        "donjayamanne.githistory",
+        "codezombiech.gitignore",
         // === PRODUCTIVITY ===
         "usernamehw.errorlens",
         "gruntfuggly.todo-tree",
@@ -45,9 +47,11 @@
         "mikestead.dotenv",
         // === VISUAL ENHANCEMENT ===
         "PKief.material-icon-theme",
+        "PKief.material-product-icons",
         "naumovs.color-highlight",
         "oderwat.indent-rainbow",
         "mechatroner.rainbow-csv",
+        "2gua.rainbow-brackets",
         // === MARKDOWN & DOCS ===
         "yzhang.markdown-all-in-one",
         "bierner.markdown-mermaid",
@@ -55,9 +59,12 @@
         // === CONTAINERS & DEVOPS ===
         "ms-azuretools.vscode-docker",
         "ms-vscode-remote.remote-containers",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
         // === API & REST ===
         "humao.rest-client",
         "rangav.vscode-thunder-client",
+        // === REGEX ===
+        "chrmarti.regex",
         // === DATABASE ===
         "mtxr.sqltools",
         // === XML ===
@@ -157,6 +164,17 @@
         // (rust-lang.rust-analyzer already listed above)
         "vadimcn.vscode-lldb",
         "tamasfe.even-better-toml",
+        // === Svelte ===
+        "svelte.svelte-vscode",
+        // === Prisma ===
+        "prisma.prisma",
+        // === Proto/gRPC ===
+        "zxh404.vscode-proto3",
+        // === CMake ===
+        "twxs.cmake",
+        "ms-vscode.cmake-tools",
+        // === Makefile ===
+        "ms-vscode.makefile-tools",
         // === C/C++ - Clang-Tidy, Cppcheck, PVS-Studio ===
         "ms-vscode.cpptools",
         "ms-vscode.cpptools-extension-pack",
@@ -265,8 +283,7 @@
         // === NOTEBOOK / JUPYTER ===
         "ms-toolsai.jupyter",
         "ms-toolsai.jupyter-renderers",
-        "ms-toolsai.jupyter-keymap",
-        "ms-toolsai.jupyter-renderers"
+        "ms-toolsai.jupyter-keymap"
     ],
     "unwantedRecommendations": []
 }
