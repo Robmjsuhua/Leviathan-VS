@@ -16,7 +16,7 @@
 A monstrous VS Code configuration that rises from the depths. Semantic translation engine, HTTP interceptor, 33 MCP security servers with 460+ tools, 4 emulator controllers, and 80+ extensions forged in the darkness of the deep sea.
 
 ![Version](https://img.shields.io/badge/version-14.2.0-0d1117?style=for-the-badge&labelColor=161b22)
-![Python](https://img.shields.io/badge/python-3.14-1f6feb?style=for-the-badge&labelColor=0d1117)
+![Python](https://img.shields.io/badge/python-3.9+-1f6feb?style=for-the-badge&labelColor=0d1117)
 ![License](https://img.shields.io/badge/license-MIT-238636?style=for-the-badge&labelColor=0d1117)
 ![Extensions](https://img.shields.io/badge/extensions-80+-8957e5?style=for-the-badge&labelColor=0d1117)
 ![Rules](https://img.shields.io/badge/translation_rules-640+-f85149?style=for-the-badge&labelColor=0d1117)

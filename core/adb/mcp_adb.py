@@ -65,6 +65,10 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# Add parent dir (core/) to path so we can import mcp_plugin_base
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from mcp_plugin_base import MCPPluginBase  # noqa: E402
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -1008,116 +1012,17 @@ async def dispatch_tool(name: str, args: Dict) -> str:
     return f"Unknown tool: {name}"
 
 
-# ── MCP Server ──
-class MCPServer:
-    def __init__(self):
-        self.running = True
+# ── MCP Server (via MCPPluginBase) ──
+class ADBPlugin(MCPPluginBase):
+    """ADB MCP server built on MCPPluginBase."""
 
-    def _response(self, id: Any, result: Any) -> Dict:
-        return {"jsonrpc": "2.0", "id": id, "result": result}
+    server_name = SERVER_NAME
+    version = VERSION
+    tools = TOOLS
 
-    def _error(self, id: Any, code: int, msg: str) -> Dict:
-        return {"jsonrpc": "2.0", "id": id, "error": {"code": code, "message": msg}}
-
-    async def handle(self, req: Dict) -> Optional[Dict]:
-        method = req.get("method", "")
-        params = req.get("params", {})
-        rid = req.get("id")
-
-        if method == "initialize":
-            return self._response(
-                rid,
-                {
-                    "protocolVersion": "2024-11-05",
-                    "serverInfo": {"name": SERVER_NAME, "version": VERSION},
-                    "capabilities": {"tools": {"listChanged": False}},
-                },
-            )
-        elif method == "initialized":
-            return None
-        elif method == "shutdown":
-            self.running = False
-            return self._response(rid, None)
-        elif method == "tools/list":
-            return self._response(rid, {"tools": TOOLS})
-        elif method == "tools/call":
-            name = params.get("name", "")
-            args = params.get("arguments", {})
-            try:
-                result = await dispatch_tool(name, args)
-                return self._response(
-                    rid, {"content": [{"type": "text", "text": str(result)}]}
-                )
-            except Exception as e:
-                return self._response(
-                    rid,
-                    {
-                        "content": [{"type": "text", "text": f"ERROR: {e}"}],
-                        "isError": True,
-                    },
-                )
-        elif method == "resources/list":
-            return self._response(rid, {"resources": []})
-        elif method == "prompts/list":
-            return self._response(rid, {"prompts": []})
-        elif method.startswith("notifications/"):
-            return None
-        else:
-            return self._error(rid, -32601, f"Unknown method: {method}")
-
-    async def run(self):
-        if sys.platform == "win32" and hasattr(sys.stdout, "buffer"):
-            import msvcrt
-
-            msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
-            msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)
-
-        reader = asyncio.StreamReader()
-        protocol = asyncio.StreamReaderProtocol(reader)
-        await asyncio.get_event_loop().connect_read_pipe(
-            lambda: protocol, sys.stdin.buffer
-        )
-
-        logger.info(f"{SERVER_NAME} v{VERSION} started (ADB: {ADB})")
-
-        buf = b""
-        while self.running:
-            try:
-                chunk = await reader.read(4096)
-                if not chunk:
-                    break
-                buf += chunk
-
-                while True:
-                    if b"Content-Length:" not in buf:
-                        break
-                    header_end = buf.find(b"\r\n\r\n")
-                    if header_end == -1:
-                        break
-                    header = buf[:header_end].decode("utf-8")
-                    length = 0
-                    for line in header.split("\r\n"):
-                        if line.startswith("Content-Length:"):
-                            length = int(line.split(":")[1].strip())
-                    body_start = header_end + 4
-                    if len(buf) < body_start + length:
-                        break
-                    body = buf[body_start : body_start + length].decode("utf-8")
-                    buf = buf[body_start + length :]
-
-                    req = json.loads(body)
-                    resp = await self.handle(req)
-                    if resp:
-                        data = json.dumps(resp).encode("utf-8")
-                        frame = f"Content-Length: {len(data)}\r\n\r\n".encode("utf-8")
-                        sys.stdout.buffer.write(frame + data)
-                        sys.stdout.buffer.flush()
-            except Exception as e:
-                logger.error(f"Error: {e}")
-                break
-
-        logger.info("Server shutdown")
+    async def dispatch_tool(self, name: str, args: Dict) -> str:
+        return await dispatch_tool(name, args)
 
 
 if __name__ == "__main__":
-    asyncio.run(MCPServer().run())
+    ADBPlugin.main()

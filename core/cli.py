@@ -28,14 +28,11 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-VERSION = "14.2.0"
+from __version__ import __version__ as VERSION
+from colors import enable_ansi
+
 BASE_DIR = Path(__file__).parent.resolve()
 PROJECT_DIR = BASE_DIR.parent
-
-
-def _enable_ansi():
-    if os.name == "nt":
-        os.system("")
 
 
 # ============================================================================
@@ -243,7 +240,7 @@ def cmd_version(args):
 
 
 def main():
-    _enable_ansi()
+    enable_ansi()
     parser = argparse.ArgumentParser(
         prog="leviathan",
         description="LEVIATHAN VS — Unified CLI for security research environment",

@@ -28,7 +28,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-VERSION = "14.2.0"
+from __version__ import __version__ as VERSION
 BASE_DIR = Path(__file__).parent.resolve()
 PROJECT_DIR = BASE_DIR.parent
 
@@ -420,93 +420,12 @@ def check_permissions(report: DoctorReport):
 # ============================================================================
 
 
-def _strip_jsonc_comments(text: str) -> str:
-    """Remove // and /* */ comments from JSONC text, preserving strings."""
-    result = []
-    i = 0
-    in_string = False
-    escape = False
-    while i < len(text):
-        ch = text[i]
-        if escape:
-            result.append(ch)
-            escape = False
-            i += 1
-            continue
-        if ch == "\\" and in_string:
-            result.append(ch)
-            escape = True
-            i += 1
-            continue
-        if ch == '"' and not in_string:
-            in_string = True
-            result.append(ch)
-            i += 1
-            continue
-        if ch == '"' and in_string:
-            in_string = False
-            result.append(ch)
-            i += 1
-            continue
-        if not in_string and ch == "/" and i + 1 < len(text):
-            if text[i + 1] == "/":
-                while i < len(text) and text[i] != "\n":
-                    i += 1
-                continue
-            elif text[i + 1] == "*":
-                i += 2
-                while i + 1 < len(text) and not (text[i] == "*" and text[i + 1] == "/"):
-                    i += 1
-                i += 2
-                continue
-        result.append(ch)
-        i += 1
-    return "".join(result)
+from jsonc import load_jsonc  # noqa: E402
+from jsonc import sanitize_json_escapes as _sanitize_json_escapes  # noqa: E402
+from jsonc import strip_jsonc_comments as _strip_jsonc_comments  # noqa: E402
 
 
-def _sanitize_json_escapes(text: str) -> str:
-    """Fix invalid backslash escapes inside JSON strings.
 
-    VS Code tasks.json often contains PowerShell commands with literal
-    sequences like \\e[ (ANSI escape), \\S, \\A that are invalid in
-    strict JSON.  This walks the text char-by-char, doubling any backslash
-    inside a quoted string that is NOT followed by a valid JSON escape char.
-    Valid: \" \\\\ \\/ \\b \\f \\n \\r \\t \\uXXXX
-    """
-    _VALID_ESCAPES = frozenset('"\\/bfnrtu')
-    result = []
-    i = 0
-    in_string = False
-    while i < len(text):
-        ch = text[i]
-        if not in_string:
-            if ch == '"':
-                in_string = True
-            result.append(ch)
-            i += 1
-            continue
-        # inside string
-        if ch == '"':
-            in_string = False
-            result.append(ch)
-            i += 1
-            continue
-        if ch == "\\":
-            nxt = text[i + 1] if i + 1 < len(text) else ""
-            if nxt in _VALID_ESCAPES:
-                # valid escape — pass through as-is
-                result.append(ch)
-                result.append(nxt)
-                i += 2
-            else:
-                # invalid escape like \e, \S, \A — double the backslash
-                result.append("\\")
-                result.append("\\")
-                i += 1
-            continue
-        result.append(ch)
-        i += 1
-    return "".join(result)
 
 
 # ============================================================================

@@ -33,5 +33,26 @@
     "method": "GET",
     "status": 0,
     "duration": 2044.87
+  },
+  {
+    "timestamp": "2026-02-25T15:48:11.498966",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2034.89
+  },
+  {
+    "timestamp": "2026-02-25T15:56:39.150933",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2034.2
+  },
+  {
+    "timestamp": "2026-02-25T15:59:59.169325",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2038.91
   }
 ]

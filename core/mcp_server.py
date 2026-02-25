@@ -34,7 +34,7 @@ logger = logging.getLogger("leviathan-mcp")
 # CONSTANTES
 # ============================================================================
 
-VERSION = "14.2.0"
+from __version__ import __version__ as VERSION
 SERVER_NAME = "leviathan-tentacle-server"
 
 # ============================================================================

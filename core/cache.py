@@ -27,7 +27,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-VERSION = "14.2.0"
+from __version__ import __version__ as VERSION
 CACHE_DIR = Path(__file__).parent / ".cache"
 CACHE_DB = CACHE_DIR / "leviathan_cache.db"
 

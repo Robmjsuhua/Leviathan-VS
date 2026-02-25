@@ -27,34 +27,21 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-VERSION = "14.2.0"
+from __version__ import __version__ as VERSION
 CONFIG_FILE = Path(__file__).parent / "config.json"
 HISTORY_FILE = Path(__file__).parent / ".http_history.json"
 AI_CACHE_FILE = Path(__file__).parent / ".ai_cache.json"
 SESSION_FILE = Path(__file__).parent / ".http_session.json"
 
 
-class Colors:
-    RESET = "\033[0m"
-    BOLD = "\033[1m"
-    RED = "\033[91m"
-    GREEN = "\033[92m"
-    YELLOW = "\033[93m"
-    BLUE = "\033[94m"
-    MAGENTA = "\033[95m"
-    CYAN = "\033[96m"
+from colors import Colors, colorize, enable_ansi  # noqa: E402
 
 
 # Enable ANSI on Windows once at import time
-if os.name == "nt":
-    os.system("")
+enable_ansi()
 
 # Safe mode: require explicit opt-in for destructive operations
 SAFE_MODE = os.environ.get("LEVIATHAN_SAFE_MODE", "1") == "1"
-
-
-def colorize(text: str, color: str) -> str:
-    return f"{color}{text}{Colors.RESET}"
 
 
 USER_AGENTS = {
