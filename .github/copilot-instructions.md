@@ -708,9 +708,9 @@ Branch naming:
 
 Commit format:
   <tipo>(<escopo>): <descricao curta max 72 chars>
-  
+
   [corpo opcional - detalhes]
-  
+
   [footer opcional - breaking changes, refs]
 
 Tipos: feat, fix, refactor, docs, chore, test, perf, ci, style, build

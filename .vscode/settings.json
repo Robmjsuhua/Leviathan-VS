@@ -20,7 +20,9 @@
     "python.analysis.indexing": true,
     "python.analysis.importFormat": "relative",
     "python.analysis.inlayHints.callArgumentNames": "all",
-    "python.analysis.fixAll": ["source.unusedImports"],
+    "python.analysis.fixAll": [
+        "source.unusedImports"
+    ],
     "python.analysis.userFileIndexingLimit": -1,
     "python.languageServer": "Pylance",
     // ═══════════════════════════════════════════════════════════════════
@@ -583,9 +585,15 @@
         "enabled": true,
         "rules": {
             "function": "#00ff88",
-            "function.declaration": { "foreground": "#00ff88", "bold": true },
+            "function.declaration": {
+                "foreground": "#00ff88",
+                "bold": true
+            },
             "method": "#00ff88",
-            "method.declaration": { "foreground": "#00ff88", "bold": true },
+            "method.declaration": {
+                "foreground": "#00ff88",
+                "bold": true
+            },
             "variable": "#e0e0e0",
             "variable.readonly": "#00d4ff",
             "variable.defaultLibrary": "#00d4ff",
@@ -593,7 +601,10 @@
             "property": "#e0e0e0",
             "property.readonly": "#00d4ff",
             "class": "#00d4ff",
-            "class.declaration": { "foreground": "#00d4ff", "bold": true },
+            "class.declaration": {
+                "foreground": "#00d4ff",
+                "bold": true
+            },
             "interface": "#00d4ff",
             "enum": "#cc00ff",
             "enumMember": "#cc00ff",
@@ -624,71 +635,107 @@
         "textMateRules": [
             {
                 "scope": "entity.name.function",
-                "settings": { "foreground": "#00ff88" }
+                "settings": {
+                    "foreground": "#00ff88"
+                }
             },
             {
                 "scope": "entity.name.class",
-                "settings": { "foreground": "#00d4ff", "fontStyle": "bold" }
+                "settings": {
+                    "foreground": "#00d4ff",
+                    "fontStyle": "bold"
+                }
             },
             {
                 "scope": "variable.parameter",
-                "settings": { "foreground": "#ffcc00" }
+                "settings": {
+                    "foreground": "#ffcc00"
+                }
             },
             {
                 "scope": "storage.modifier",
-                "settings": { "foreground": "#cc00ff" }
+                "settings": {
+                    "foreground": "#cc00ff"
+                }
             },
             {
                 "scope": "constant.numeric",
-                "settings": { "foreground": "#ff6b00" }
+                "settings": {
+                    "foreground": "#ff6b00"
+                }
             },
             {
                 "scope": "string.quoted",
-                "settings": { "foreground": "#ffcc00" }
+                "settings": {
+                    "foreground": "#ffcc00"
+                }
             },
             {
                 "scope": "entity.name.tag",
-                "settings": { "foreground": "#ff0055" }
+                "settings": {
+                    "foreground": "#ff0055"
+                }
             },
             {
                 "scope": "entity.other.attribute-name",
-                "settings": { "foreground": "#ffcc00" }
+                "settings": {
+                    "foreground": "#ffcc00"
+                }
             },
             {
                 "scope": "support.function",
-                "settings": { "foreground": "#00ff88" }
+                "settings": {
+                    "foreground": "#00ff88"
+                }
             },
             {
                 "scope": "meta.decorator",
-                "settings": { "foreground": "#ff6b00" }
+                "settings": {
+                    "foreground": "#ff6b00"
+                }
             },
             {
                 "scope": "punctuation.definition.comment",
-                "settings": { "foreground": "#555555" }
+                "settings": {
+                    "foreground": "#555555"
+                }
             },
             {
                 "scope": "constant.language.boolean",
-                "settings": { "foreground": "#cc00ff" }
+                "settings": {
+                    "foreground": "#cc00ff"
+                }
             },
             {
                 "scope": "keyword.operator",
-                "settings": { "foreground": "#e0e0e0" }
+                "settings": {
+                    "foreground": "#e0e0e0"
+                }
             },
             {
                 "scope": "markup.heading",
-                "settings": { "foreground": "#00ff88", "fontStyle": "bold" }
+                "settings": {
+                    "foreground": "#00ff88",
+                    "fontStyle": "bold"
+                }
             },
             {
                 "scope": "markup.bold",
-                "settings": { "fontStyle": "bold" }
+                "settings": {
+                    "fontStyle": "bold"
+                }
             },
             {
                 "scope": "markup.italic",
-                "settings": { "fontStyle": "italic" }
+                "settings": {
+                    "fontStyle": "italic"
+                }
             },
             {
                 "scope": "markup.inline.raw",
-                "settings": { "foreground": "#00d4ff" }
+                "settings": {
+                    "foreground": "#00d4ff"
+                }
             }
         ]
     },
@@ -1290,7 +1337,14 @@
     },
     // Spell Checker
     "cSpell.language": "en,pt,pt_BR",
-    "cSpell.enableFiletypes": ["python", "javascript", "typescript", "markdown", "json", "yaml"],
+    "cSpell.enableFiletypes": [
+        "python",
+        "javascript",
+        "typescript",
+        "markdown",
+        "json",
+        "yaml"
+    ],
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.showAutocompleteSuggestions": true,
     "cSpell.maxDuplicateProblems": 5,
@@ -1298,12 +1352,60 @@
     "better-comments.multilineComments": true,
     "better-comments.highlightPlainText": false,
     "better-comments.tags": [
-        { "tag": "!", "color": "#ff0055", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": true, "italic": false },
-        { "tag": "?", "color": "#00d4ff", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": false, "italic": false },
-        { "tag": "//", "color": "#555555", "strikethrough": true, "underline": false, "backgroundColor": "transparent", "bold": false, "italic": false },
-        { "tag": "todo", "color": "#ffcc00", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": false, "italic": false },
-        { "tag": "*", "color": "#cc00ff", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": true, "italic": false },
-        { "tag": "hack", "color": "#00ff88", "strikethrough": false, "underline": false, "backgroundColor": "transparent", "bold": true, "italic": true }
+        {
+            "tag": "!",
+            "color": "#ff0055",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false
+        },
+        {
+            "tag": "?",
+            "color": "#00d4ff",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "//",
+            "color": "#555555",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "todo",
+            "color": "#ffcc00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "*",
+            "color": "#cc00ff",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false
+        },
+        {
+            "tag": "hack",
+            "color": "#00ff88",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": true
+        }
     ],
     // ═══════════════════════════════════════════════════════════════════
     // 🔒 TELEMETRY & PRIVACY - DESATIVADO
