@@ -1,6 +1,6 @@
 {
     // ════════════════════════════════════════════════════════════════════
-    // LEVIATHAN VS v15.1 - COGNITIVE DESTRUCTION CONFIGURATION
+    // LEVIATHAN VS v15.2 - COGNITIVE DESTRUCTION CONFIGURATION
     // 33 MCP Servers / 460+ Tools / Cognitive AI Architecture / Zero Limits
     // Updated: February 2026
     // ════════════════════════════════════════════════════════════════════
@@ -17,8 +17,6 @@
     "python.analysis.inlayHints.pytestParameters": true,
     "python.analysis.completeFunctionParens": true,
     "python.analysis.autoFormatStrings": true,
-    "python.testing.pytestEnabled": true,
-    "python.testing.unittestEnabled": false,
     // ═══════════════════════════════════════════════════════════════════
     // ✏️ EDITOR - CONFIGURAÇÃO SUPREMA
     // ═══════════════════════════════════════════════════════════════════
@@ -70,7 +68,7 @@
     "editor.wordBasedSuggestions": "matchingDocuments",
     "editor.parameterHints.enabled": true,
     "editor.hover.enabled": true,
-    "editor.hover.delay": 300,
+    "editor.hover.delay": 200,
     "editor.rulers": [
         80,
         120
@@ -108,6 +106,8 @@
     "editor.semanticHighlighting.enabled": true,
     "editor.defaultColorDecorators": true,
     "editor.occurrencesHighlight": "singleFile",
+    "editor.inlineSuggest.enabled": true,
+    "editor.experimental.asyncTokenization": true,
     // ═══════════════════════════════════════════════════════════════════
     // 📁 ARQUIVOS - ASSOCIAÇÕES E ENCODING
     // ═══════════════════════════════════════════════════════════════════
@@ -158,7 +158,18 @@
         "*.ps1": "powershell",
         "*.sh": "shellscript",
         "*.fish": "shellscript",
-        "*.zsh": "shellscript"
+        "*.zsh": "shellscript",
+        "*.mjs": "javascript",
+        "*.cjs": "javascript",
+        "*.mts": "typescript",
+        "*.cts": "typescript",
+        "*.astro": "astro",
+        "*.svelte": "svelte",
+        "*.wasm": "hexEditor.hexedit",
+        "*.pem": "plaintext",
+        "*.key": "plaintext",
+        "*.cert": "plaintext",
+        "*.har": "jsonc"
     },
     "files.encoding": "utf8",
     "files.eol": "\n",
@@ -199,7 +210,13 @@
         "**/.ruff_cache/**": true,
         "**/jadx_output/**": true,
         "**/ghidra_projects/**": true,
-        "**/captures/**": true
+        "**/captures/**": true,
+        "**/venv/**": true,
+        "**/.venv/**": true,
+        "**/env/**": true,
+        "**/.tox/**": true,
+        "**/.eggs/**": true,
+        "**/apk_extract/**": true
     },
     // ═══════════════════════════════════════════════════════════════════
     // 🖥️ TERMINAL - CONFIGURAÇÃO AVANÇADA
@@ -216,7 +233,8 @@
     "terminal.integrated.smoothScrolling": true,
     "terminal.integrated.gpuAcceleration": "auto",
     "terminal.integrated.enableMultiLinePasteWarning": "auto",
-    "terminal.integrated.persistentSessionScrollback": 1000,
+    "terminal.integrated.persistentSessionScrollback": 5000,
+    "terminal.integrated.stickyScroll.enabled": true,
     "terminal.integrated.tabs.enabled": true,
     "terminal.integrated.tabs.showActiveTerminal": "always",
     "terminal.integrated.shellIntegration.enabled": true,
@@ -653,7 +671,10 @@
         "**/*.luac": true,
         "**/.pytest_cache": true,
         "**/.mypy_cache": true,
-        "**/.ruff_cache": true
+        "**/.ruff_cache": true,
+        "**/venv": true,
+        "**/.venv": true,
+        "**/env": true
     },
     "search.useIgnoreFiles": true,
     "search.showLineNumbers": true,
@@ -812,9 +833,6 @@
     "chat.editing.alwaysSaveWithGeneratedChanges": true,
     "chat.promptFiles": true,
     // --- Search: AI-Enhanced ---
-    "search.smartCase": true,
-    "search.showLineNumbers": true,
-    "search.seedWithNearestWord": true,
     "search.quickAccess.preserveInput": true,
     "search.searchEditor.reusePriorSearchConfiguration": true,
     "search.experimental.closedNotebookRichContentResults": true,
@@ -831,6 +849,8 @@
     "errorLens.messageMaxChars": 100,
     "errorLens.fontStyleItalic": true,
     "errorLens.gutterIconsEnabled": true,
+    "errorLens.delay": 200,
+    "errorLens.scrollbarHackEnabled": true,
     // TODO Tree
     "todo-tree.general.tags": [
         "BUG",
@@ -927,7 +947,7 @@
     "window.titleBarStyle": "custom",
     "window.menuBarVisibility": "compact",
     "window.zoomLevel": 0,
-    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}${separator}LEVIATHAN v15.1",
+    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}${separator}LEVIATHAN v15.2",
     "window.newWindowDimensions": "maximized",
     "window.restoreFullscreen": true,
     "window.commandCenter": true,
@@ -963,6 +983,14 @@
     // Playwright Testing
     "playwright.reuseBrowser": true,
     "playwright.showTrace": true,
+    // Jupyter Notebook
+    "notebook.cellToolbarLocation": "both",
+    "notebook.output.scrolling": true,
+    "notebook.output.textLineLimit": 50,
+    "notebook.showCellStatusBar": "visible",
+    "notebook.compactView": false,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.interactiveWindow.codeLens.enable": true,
     // ═══════════════════════════════════════════════════════════════════
     // 🔍 CODE QUALITY - ANÁLISE DE QUALIDADE
     // ═══════════════════════════════════════════════════════════════════
@@ -1068,7 +1096,6 @@
         }
     },
     // === PYTHON: Pylint, Bandit, Mypy, Flake8, Radon ===
-    "python.analysis.typeCheckingMode": "standard",
     "python.analysis.diagnosticSeverityOverrides": {
         "reportUnusedImport": "warning",
         "reportUnusedVariable": "warning",
