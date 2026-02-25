@@ -1,9 +1,9 @@
 {
     "mcpServers": {
         // ════════════════════════════════════════════════════════════════════════
-        // LEVIATHAN VS v12.0 - ABSOLUTE DESTRUCTION MCP CONFIGURATION
-        // 27 MCP Servers / 305+ Tools / Zero Limitations
-        // Updated: January 2026
+        // LEVIATHAN VS v14.2 - ABSOLUTE DESTRUCTION MCP CONFIGURATION
+        // 33 MCP Servers / 460+ Tools / Zero Limitations
+        // Updated: July 2025
         // ════════════════════════════════════════════════════════════════════════
         // ═══════════════════════════════════════════════════════════════════════
         // CORE - leviathan TRANSLATION ENGINE
@@ -379,6 +379,96 @@
             "args": [
                 "-m",
                 "core.objection.mcp_objection"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // MITMPROXY - MITM Proxy Interception (14 tools)
+        // start/stop proxy, dump traffic, create scripts, replay, HAR export
+        // ═══════════════════════════════════════════════════════════════════════
+        "mitmproxy": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.mitmproxy.mcp_mitmproxy"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // APKTOOL - APK Decode/Rebuild/Sign (12 tools)
+        // decode, build, sign, zipalign, patch smali/manifest, inject, diff
+        // ═══════════════════════════════════════════════════════════════════════
+        "apktool": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.apktool.mcp_apktool"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // ANDROGUARD - Python APK Static Analysis (15 tools)
+        // permissions, components, strings, certificate, xrefs, security audit
+        // ═══════════════════════════════════════════════════════════════════════
+        "androguard": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.androguard.mcp_androguard"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // SCAPY - Packet Crafting & Network Analysis (15 tools)
+        // craft, send, sniff, traceroute, arp scan, port scan, dns, fuzzing
+        // ═══════════════════════════════════════════════════════════════════════
+        "scapy": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.scapy.mcp_scapy"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // RADARE2 - Binary Analysis & Reverse Engineering (16 tools)
+        // analyze, functions, strings, xrefs, disasm, hex, patches, emulate
+        // ═══════════════════════════════════════════════════════════════════════
+        "radare2": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.r2.mcp_r2"
+            ],
+            "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
+            "env": {
+                "PYTHONIOENCODING": "utf-8"
+            }
+        },
+        // ═══════════════════════════════════════════════════════════════════════
+        // HASHCAT - Password Cracking & Hash Analysis (12 tools)
+        // crack, identify, benchmark, wordlist, rules, combinator, brute-force
+        // ═══════════════════════════════════════════════════════════════════════
+        "hashcat": {
+            "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+            "args": [
+                "-m",
+                "core.hashcat.mcp_hashcat"
             ],
             "cwd": "c:\\Users\\Kishi\\Desktop\\Trabalhos\\Leviathan-VS",
             "env": {

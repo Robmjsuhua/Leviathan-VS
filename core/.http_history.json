@@ -1,0 +1,37 @@
+[
+  {
+    "timestamp": "2026-02-25T15:04:23.701514",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2038.0
+  },
+  {
+    "timestamp": "2026-02-25T15:04:37.567918",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2042.36
+  },
+  {
+    "timestamp": "2026-02-25T15:06:09.827607",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2033.01
+  },
+  {
+    "timestamp": "2026-02-25T15:09:33.191340",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2033.13
+  },
+  {
+    "timestamp": "2026-02-25T15:20:41.606424",
+    "url": "http://127.0.0.1:1",
+    "method": "GET",
+    "status": 0,
+    "duration": 2044.87
+  }
+]

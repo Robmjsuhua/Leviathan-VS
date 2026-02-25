@@ -1,0 +1,46 @@
+{
+  "a996d96cf075b155": {
+    "summary": "HTTP 500: Internal Server Error",
+    "vulnerabilities": [
+      "Missing: x-frame-options",
+      "Missing: x-content-type-options",
+      "Missing: content-security-policy",
+      "Missing: strict-transport-security"
+    ],
+    "recommendations": [],
+    "risk_level": "medium",
+    "patterns_detected": [
+      "Stack trace exposed"
+    ],
+    "headers_analysis": {
+      "present": [],
+      "missing": [
+        "\u2717 x-frame-options",
+        "\u2717 x-content-type-options",
+        "\u2717 content-security-policy",
+        "\u2717 strict-transport-security"
+      ]
+    }
+  },
+  "4c8f2993b0814117": {
+    "summary": "HTTP 0: Connection Error",
+    "vulnerabilities": [
+      "Missing: x-frame-options",
+      "Missing: x-content-type-options",
+      "Missing: content-security-policy",
+      "Missing: strict-transport-security"
+    ],
+    "recommendations": [],
+    "risk_level": "low",
+    "patterns_detected": [],
+    "headers_analysis": {
+      "present": [],
+      "missing": [
+        "\u2717 x-frame-options",
+        "\u2717 x-content-type-options",
+        "\u2717 content-security-policy",
+        "\u2717 strict-transport-security"
+      ]
+    }
+  }
+}

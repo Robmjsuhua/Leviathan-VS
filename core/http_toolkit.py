@@ -12,25 +12,27 @@ Funcionalidades:
 - Ink Cloud: Proxy invisivel para analise
 """
 
-import json
-import time
-import random
-import hashlib
 import argparse
-import urllib.request
-import urllib.error
-import ssl
+import hashlib
+import json
 import os
+import random
 import re
-from typing import Dict, List, Optional, Any
-from dataclasses import dataclass, asdict, field
+import ssl
+import time
+import urllib.error
+import urllib.request
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
-VERSION = "2.0.0"
+VERSION = "14.2.0"
 CONFIG_FILE = Path(__file__).parent / "config.json"
 HISTORY_FILE = Path(__file__).parent / ".http_history.json"
 AI_CACHE_FILE = Path(__file__).parent / ".ai_cache.json"
+SESSION_FILE = Path(__file__).parent / ".http_session.json"
+
 
 class Colors:
     RESET = "\033[0m"
@@ -42,10 +44,18 @@ class Colors:
     MAGENTA = "\033[95m"
     CYAN = "\033[96m"
 
+
+# Enable ANSI on Windows once at import time
+if os.name == "nt":
+    os.system("")
+
+# Safe mode: require explicit opt-in for destructive operations
+SAFE_MODE = os.environ.get("LEVIATHAN_SAFE_MODE", "1") == "1"
+
+
 def colorize(text: str, color: str) -> str:
-    if os.name == 'nt':
-        os.system('')
     return f"{color}{text}{Colors.RESET}"
+
 
 USER_AGENTS = {
     "chrome_windows": [
@@ -71,6 +81,7 @@ USER_AGENTS = {
     "postman": ["PostmanRuntime/7.36.1"],
 }
 
+
 @dataclass
 class RequestConfig:
     url: str
@@ -81,6 +92,7 @@ class RequestConfig:
     follow_redirects: bool = True
     validate_ssl: bool = True
     retries: int = 3
+
 
 @dataclass
 class ResponseData:
@@ -101,6 +113,7 @@ class ResponseData:
     def is_error(self) -> bool:
         return self.status >= 400
 
+
 class AIIntegration:
     def __init__(self):
         self.cache: Dict[str, Any] = {}
@@ -111,7 +124,7 @@ class AIIntegration:
             if AI_CACHE_FILE.exists():
                 with open(AI_CACHE_FILE, "r", encoding="utf-8") as f:
                     self.cache = json.load(f)
-        except:
+        except (json.JSONDecodeError, OSError):
             self.cache = {}
 
     def _save_cache(self):
@@ -121,8 +134,12 @@ class AIIntegration:
         except:
             pass
 
-    def analyze_response(self, response: ResponseData, config: RequestConfig) -> Dict[str, Any]:
-        cache_key = hashlib.md5(f"{config.url}:{response.status}".encode()).hexdigest()[:16]
+    def analyze_response(
+        self, response: ResponseData, config: RequestConfig
+    ) -> Dict[str, Any]:
+        cache_key = hashlib.md5(f"{config.url}:{response.status}".encode()).hexdigest()[
+            :16
+        ]
 
         if cache_key in self.cache:
             return self.cache[cache_key]
@@ -155,9 +172,18 @@ class AIIntegration:
         body_lower = response.body.lower()
 
         patterns = {
-            "sql_error": (r"(sql|mysql|postgresql).*?(error|exception)", "SQL error exposed"),
-            "stack_trace": (r"(traceback|exception in|at line \d+)", "Stack trace exposed"),
-            "api_key": (r"(api[_-]?key|secret[_-]?key)", "Possible credential exposure"),
+            "sql_error": (
+                r"(sql|mysql|postgresql).*?(error|exception)",
+                "SQL error exposed",
+            ),
+            "stack_trace": (
+                r"(traceback|exception in|at line \d+)",
+                "Stack trace exposed",
+            ),
+            "api_key": (
+                r"(api[_-]?key|secret[_-]?key)",
+                "Possible credential exposure",
+            ),
             "internal_path": (r"(/var/|/home/|c:\\)", "Internal paths exposed"),
         }
 
@@ -191,7 +217,7 @@ class AIIntegration:
             return "🔑 Try: refresh token, check credentials"
         if response.status == 429:
             recent_429 = sum(1 for h in history[-10:] if h.get("status") == 429)
-            wait = min(60, 5 * (2 ** recent_429))
+            wait = min(60, 5 * (2**recent_429))
             return f"⏳ Rate limited. Wait {wait}s"
         if response.status >= 500:
             return "🔄 Server error. Retry in a few seconds"
@@ -206,6 +232,7 @@ class AIIntegration:
         parts.append(f'"{config.url}"')
         return " ".join(parts)
 
+
 class HeaderMimicry:
     def __init__(self):
         self.current_profile = "chrome_windows"
@@ -214,7 +241,9 @@ class HeaderMimicry:
         self.custom_headers: Dict[str, str] = {}
 
     def get_random_ua(self, profile: Optional[str] = None) -> str:
-        agents = USER_AGENTS.get(profile or self.current_profile, USER_AGENTS["chrome_windows"])
+        agents = USER_AGENTS.get(
+            profile or self.current_profile, USER_AGENTS["chrome_windows"]
+        )
         return random.choice(agents)
 
     def rotate_profile(self) -> str:
@@ -247,6 +276,7 @@ class HeaderMimicry:
             return True
         return False
 
+
 class SemanticProcessor:
     def __init__(self):
         self.rules: Dict[str, str] = {}
@@ -262,7 +292,7 @@ class SemanticProcessor:
                     if not k.startswith("_"):
                         self.rules[k.lower()] = v
                         self.reverse_rules[v.lower()] = k
-        except:
+        except (json.JSONDecodeError, OSError, KeyError):
             pass
 
     def sanitize(self, text: str) -> str:
@@ -277,25 +307,44 @@ class SemanticProcessor:
             result = re.sub(rf"\b{re.escape(san)}\b", orig, result, flags=re.IGNORECASE)
         return result
 
+
 class AIAutoRepair:
     def __init__(self):
         self.failure_log: List[Dict] = []
 
-    def analyze_failure(self, response: ResponseData, config: RequestConfig) -> Dict[str, Any]:
+    def analyze_failure(
+        self, response: ResponseData, config: RequestConfig
+    ) -> Dict[str, Any]:
         strategies = {
             401: ("token_refresh", {"action": "Refresh auth token"}),
-            403: ("linear_decoupling", {
-                "headers": {"X-Forwarded-For": f"{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}"},
-                "delay": 2000, "rotate_ua": True
-            }),
+            403: (
+                "linear_decoupling",
+                {
+                    "headers": {
+                        "X-Forwarded-For": f"{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}"
+                    },
+                    "delay": 2000,
+                    "rotate_ua": True,
+                },
+            ),
             429: ("rate_limit_evasion", {"delay": 30000, "rotate_ua": True}),
             500: ("server_retry", {"delay": 5000, "retry_count": 3}),
         }
 
         if response.status in strategies:
             strategy, changes = strategies[response.status]
-            self.failure_log.append({"timestamp": datetime.now().isoformat(), "error": response.status, "strategy": strategy})
-            return {"should_retry": True, "suggested_changes": changes, "strategy": strategy}
+            self.failure_log.append(
+                {
+                    "timestamp": datetime.now().isoformat(),
+                    "error": response.status,
+                    "strategy": strategy,
+                }
+            )
+            return {
+                "should_retry": True,
+                "suggested_changes": changes,
+                "strategy": strategy,
+            }
 
         return {"should_retry": False, "suggested_changes": {}, "strategy": "none"}
 
@@ -305,12 +354,59 @@ class AIAutoRepair:
             by_error[log["error"]] = by_error.get(log["error"], 0) + 1
         return {"total": len(self.failure_log), "by_error": by_error}
 
+
+class SessionManager:
+    """Persist cookies and tokens across requests."""
+
+    def __init__(self):
+        self.cookies: Dict[str, str] = {}
+        self.tokens: Dict[str, str] = {}  # type -> value
+        self._load()
+
+    def _load(self):
+        try:
+            if SESSION_FILE.exists():
+                with open(SESSION_FILE, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                self.cookies = data.get("cookies", {})
+                self.tokens = data.get("tokens", {})
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    def save(self):
+        try:
+            with open(SESSION_FILE, "w", encoding="utf-8") as f:
+                json.dump({"cookies": self.cookies, "tokens": self.tokens}, f, indent=2)
+        except OSError:
+            pass
+
+    def update_from_response(self, headers: Dict[str, str]):
+        for key, val in headers.items():
+            if key.lower() == "set-cookie":
+                for part in val.split(","):
+                    if "=" in part:
+                        cname, cval = part.strip().split("=", 1)
+                        self.cookies[cname.strip()] = cval.split(";")[0].strip()
+        self.save()
+
+    def get_cookie_header(self) -> Optional[str]:
+        if self.cookies:
+            return "; ".join(f"{k}={v}" for k, v in self.cookies.items())
+        return None
+
+    def clear(self):
+        self.cookies.clear()
+        self.tokens.clear()
+        self.save()
+
+
 class HOGDispatcher:
-    def __init__(self, verbose: bool = True):
+    def __init__(self, verbose: bool = True, session: bool = True):
         self.header_mimicry = HeaderMimicry()
         self.semantic = SemanticProcessor()
         self.ai = AIIntegration()
         self.auto_repair = AIAutoRepair()
+        self.session = SessionManager() if session else None
         self.history: List[Dict] = []
         self.verbose = verbose
         self._load_history()
@@ -318,7 +414,12 @@ class HOGDispatcher:
     def _log(self, msg: str, level: str = "info"):
         if not self.verbose:
             return
-        colors = {"info": Colors.CYAN, "success": Colors.GREEN, "warning": Colors.YELLOW, "error": Colors.RED}
+        colors = {
+            "info": Colors.CYAN,
+            "success": Colors.GREEN,
+            "warning": Colors.YELLOW,
+            "error": Colors.RED,
+        }
         print(f"{colors.get(level, Colors.CYAN)}[HOG]{Colors.RESET} {msg}")
 
     def _load_history(self):
@@ -326,37 +427,65 @@ class HOGDispatcher:
             if HISTORY_FILE.exists():
                 with open(HISTORY_FILE, "r", encoding="utf-8") as f:
                     self.history = json.load(f)
-        except:
+        except (json.JSONDecodeError, OSError):
             self.history = []
 
     def _save_history(self):
         try:
             with open(HISTORY_FILE, "w", encoding="utf-8") as f:
                 json.dump(self.history[-500:], f, indent=2)
-        except:
+        except OSError:
             pass
 
-    def dispatch(self, url: str, method: str = "GET", payload: Any = None,
-                 headers: Optional[Dict[str, str]] = None, analyze: bool = True) -> Optional[ResponseData]:
+    def dispatch(
+        self,
+        url: str,
+        method: str = "GET",
+        payload: Any = None,
+        headers: Optional[Dict[str, str]] = None,
+        analyze: bool = True,
+    ) -> Optional[ResponseData]:
         start = time.time()
 
         body = None
         if payload:
-            body = json.dumps(payload) if isinstance(payload, (dict, list)) else str(payload)
+            body = (
+                json.dumps(payload)
+                if isinstance(payload, (dict, list))
+                else str(payload)
+            )
             body = self.semantic.sanitize(body)
 
-        self._log(f"Dispatching {colorize(method, Colors.BOLD)} to: {colorize(url, Colors.BLUE)}")
+        self._log(
+            f"Dispatching {colorize(method, Colors.BOLD)} to: {colorize(url, Colors.BLUE)}"
+        )
 
         req_headers = self.header_mimicry.get_headers()
         req_headers["Content-Type"] = "application/json"
         if headers:
             req_headers.update(headers)
 
-        config = RequestConfig(url=url, method=method.upper(), headers=req_headers, body=body)
+        config = RequestConfig(
+            url=url, method=method.upper(), headers=req_headers, body=body
+        )
+
+        # Inject session cookies
+        if self.session:
+            cookie = self.session.get_cookie_header()
+            if cookie:
+                config.headers["Cookie"] = cookie
 
         response = None
         for attempt in range(config.retries):
             try:
+                backoff = min(30, 0.5 * (2**attempt))  # exponential: 0.5, 1, 2, 4…
+                if attempt > 0:
+                    self._log(
+                        f"Retry {attempt}/{config.retries} (backoff {backoff:.1f}s)",
+                        "warning",
+                    )
+                    time.sleep(backoff)
+
                 response = self._request(config)
 
                 if response.is_error() and attempt < config.retries - 1:
@@ -364,7 +493,8 @@ class HOGDispatcher:
                     if repair["should_retry"]:
                         self._log(f"Auto-repair: {repair['strategy']}", "warning")
                         if "delay" in repair["suggested_changes"]:
-                            time.sleep(repair["suggested_changes"]["delay"] / 1000)
+                            extra_delay = repair["suggested_changes"]["delay"] / 1000
+                            time.sleep(extra_delay)
                         if repair["suggested_changes"].get("rotate_ua"):
                             self.header_mimicry.rotate_profile()
                             config.headers = self.header_mimicry.get_headers()
@@ -372,7 +502,17 @@ class HOGDispatcher:
                 break
             except Exception as e:
                 if attempt == config.retries - 1:
-                    response = ResponseData(0, "Error", {}, str(e), {"start": start, "end": time.time(), "duration": (time.time()-start)*1000})
+                    response = ResponseData(
+                        0,
+                        "Error",
+                        {},
+                        str(e),
+                        {
+                            "start": start,
+                            "end": time.time(),
+                            "duration": (time.time() - start) * 1000,
+                        },
+                    )
 
         if response and analyze:
             response.ai_analysis = self.ai.analyze_response(response, config)
@@ -381,17 +521,28 @@ class HOGDispatcher:
             self._log(f"Risk: {colorize(risk.upper(), colors.get(risk, Colors.GREEN))}")
 
         if response:
+            # Persist session cookies from response
+            if self.session and response.headers:
+                self.session.update_from_response(response.headers)
+
             response.body = self.semantic.restore(response.body)
             response.sanitized = True
 
             success = response.is_success()
-            self._log(f"Result: {'SUCCESS' if success else 'FAILED'}", "success" if success else "warning")
+            self._log(
+                f"Result: {'SUCCESS' if success else 'FAILED'}",
+                "success" if success else "warning",
+            )
 
-            self.history.append({
-                "timestamp": datetime.now().isoformat(),
-                "url": url, "method": method, "status": response.status,
-                "duration": response.timing["duration"]
-            })
+            self.history.append(
+                {
+                    "timestamp": datetime.now().isoformat(),
+                    "url": url,
+                    "method": method,
+                    "status": response.status,
+                    "duration": response.timing["duration"],
+                }
+            )
             self._save_history()
 
             suggestion = self.ai.suggest_next_action(response, self.history)
@@ -403,7 +554,9 @@ class HOGDispatcher:
         start = time.time()
         data = config.body.encode() if config.body else None
 
-        req = urllib.request.Request(config.url, data=data, headers=config.headers, method=config.method)
+        req = urllib.request.Request(
+            config.url, data=data, headers=config.headers, method=config.method
+        )
 
         ctx = ssl.create_default_context()
         if not config.validate_ssl:
@@ -411,47 +564,126 @@ class HOGDispatcher:
             ctx.verify_mode = ssl.CERT_NONE
 
         try:
-            with urllib.request.urlopen(req, timeout=config.timeout, context=ctx) as resp:
+            with urllib.request.urlopen(
+                req, timeout=config.timeout, context=ctx
+            ) as resp:
                 body = resp.read().decode("utf-8", errors="replace")
-                return ResponseData(resp.status, resp.reason, dict(resp.headers), body,
-                    {"start": start, "end": time.time(), "duration": round((time.time()-start)*1000, 2)})
+                return ResponseData(
+                    resp.status,
+                    resp.reason,
+                    dict(resp.headers),
+                    body,
+                    {
+                        "start": start,
+                        "end": time.time(),
+                        "duration": round((time.time() - start) * 1000, 2),
+                    },
+                )
         except urllib.error.HTTPError as e:
             body = ""
             try:
                 body = e.read().decode("utf-8", errors="replace")
-            except:
+            except (OSError, AttributeError):
                 pass
-            return ResponseData(e.code, e.reason, dict(e.headers) if e.headers else {}, body,
-                {"start": start, "end": time.time(), "duration": round((time.time()-start)*1000, 2)})
+            return ResponseData(
+                e.code,
+                e.reason,
+                dict(e.headers) if e.headers else {},
+                body,
+                {
+                    "start": start,
+                    "end": time.time(),
+                    "duration": round((time.time() - start) * 1000, 2),
+                },
+            )
         except urllib.error.URLError as e:
-            return ResponseData(0, "Connection Error", {}, str(e.reason),
-                {"start": start, "end": time.time(), "duration": round((time.time()-start)*1000, 2)})
+            return ResponseData(
+                0,
+                "Connection Error",
+                {},
+                str(e.reason),
+                {
+                    "start": start,
+                    "end": time.time(),
+                    "duration": round((time.time() - start) * 1000, 2),
+                },
+            )
 
-    def scan(self, url: str) -> List[Dict]:
-        methods = ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"]
+    def scan(
+        self, url: str, delay: float = 0.3, methods: Optional[List[str]] = None
+    ) -> List[Dict]:
+        if methods is None:
+            if SAFE_MODE:
+                # In safe mode, exclude destructive methods by default
+                methods = ["GET", "POST", "PUT", "PATCH", "OPTIONS", "HEAD"]
+            else:
+                methods = ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"]
         results = []
         for m in methods:
             r = self.dispatch(url, m, analyze=False)
             if r:
-                results.append({"method": m, "status": r.status, "duration": r.timing["duration"]})
-            time.sleep(0.3)
+                results.append(
+                    {"method": m, "status": r.status, "duration": r.timing["duration"]}
+                )
+            time.sleep(delay)
         return results
 
     def get_curl(self, url: str, method: str = "GET", payload: Any = None) -> str:
-        config = RequestConfig(url, method, self.header_mimicry.get_headers(),
-                              json.dumps(payload) if payload else None)
+        config = RequestConfig(
+            url,
+            method,
+            self.header_mimicry.get_headers(),
+            json.dumps(payload) if payload else None,
+        )
         return self.ai.generate_curl(config)
 
     def set_profile(self, profile: str) -> bool:
         return self.header_mimicry.set_profile(profile)
 
+    def dispatch_json(
+        self,
+        url: str,
+        method: str = "GET",
+        payload: Any = None,
+        headers: Optional[Dict[str, str]] = None,
+    ) -> Dict:
+        """Dispatch and return a JSON-serializable dict (for automation)."""
+        r = self.dispatch(url, method, payload, headers, analyze=True)
+        if r:
+            return r.to_dict()
+        return {"status": 0, "error": "No response"}
+
+    def profile_endpoint(self, url: str, rounds: int = 5) -> Dict:
+        """Hit an endpoint N times and return timing/status distribution."""
+        timings: List[float] = []
+        statuses: Dict[int, int] = {}
+        for _ in range(rounds):
+            r = self.dispatch(url, "GET", analyze=False)
+            if r:
+                timings.append(r.timing["duration"])
+                statuses[r.status] = statuses.get(r.status, 0) + 1
+            time.sleep(0.2)
+        avg = sum(timings) / len(timings) if timings else 0
+        return {
+            "url": url,
+            "rounds": rounds,
+            "avg_ms": round(avg, 2),
+            "min_ms": round(min(timings), 2) if timings else 0,
+            "max_ms": round(max(timings), 2) if timings else 0,
+            "status_distribution": statuses,
+        }
+
+
 def print_banner():
-    print(f"""
+    print(
+        f"""
 {Colors.CYAN}╔═══════════════════════════════════════════════════════════════════════════╗
 ║     {Colors.BOLD}THE HAND OF GOD - HTTP TOOLKIT v{VERSION}{Colors.RESET}{Colors.CYAN} (AI-Powered Network Dispatcher)    ║
 ║           Interceptor com Normalização Semântica + Análise de IA           ║
 ╚═══════════════════════════════════════════════════════════════════════════╝{Colors.RESET}
-    """)
+    """
+    )
+
 
 def cmd_dispatch(args):
     d = HOGDispatcher(verbose=not args.quiet)
@@ -467,40 +699,64 @@ def cmd_dispatch(args):
 
     r = d.dispatch(args.url, args.method, payload, headers)
 
+    if getattr(args, "json_output", False):
+        print(
+            json.dumps(
+                r.to_dict() if r else {"error": "no response"}, indent=2, default=str
+            )
+        )
+        return
+
     print(f"\n{'='*70}")
     if r:
         print(f"Status: {r.status} {r.status_text}")
         print(f"Duration: {r.timing['duration']}ms")
         if r.ai_analysis:
             print(f"Risk: {r.ai_analysis.get('risk_level', 'N/A').upper()}")
-        print('='*70)
+        print("=" * 70)
         print(f"\nBody:\n{r.body[:2000]}{'...' if len(r.body) > 2000 else ''}")
     else:
         print("Request failed - no response")
-        print('='*70)
+        print("=" * 70)
 
     if args.curl:
         print(f"\nCurl: {d.get_curl(args.url, args.method, payload)}")
 
+
 def cmd_scan(args):
     d = HOGDispatcher()
-    print(f"\n{Colors.CYAN}[HOG] Scanning: {args.url}{Colors.RESET}\n{'='*70}")
 
     results = d.scan(args.url)
+
+    if getattr(args, "json_output", False):
+        print(
+            json.dumps(
+                {"url": args.url, "results": results, "safe_mode": SAFE_MODE}, indent=2
+            )
+        )
+        return
+
+    print(f"\n{Colors.CYAN}[HOG] Scanning: {args.url}{Colors.RESET}\n{'='*70}")
     success = 0
     for r in results:
-        icon = colorize("✓", Colors.GREEN) if 200 <= r["status"] < 400 else colorize("✗", Colors.RED)
+        icon = (
+            colorize("✓", Colors.GREEN)
+            if 200 <= r["status"] < 400
+            else colorize("✗", Colors.RED)
+        )
         print(f"  {icon} {r['method']:8} -> {r['status']} ({r['duration']:.0f}ms)")
         if 200 <= r["status"] < 400:
             success += 1
 
     print(f"{'='*70}\nActive methods: {success}/{len(results)}")
 
+
 def cmd_interactive(args):
     print_banner()
     d = HOGDispatcher()
 
-    print(f"""
+    print(
+        f"""
 {Colors.BOLD}Commands:{Colors.RESET}
   GET/POST/PUT/DELETE <url>  - Make request
   scan <url>                 - Scan methods
@@ -508,7 +764,8 @@ def cmd_interactive(args):
   history                    - Show history
   curl <url>                 - Generate curl
   quit                       - Exit
-    """)
+    """
+    )
 
     while True:
         try:
@@ -521,8 +778,14 @@ def cmd_interactive(args):
 
             if cmd.lower() == "history":
                 for h in d.history[-20:]:
-                    icon = colorize("✓", Colors.GREEN) if 200 <= h.get("status", 0) < 300 else colorize("✗", Colors.RED)
-                    print(f"  {icon} {h.get('method', 'GET'):6} {h.get('status', 0):3} {h.get('url', '')[:50]}")
+                    icon = (
+                        colorize("✓", Colors.GREEN)
+                        if 200 <= h.get("status", 0) < 300
+                        else colorize("✗", Colors.RED)
+                    )
+                    print(
+                        f"  {icon} {h.get('method', 'GET'):6} {h.get('status', 0):3} {h.get('url', '')[:50]}"
+                    )
                 continue
 
             if cmd.lower().startswith("profile "):
@@ -545,13 +808,23 @@ def cmd_interactive(args):
                 continue
 
             parts = cmd.split(" ", 1)
-            if len(parts) == 2 and parts[0].upper() in ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"]:
+            if len(parts) == 2 and parts[0].upper() in [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "HEAD",
+                "OPTIONS",
+                "PATCH",
+            ]:
                 r = d.dispatch(parts[1], parts[0].upper())
             else:
                 r = d.dispatch(cmd)
 
             if r:
-                print(f"\nStatus: {r.status} {r.status_text} ({r.timing['duration']:.0f}ms)")
+                print(
+                    f"\nStatus: {r.status} {r.status_text} ({r.timing['duration']:.0f}ms)"
+                )
                 if r.body:
                     print(f"Body: {r.body[:500]}...")
             else:
@@ -563,11 +836,19 @@ def cmd_interactive(args):
         except Exception as e:
             print(f"Error: {e}")
 
+
 def main():
     parser = argparse.ArgumentParser(description=f"HOG HTTP Toolkit v{VERSION}")
     parser.add_argument("--version", action="version", version=VERSION)
 
     sub = parser.add_subparsers(dest="command")
+
+    parser.add_argument(
+        "--json",
+        dest="json_output",
+        action="store_true",
+        help="JSON output for automation",
+    )
 
     p = sub.add_parser("dispatch", help="Make HTTP request")
     p.add_argument("url")
@@ -577,9 +858,11 @@ def main():
     p.add_argument("-p", "--profile")
     p.add_argument("-q", "--quiet", action="store_true")
     p.add_argument("--curl", action="store_true")
+    p.add_argument("--json", dest="json_output", action="store_true")
 
     p = sub.add_parser("scan", help="Scan endpoint")
     p.add_argument("url")
+    p.add_argument("--json", dest="json_output", action="store_true")
 
     sub.add_parser("interactive", aliases=["i"], help="Interactive mode")
 
@@ -594,6 +877,7 @@ def main():
     else:
         print_banner()
         parser.print_help()
+
 
 if __name__ == "__main__":
     main()

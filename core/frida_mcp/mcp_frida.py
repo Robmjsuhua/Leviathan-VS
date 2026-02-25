@@ -1162,7 +1162,7 @@ if (mod) {{
             cmd += ["-D", args["device"]]
         cmd += ["-i", args["pattern"]]
         timeout = args.get("timeout", 15)
-        r = _run_frida_cli(cmd, timeout=timeout)
+        r = _run_frida_cmd(cmd, timeout=timeout)
         return r.get("stdout", "") + "\n" + r.get("stderr", "")
 
     elif name == "frida_memory_read":
@@ -1178,10 +1178,14 @@ for (var i = 0; i < view.length; i++) {{
 }}
 send(hex);
 """
-        cmd = _build_inject_cmd(
-            args["target"], script, args.get("spawn", False), args.get("device")
+        cmd, tmpfile = _build_inject_cmd(
+            args["target"], script, args.get("spawn", False), args.get("device", "")
         )
-        r = _run_frida_cli(cmd, timeout=args.get("timeout", 15))
+        r = _run_frida_cmd(cmd, timeout=args.get("timeout", 15))
+        try:
+            os.unlink(tmpfile)
+        except Exception:
+            pass
         return r.get("stdout", "") + "\n" + r.get("stderr", "")
 
     elif name == "frida_memory_write":
@@ -1196,10 +1200,14 @@ var bytes = [{byte_array}];
 Memory.writeByteArray(addr, bytes);
 send('Written ' + bytes.length + ' bytes to ' + addr);
 """
-        cmd = _build_inject_cmd(
-            args["target"], script, args.get("spawn", False), args.get("device")
+        cmd, tmpfile = _build_inject_cmd(
+            args["target"], script, args.get("spawn", False), args.get("device", "")
         )
-        r = _run_frida_cli(cmd, timeout=args.get("timeout", 15))
+        r = _run_frida_cmd(cmd, timeout=args.get("timeout", 15))
+        try:
+            os.unlink(tmpfile)
+        except Exception:
+            pass
         return r.get("stdout", "") + "\n" + r.get("stderr", "")
 
     elif name == "frida_backtrace":
@@ -1220,10 +1228,14 @@ Interceptor.attach({hook}, {{
     }}
 }});
 """
-        cmd = _build_inject_cmd(
-            args["target"], script, args.get("spawn", False), args.get("device")
+        cmd, tmpfile = _build_inject_cmd(
+            args["target"], script, args.get("spawn", False), args.get("device", "")
         )
-        r = _run_frida_cli(cmd, timeout=args.get("timeout", 15))
+        r = _run_frida_cmd(cmd, timeout=args.get("timeout", 15))
+        try:
+            os.unlink(tmpfile)
+        except Exception:
+            pass
         return r.get("stdout", "") + "\n" + r.get("stderr", "")
 
     elif name == "frida_stalker_trace":
@@ -1255,10 +1267,14 @@ Interceptor.attach({hook}, {{
     }}
 }});
 """
-        cmd = _build_inject_cmd(
-            args["target"], script, args.get("spawn", False), args.get("device")
+        cmd, tmpfile = _build_inject_cmd(
+            args["target"], script, args.get("spawn", False), args.get("device", "")
         )
-        r = _run_frida_cli(cmd, timeout=args.get("timeout", 20))
+        r = _run_frida_cmd(cmd, timeout=args.get("timeout", 20))
+        try:
+            os.unlink(tmpfile)
+        except Exception:
+            pass
         return r.get("stdout", "") + "\n" + r.get("stderr", "")
 
     elif name == "frida_spawn_gating":
@@ -1272,7 +1288,7 @@ Interceptor.attach({hook}, {{
         else:
             script = "var pending = Frida.enumeratePendingSpawn(); send(JSON.stringify(pending));"
         cmd = [frida_bin] + device_args + ["-e", script]
-        r = _run_frida_cli(cmd, timeout=10)
+        r = _run_frida_cmd(cmd, timeout=10)
         return r.get("stdout", "") + "\n" + r.get("stderr", "")
 
     elif name == "frida_enumerate_modules":
@@ -1281,10 +1297,14 @@ Process.enumerateModules().forEach(function(m) {
     send(m.name + ' | base=' + m.base + ' | size=' + m.size + ' | path=' + m.path);
 });
 """
-        cmd = _build_inject_cmd(
-            args["target"], script, args.get("spawn", False), args.get("device")
+        cmd, tmpfile = _build_inject_cmd(
+            args["target"], script, args.get("spawn", False), args.get("device", "")
         )
-        r = _run_frida_cli(cmd, timeout=args.get("timeout", 15))
+        r = _run_frida_cmd(cmd, timeout=args.get("timeout", 15))
+        try:
+            os.unlink(tmpfile)
+        except Exception:
+            pass
         output = r.get("stdout", "") + "\n" + r.get("stderr", "")
         if args.get("filter"):
             output = "\n".join(
@@ -1309,10 +1329,14 @@ if (func) {{
     send('Export {export} not found in {module}');
 }}
 """
-        cmd = _build_inject_cmd(
-            args["target"], script, args.get("spawn", False), args.get("device")
+        cmd, tmpfile = _build_inject_cmd(
+            args["target"], script, args.get("spawn", False), args.get("device", "")
         )
-        r = _run_frida_cli(cmd, timeout=args.get("timeout", 15))
+        r = _run_frida_cmd(cmd, timeout=args.get("timeout", 15))
+        try:
+            os.unlink(tmpfile)
+        except Exception:
+            pass
         return r.get("stdout", "") + "\n" + r.get("stderr", "")
 
     return f"Unknown tool: {name}"

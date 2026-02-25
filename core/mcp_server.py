@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 """
 ================================================================================
-    LEVIATHAN VS - Tentacle Protocol Server v7.0
+    LEVIATHAN VS - Tentacle Protocol Server v14.2
     Real-Time Semantic Translation Server
 
     Model Context Protocol Server para traducao semantica em tempo real.
     Integra com VS Code para aplicar regras automaticamente durante digitacao.
 
     Autor: ThiagoFrag
-    Versao: 7.0.0
+    Versao: 14.2.0
 ================================================================================
 """
 
@@ -17,8 +17,8 @@ import asyncio
 import json
 import logging
 import re
+import shutil
 import sys
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -34,24 +34,12 @@ logger = logging.getLogger("leviathan-mcp")
 # CONSTANTES
 # ============================================================================
 
-VERSION = "7.0.0"
+VERSION = "14.2.0"
 SERVER_NAME = "leviathan-tentacle-server"
 
 # ============================================================================
 # MCP PROTOCOL IMPLEMENTATION
 # ============================================================================
-
-
-@dataclass
-class MCPMessage:
-    """Mensagem do protocolo MCP."""
-
-    jsonrpc: str = "2.0"
-    id: Optional[int] = None
-    method: Optional[str] = None
-    params: Optional[Dict] = None
-    result: Optional[Any] = None
-    error: Optional[Dict] = None
 
 
 class SemanticEngine:
@@ -504,6 +492,11 @@ class MCPServer:
 
             result, changes = self.engine.translate(content, mode)
 
+            # Backup antes de sobrescrever
+            backup_path = file_path.with_suffix(file_path.suffix + ".bak")
+            shutil.copy2(file_path, backup_path)
+            logger.info(f"Backup criado: {backup_path}")
+
             # Salvar arquivo traduzido
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(result)
@@ -672,11 +665,10 @@ class MCPServer:
 
     def _send_response(self, response: Dict) -> None:
         """Envia resposta com Content-Length framing (MCP protocol)."""
-        body = json.dumps(response)
-        header = f"Content-Length: {len(body.encode('utf-8'))}\r\n\r\n"
-        sys.stdout.write(header)
-        sys.stdout.write(body)
-        sys.stdout.flush()
+        body_bytes = json.dumps(response).encode("utf-8")
+        header = f"Content-Length: {len(body_bytes)}\r\n\r\n".encode("utf-8")
+        sys.stdout.buffer.write(header + body_bytes)
+        sys.stdout.buffer.flush()
 
     def _read_message(self) -> Optional[Dict]:
         """Le uma mensagem com Content-Length framing do stdin."""
@@ -747,9 +739,6 @@ def main():
 
     parser = argparse.ArgumentParser(description="MEGAZORD MCP Server")
     parser.add_argument("--config", "-c", type=str, help="Caminho do config.json")
-    parser.add_argument(
-        "--port", "-p", type=int, help="Porta para servidor HTTP (opcional)"
-    )
     args = parser.parse_args()
 
     # Determinar caminho base

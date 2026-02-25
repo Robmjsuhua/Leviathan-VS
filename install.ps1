@@ -15,7 +15,7 @@ param(
     [switch]$SkipMCP
 )
 
-$ErrorActionPreference = "SilentlyContinue"
+$ErrorActionPreference = "Continue"
 $ProgressPreference = "SilentlyContinue"
 
 # Cores
@@ -135,7 +135,7 @@ if (-not $SkipMCP) {
             "megazord-hog" = @{
                 type = "stdio"
                 command = "python"
-                args = @("$($scriptPath -replace '\\','/')/mcp_server.py")
+                args = @("$($scriptPath -replace '\\','/')/core/mcp_server.py")
                 env = @{}
             }
         }
@@ -148,10 +148,10 @@ if (-not $SkipMCP) {
 Write-Host "`n[7/8] Validando instalacao..." -ForegroundColor Cyan
 $checks = @(
     @{Name="Python"; Test={python -c "print('ok')" 2>$null; $LASTEXITCODE -eq 0}},
-    @{Name="Config"; Test={Test-Path "$scriptPath\config.json"}},
-    @{Name="Translator"; Test={Test-Path "$scriptPath\translator.py"}},
-    @{Name="HTTP Toolkit"; Test={Test-Path "$scriptPath\http_toolkit.py"}},
-    @{Name="MCP Server"; Test={Test-Path "$scriptPath\mcp_server.py"}}
+    @{Name="Config"; Test={Test-Path "$scriptPath\core\config.json"}},
+    @{Name="Translator"; Test={Test-Path "$scriptPath\core\translator.py"}},
+    @{Name="HTTP Toolkit"; Test={Test-Path "$scriptPath\core\http_toolkit.py"}},
+    @{Name="MCP Server"; Test={Test-Path "$scriptPath\core\mcp_server.py"}}
 )
 
 foreach ($check in $checks) {

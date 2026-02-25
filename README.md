@@ -13,15 +13,15 @@
 
 ## The Abyss Awaits - Ultimate Development Configuration
 
-A monstrous VS Code configuration that rises from the depths. Semantic translation engine, HTTP interceptor, 12 MCP security servers with 324+ tools, 4 emulator controllers, and 80+ extensions forged in the darkness of the deep sea.
+A monstrous VS Code configuration that rises from the depths. Semantic translation engine, HTTP interceptor, 33 MCP security servers with 460+ tools, 4 emulator controllers, and 80+ extensions forged in the darkness of the deep sea.
 
-![Version](https://img.shields.io/badge/version-13.0.0-0d1117?style=for-the-badge&labelColor=161b22)
-![Python](https://img.shields.io/badge/python-3.8+-1f6feb?style=for-the-badge&labelColor=0d1117)
+![Version](https://img.shields.io/badge/version-14.2.0-0d1117?style=for-the-badge&labelColor=161b22)
+![Python](https://img.shields.io/badge/python-3.14-1f6feb?style=for-the-badge&labelColor=0d1117)
 ![License](https://img.shields.io/badge/license-MIT-238636?style=for-the-badge&labelColor=0d1117)
 ![Extensions](https://img.shields.io/badge/extensions-80+-8957e5?style=for-the-badge&labelColor=0d1117)
 ![Rules](https://img.shields.io/badge/translation_rules-640+-f85149?style=for-the-badge&labelColor=0d1117)
-![MCP Tools](https://img.shields.io/badge/MCP_tools-324+-ff6600?style=for-the-badge&labelColor=0d1117)
-![Tasks](https://img.shields.io/badge/VS_Code_tasks-90+-00ccff?style=for-the-badge&labelColor=0d1117)
+![MCP Tools](https://img.shields.io/badge/MCP_tools-460+-ff6600?style=for-the-badge&labelColor=0d1117)
+![Tasks](https://img.shields.io/badge/VS_Code_tasks-138-00ccff?style=for-the-badge&labelColor=0d1117)
 
 ---
 
@@ -34,16 +34,22 @@ Leviathan VS is a complete development environment that emerges from the abyss:
 | **Kraken Engine**       | Semantic translation - transforms sensitive terms into deep sea terminology |
 | **Abyssal Interceptor** | HTTP toolkit with AI-powered analysis                                       |
 | **Deep Scan**           | Static analysis for 10+ languages                                           |
-| **Tentacle Protocol**   | 12 MCP servers / 324+ tools for GitHub Copilot                              |
-| **ADB Module**          | 41 Android Debug Bridge tools                                               |
+| **Tentacle Protocol**   | 33 MCP servers / 460+ tools for GitHub Copilot                              |
+| **ADB Module**          | 42 Android Debug Bridge tools                                               |
 | **Frida Module**        | 28 dynamic instrumentation + 89 tools in LDPlayer composite                 |
 | **Ghidra Module**       | 15 headless binary analysis tools                                           |
+| **Radare2 Module**      | 16 binary analysis & reverse engineering tools                              |
 | **JADX Module**         | 16 APK decompilation tools                                                  |
+| **APKTool Module**      | 12 APK decode/rebuild/sign tools                                            |
+| **Androguard Module**   | 15 Python APK static analysis tools                                         |
 | **Wireshark Module**    | 23 network capture & analysis tools                                         |
-| **Emulator Control**    | LDPlayer (89) + BlueStacks (18) + MEmu (20) + Nox (22) tools                |
+| **MITMProxy Module**    | 14 HTTPS interception & modification tools                                  |
+| **Scapy Module**        | 15 packet crafting, scanning & fuzzing tools                                |
+| **Emulator Control**    | LDPlayer (89) + BlueStacks (17) + MEmu (19) + Nox (22) tools                |
 | **Burp Suite Module**   | 15 web security testing tools                                               |
 | **Nuclei Module**       | 17 vuln scanners (nuclei + sqlmap + nmap + ffuf)                            |
 | **Objection Module**    | 20 mobile runtime exploration tools                                         |
+| **Hashcat Module**      | 12 password cracking & hash analysis tools                                  |
 
 ---
 
@@ -137,28 +143,34 @@ Leviathan-VS/
     .vscode/
         extensions.json    # 80+ tentacles (extensions)
         settings.json      # Lair configuration
-        tasks.json         # 90+ hunting tasks
+        tasks.json         # 100+ hunting tasks
         launch.json        # Debug depth charges
-        mcp.json           # 12 MCP servers / 324+ tools
+        mcp.json           # 33 MCP servers / 460+ tools
         keybindings.json   # Combat shortcuts
     core/
         config.json        # 640+ translation runes
         translator.py      # Kraken Engine
         http_toolkit.py    # Abyssal Interceptor
         mcp_server.py      # Tentacle Protocol Server
-        adb/               # ADB MCP (41 tools)
+        adb/               # ADB MCP (42 tools)
         frida_mcp/         # Frida Standalone MCP (28 tools)
         ghidra/            # Ghidra Headless MCP (15 tools)
+        r2/                # Radare2 MCP (16 tools)
         jadx/              # JADX Decompiler MCP (16 tools)
+        apktool/           # APKTool Rebuild MCP (12 tools)
+        androguard/        # Androguard Analysis MCP (15 tools)
         ldplayer/          # LDPlayer Composite MCP (89 tools)
             frida_scripts/ # 8 bypass/interceptor scripts
-        bluestacks/        # BlueStacks MCP (18 tools)
-        memu/              # MEmu MCP (20 tools)
+        bluestacks/        # BlueStacks MCP (17 tools)
+        memu/              # MEmu MCP (19 tools)
         nox/               # NoxPlayer MCP (22 tools)
         wireshark/         # Wireshark MCP (23 tools)
+        mitmproxy/         # MITMProxy MCP (14 tools)
+        scapy/             # Scapy Packet MCP (15 tools)
         burpsuite/         # Burp Suite MCP (15 tools)
         nuclei/            # Nuclei + SQLMap + Nmap MCP (17 tools)
         objection/         # Objection MCP (20 tools)
+        hashcat/           # Hashcat + John MCP (12 tools)
     docs/
         CLAUDE_SKILLS.md   # Servant documentation
 ```
@@ -352,7 +364,7 @@ Categories from the deep:
 
 ---
 
-## Tentacle Protocol (MCP) - 27 Servers / 324+ Tools
+## Tentacle Protocol (MCP) - 33 Servers / 460+ Tools
 
 ```json
 // .vscode/mcp.json - configured automatically on install
@@ -362,21 +374,27 @@ Categories from the deep:
     "adb": "core/adb/mcp_adb.py",
     "frida-standalone": "core/frida_mcp/mcp_frida.py",
     "ghidra": "core/ghidra/mcp_ghidra.py",
+    "radare2": "core/r2/mcp_r2.py",
     "jadx": "core/jadx/mcp_jadx.py",
+    "apktool": "core/apktool/mcp_apktool.py",
+    "androguard": "core/androguard/mcp_androguard.py",
     "ldplayer": "core/ldplayer/mcp_ldplayer.py",
     "bluestacks": "core/bluestacks/mcp_bluestacks.py",
     "memu": "core/memu/mcp_memu.py",
     "nox": "core/nox/mcp_nox.py",
     "wireshark": "core/wireshark/mcp_wireshark.py",
+    "mitmproxy": "core/mitmproxy/mcp_mitmproxy.py",
+    "scapy": "core/scapy/mcp_scapy.py",
     "burpsuite": "core/burpsuite/mcp_burpsuite.py",
     "nuclei": "core/nuclei/mcp_nuclei.py",
     "objection": "core/objection/mcp_objection.py",
+    "hashcat": "core/hashcat/mcp_hashcat.py",
     "+ 14 utility servers": "filesystem, memory, fetch, time, sqlite, git, ..."
   }
 }
 ```
 
-All 324+ tools available to Copilot/Cline/Claude via MCP protocol.
+All 460+ tools available to Copilot/Cline/Claude via MCP protocol.
 Run `[LEVIATHAN] Status Completo` to verify all servers are operational.
 
 ---
@@ -416,7 +434,7 @@ Run `[LEVIATHAN] Status Completo` to verify all servers are operational.
 
 ## Requirements
 
-- Python 3.8+ (the beast's blood)
+- Python 3.14+ (the beast's blood)
 - VS Code 1.80+ (the lair)
 - Git (the current)
 
@@ -430,7 +448,7 @@ cd Leviathan-VS
 code .
 ```
 
-Run `[LEVIATHAN] Status Completo` to verify all 324+ tools are operational.
+Run `[LEVIATHAN] Status Completo` to verify all 460+ tools are operational.
 
 ---
 

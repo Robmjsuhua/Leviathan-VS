@@ -455,6 +455,37 @@
             "key": "ctrl+alt+r",
             "command": "workbench.action.tasks.runTask",
             "args": "[LEVIATHAN] RELOAD RULES"
+        },
+        // ═══════════════ NEW MCP TOOLS ═══════════════
+        {
+            "key": "ctrl+shift+alt+a",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[APKTOOL] Decode APK"
+        },
+        {
+            "key": "ctrl+shift+alt+b",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[APKTOOL] Rebuild + Sign APK"
+        },
+        {
+            "key": "ctrl+shift+alt+s",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[SCAPY] ARP Scan"
+        },
+        {
+            "key": "ctrl+shift+alt+r",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[R2] Analyze Binary"
+        },
+        {
+            "key": "ctrl+shift+alt+h",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[HASHCAT] Identify Hash"
+        },
+        {
+            "key": "ctrl+shift+alt+m",
+            "command": "workbench.action.tasks.runTask",
+            "args": "[MITMPROXY] Start Proxy"
         }
     ]
 }

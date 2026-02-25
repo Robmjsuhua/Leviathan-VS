@@ -160,6 +160,42 @@
         "huawei_p60"
       ],
       "default": "samsung_s23"
+    },
+    {
+      "id": "hashValue",
+      "type": "promptString",
+      "description": "Hash para identificar/crackar:",
+      "default": ""
+    },
+    {
+      "id": "hashFile",
+      "type": "promptString",
+      "description": "Arquivo com hashes:",
+      "default": "hashes.txt"
+    },
+    {
+      "id": "wordlistPath",
+      "type": "promptString",
+      "description": "Caminho da wordlist:",
+      "default": "rockyou.txt"
+    },
+    {
+      "id": "networkTarget",
+      "type": "promptString",
+      "description": "IP ou range de rede (ex: 192.168.1.0/24):",
+      "default": "192.168.1.0/24"
+    },
+    {
+      "id": "r2Function",
+      "type": "promptString",
+      "description": "Funcao para descompilar (ex: main, sym.encrypt):",
+      "default": "main"
+    },
+    {
+      "id": "mitmPort",
+      "type": "promptString",
+      "description": "Porta do proxy MITM:",
+      "default": "8080"
     }
   ],
   "tasks": [
@@ -1938,6 +1974,313 @@
       "detail": "Lista activities do app Android"
     },
     // ═══════════════════════════════════════════════════════════════════════════
+    // APKTOOL - APK Decode / Rebuild / Sign Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[APKTOOL] Decode APK",
+      "type": "shell",
+      "command": "apktool d \"${input:apkPath}\" -o apktool_output -f; Write-Host 'APK decoded to apktool_output/' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "package"
+      },
+      "detail": "Decodifica APK com APKTool (resources + smali)"
+    },
+    {
+      "label": "[APKTOOL] Rebuild + Sign APK",
+      "type": "shell",
+      "command": "apktool b apktool_output -o rebuilt.apk; Write-Host 'Signing APK...' -ForegroundColor Cyan; apksigner sign --ks debug.keystore --ks-pass pass:android rebuilt.apk; Write-Host 'rebuilt.apk signed and ready!' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "tools"
+      },
+      "detail": "Rebuild APK from smali + sign with debug keystore"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // ANDROGUARD - Python APK Static Analysis Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[ANDROGUARD] Security Audit",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"from androguard.misc import AnalyzeAPK; a,d,dx=AnalyzeAPK('${input:apkPath}'); print('Package:',a.get_package()); print('Permissions:'); [print(' ',p) for p in a.get_permissions()]; print('Activities:',len(a.get_activities())); print('Services:',len(a.get_services())); print('Receivers:',len(a.get_receivers()))\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "shield"
+      },
+      "detail": "Analise de seguranca APK via Androguard (permissoes, componentes)"
+    },
+    {
+      "label": "[ANDROGUARD] Extract Strings",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"from androguard.misc import AnalyzeAPK; a,d,dx=AnalyzeAPK('${input:apkPath}'); strings=[s for d_ in d for s in d_.get_strings() if len(s)>8]; print(f'Found {len(strings)} interesting strings:'); [print(' ',s[:120]) for s in strings[:50]]\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "search"
+      },
+      "detail": "Extrai strings interessantes do APK via Androguard"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // MITMPROXY - HTTPS Interception Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[MITMPROXY] Start Proxy",
+      "type": "shell",
+      "command": "mitmproxy --listen-port ${input:mitmPort} --set console_focus_follow=true",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "globe"
+      },
+      "detail": "Inicia mitmproxy interativo na porta especificada"
+    },
+    {
+      "label": "[MITMPROXY] Dump Traffic",
+      "type": "shell",
+      "command": "$ts=Get-Date -Format 'yyyyMMdd_HHmmss'; mitmdump --listen-port ${input:mitmPort} -w mitm_$ts.flow; Write-Host \"Trafego salvo em mitm_$ts.flow\" -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "cloud-download"
+      },
+      "detail": "Captura trafego HTTPS via mitmdump para arquivo .flow"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // SCAPY - Packet Crafting & Network Scanning Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[SCAPY] ARP Scan",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"from scapy.all import *; ans,_=srp(Ether(dst='ff:ff:ff:ff:ff:ff')/ARP(pdst='${input:networkTarget}'),timeout=3,verbose=0); print(f'Found {len(ans)} hosts:'); [print(f'  {r.psrc} ({r.hwsrc})') for _,r in ans]\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "radio-tower"
+      },
+      "detail": "Scan ARP para descobrir hosts na rede local"
+    },
+    {
+      "label": "[SCAPY] Port Scan",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"from scapy.all import *; target='${input:scanTarget}'; ports=[21,22,23,25,53,80,110,135,139,443,445,993,995,1433,3306,3389,5432,5900,8080,8443]; ans,_=sr(IP(dst=target)/TCP(dport=ports,flags='S'),timeout=3,verbose=0); open_ports=[p.dport for _,p in ans if p.haslayer(TCP) and p[TCP].flags==0x12]; print(f'Open ports on {target}:'); [print(f'  {p}') for p in open_ports] if open_ports else print('  None found')\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "plug"
+      },
+      "detail": "SYN scan nas 20 portas mais comuns via Scapy"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // RADARE2 - Binary Analysis & Reverse Engineering Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[R2] Analyze Binary",
+      "type": "shell",
+      "command": "radare2 -q -e bin.cache=true -c 'aaa; iI; afl | head 30; iz | head 20' \"${input:binaryPath}\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "file-binary"
+      },
+      "detail": "Analise completa do binario: info + funcoes + strings"
+    },
+    {
+      "label": "[R2] Disassemble Function",
+      "type": "shell",
+      "command": "radare2 -q -e bin.cache=true -c 'aaa; s ${input:r2Function}; pdf' \"${input:binaryPath}\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "code"
+      },
+      "detail": "Disassembla funcao especifica do binario"
+    },
+    {
+      "label": "[R2] Decompile Function",
+      "type": "shell",
+      "command": "radare2 -q -e bin.cache=true -c 'aaa; s ${input:r2Function}; pdg' \"${input:binaryPath}\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "symbol-method"
+      },
+      "detail": "Decompila funcao para pseudo-C (requer r2ghidra)"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // HASHCAT - Password Cracking & Hash Analysis Commands
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[HASHCAT] Identify Hash",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -c \"import re,sys; h='${input:hashValue}'; patterns={'MD5 (32 hex)': r'^[a-fA-F0-9]{32}$', 'SHA-1 (40 hex)': r'^[a-fA-F0-9]{40}$', 'SHA-256 (64 hex)': r'^[a-fA-F0-9]{64}$', 'SHA-512 (128 hex)': r'^[a-fA-F0-9]{128}$', 'bcrypt': r'^\$2[aby]?\$', 'NTLM (32 hex)': r'^[a-fA-F0-9]{32}$', 'MySQL (41 hex)': r'^\*[A-F0-9]{40}$'}; matches=[n for n,p in patterns.items() if re.match(p,h)]; print(f'Hash: {h[:40]}...') if len(h)>40 else print(f'Hash: {h}'); print(f'Possible types: {matches if matches else [\"Unknown\"]}')\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "key"
+      },
+      "detail": "Identifica tipo de hash por regex patterns"
+    },
+    {
+      "label": "[HASHCAT] Crack Hash (Dictionary)",
+      "type": "shell",
+      "command": "hashcat -m 0 -a 0 \"${input:hashFile}\" \"${input:wordlistPath}\" --potfile-path hashcat_output/cracked.pot -o hashcat_output/cracked.txt; Write-Host 'Results in hashcat_output/cracked.txt' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "unlock"
+      },
+      "detail": "Crack hashes MD5 com ataque dicionario (mode 0)"
+    },
+    {
+      "label": "[HASHCAT] Benchmark GPU",
+      "type": "shell",
+      "command": "hashcat -b --benchmark-all | Select-Object -First 60",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "dashboard"
+      },
+      "detail": "Benchmark de performance GPU para todos os modos"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
+    // LEVIATHAN META — Doctor, Validate, Test, Lint, Report
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+      "label": "[LEVIATHAN] Doctor",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe core/doctor.py",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "heart"
+      },
+      "detail": "Healthcheck completo: Python, configs, tools, permissions"
+    },
+    {
+      "label": "[LEVIATHAN] Validate Configs",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe core/config_schema.py",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "check-all"
+      },
+      "detail": "Valida config.json, mcp.json e tasks.json"
+    },
+    {
+      "label": "[LEVIATHAN] Run Tests",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest tests/ -v --tb=short",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "beaker"
+      },
+      "group": "test",
+      "detail": "Roda testes unitarios via pytest"
+    },
+    {
+      "label": "[LEVIATHAN] Lint",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m ruff check core/ --output-format=concise",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "eye"
+      },
+      "detail": "Lint com ruff (regras em pyproject.toml)"
+    },
+    {
+      "label": "[LEVIATHAN] Export Report",
+      "type": "shell",
+      "command": "C:\\Users\\Kishi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe core/cli.py report --format markdown --output leviathan_report.md; Write-Host 'Report salvo em leviathan_report.md' -ForegroundColor Green",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "output"
+      },
+      "detail": "Exporta report de ambiente em Markdown"
+    },
+    // ═══════════════════════════════════════════════════════════════════════════
     // WORKFLOWS - Pipelines Automatizados
     // ═══════════════════════════════════════════════════════════════════════════
     {
@@ -2021,7 +2364,7 @@
     {
       "label": "[LEVIATHAN] Status Completo",
       "type": "shell",
-      "command": "Write-Host '=== LEVIATHAN VS - SYSTEM STATUS ===' -ForegroundColor Magenta; Write-Host '' ; Write-Host '[ADB]' -ForegroundColor Cyan -NoNewline; if (Get-Command adb -ErrorAction SilentlyContinue) { $d=(adb devices | Select-Object -Skip 1 | Where-Object { $_ -match 'device' }).Count; Write-Host \" OK ($d devices)\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Frida]' -ForegroundColor Cyan -NoNewline; if (Get-Command frida -ErrorAction SilentlyContinue) { Write-Host \" OK ($(frida --version))\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Ghidra]' -ForegroundColor Cyan -NoNewline; if (Get-Command analyzeHeadless -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND (add to PATH)' -ForegroundColor Yellow }; Write-Host '[Jadx]' -ForegroundColor Cyan -NoNewline; if (Get-Command jadx -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[tshark]' -ForegroundColor Cyan -NoNewline; if (Get-Command tshark -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Nuclei]' -ForegroundColor Cyan -NoNewline; if (Get-Command nuclei -ErrorAction SilentlyContinue) { Write-Host \" OK ($(nuclei -version 2>&1))\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Nmap]' -ForegroundColor Cyan -NoNewline; if (Get-Command nmap -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Objection]' -ForegroundColor Cyan -NoNewline; if (Get-Command objection -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[LDPlayer]' -ForegroundColor Cyan -NoNewline; if (Get-Command ldconsole.exe -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Python]' -ForegroundColor Cyan -NoNewline; Write-Host \" OK ($(python --version 2>&1))\" -ForegroundColor Green; Write-Host ''; Write-Host '=== MCP MODULES: 12 servers / 324 tools ===' -ForegroundColor Yellow",
+      "command": "Write-Host '=== LEVIATHAN VS v14.2 - SYSTEM STATUS ===' -ForegroundColor Magenta; Write-Host '' ; Write-Host '[ADB]' -ForegroundColor Cyan -NoNewline; if (Get-Command adb -ErrorAction SilentlyContinue) { $d=(adb devices | Select-Object -Skip 1 | Where-Object { $_ -match 'device' }).Count; Write-Host \" OK ($d devices)\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Frida]' -ForegroundColor Cyan -NoNewline; if (Get-Command frida -ErrorAction SilentlyContinue) { Write-Host \" OK ($(frida --version))\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Ghidra]' -ForegroundColor Cyan -NoNewline; if (Get-Command analyzeHeadless -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND (add to PATH)' -ForegroundColor Yellow }; Write-Host '[Radare2]' -ForegroundColor Cyan -NoNewline; if (Get-Command radare2 -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Jadx]' -ForegroundColor Cyan -NoNewline; if (Get-Command jadx -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[APKTool]' -ForegroundColor Cyan -NoNewline; if (Get-Command apktool -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[tshark]' -ForegroundColor Cyan -NoNewline; if (Get-Command tshark -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[mitmproxy]' -ForegroundColor Cyan -NoNewline; if (Get-Command mitmproxy -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Nuclei]' -ForegroundColor Cyan -NoNewline; if (Get-Command nuclei -ErrorAction SilentlyContinue) { Write-Host \" OK ($(nuclei -version 2>&1))\" -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Nmap]' -ForegroundColor Cyan -NoNewline; if (Get-Command nmap -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Hashcat]' -ForegroundColor Cyan -NoNewline; if (Get-Command hashcat -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Objection]' -ForegroundColor Cyan -NoNewline; if (Get-Command objection -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[LDPlayer]' -ForegroundColor Cyan -NoNewline; if (Get-Command ldconsole.exe -ErrorAction SilentlyContinue) { Write-Host ' OK' -ForegroundColor Green } else { Write-Host ' NOT FOUND' -ForegroundColor Red }; Write-Host '[Python]' -ForegroundColor Cyan -NoNewline; Write-Host \" OK ($(python --version 2>&1))\" -ForegroundColor Green; Write-Host ''; Write-Host '=== MCP MODULES: 33 servers / 460+ tools ===' -ForegroundColor Yellow",
       "presentation": {
         "reveal": "always",
         "panel": "shared",
@@ -2031,7 +2374,7 @@
       "icon": {
         "id": "pulse"
       },
-      "detail": "Verifica status de TODAS as ferramentas (ADB, Frida, Ghidra, Jadx, tshark, Nuclei, Nmap, Objection, LDPlayer)"
+      "detail": "Verifica status de TODAS as ferramentas (ADB, Frida, Ghidra, Jadx, tshark, Nuclei, Nmap, Objection, LDPlayer, R2, Hashcat, Scapy, MITMProxy)"
     }
   ]
 }
