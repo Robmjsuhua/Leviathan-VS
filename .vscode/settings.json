@@ -1,6 +1,6 @@
 {
     // ════════════════════════════════════════════════════════════════════
-    // LEVIATHAN VS v15.2 - COGNITIVE DESTRUCTION CONFIGURATION
+    // LEVIATHAN VS v15.3 - COGNITIVE DESTRUCTION CONFIGURATION
     // 33 MCP Servers / 460+ Tools / Cognitive AI Architecture / Zero Limits
     // Updated: February 2026
     // ════════════════════════════════════════════════════════════════════
@@ -107,7 +107,45 @@
     "editor.defaultColorDecorators": true,
     "editor.occurrencesHighlight": "singleFile",
     "editor.inlineSuggest.enabled": true,
+    "editor.inlineSuggest.showToolbar": "always",
+    "editor.inlineSuggest.syntaxHighlightingEnabled": true,
     "editor.experimental.asyncTokenization": true,
+    "editor.tabCompletion": "on",
+    "editor.suggestSelection": "recentlyUsedByPrefix",
+    "editor.quickSuggestionsDelay": 0,
+    "editor.autoIndent": "full",
+    "editor.wrappingIndent": "indent",
+    "editor.wrappingStrategy": "advanced",
+    "editor.dragAndDrop": true,
+    "editor.links": true,
+    "editor.emptySelectionClipboard": true,
+    "editor.showDeprecated": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggest.matchOnWordStartOnly": false,
+    "editor.suggest.showWords": true,
+    "editor.suggest.showColors": true,
+    "editor.suggest.showFiles": true,
+    "editor.suggest.showReferences": true,
+    "editor.suggest.showFolders": true,
+    "editor.suggest.showTypeParameters": true,
+    "editor.suggest.showConstants": true,
+    "editor.suggest.showEnumMembers": true,
+    "editor.suggest.showEnums": true,
+    "editor.suggest.showConstructors": true,
+    "editor.suggest.showInterfaces": true,
+    "editor.suggest.showModules": true,
+    "editor.suggest.showProperties": true,
+    "editor.suggest.showClasses": true,
+    "editor.suggest.showStructs": true,
+    "editor.suggest.showVariables": true,
+    "editor.suggest.showFields": true,
+    "editor.suggest.showEvents": true,
+    "editor.suggest.showOperators": true,
+    "editor.suggest.showUnits": true,
+    "editor.suggest.showValues": true,
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.autoClosingDelete": "auto",
+    "editor.minimap.side": "right",
     // ═══════════════════════════════════════════════════════════════════
     // 📁 ARQUIVOS - ASSOCIAÇÕES E ENCODING
     // ═══════════════════════════════════════════════════════════════════
@@ -181,6 +219,9 @@
     "files.maxMemoryForLargeFilesMB": 4096,
     "files.simpleDialog.enable": true,
     "files.readonlyFromPermissions": true,
+    "files.hotExit": "onExitAndWindowClose",
+    "files.saveConflictResolution": "overwriteFileOnDisk",
+    "files.participants.timeout": 10000,
     "files.exclude": {
         "**/__pycache__": true,
         "**/*.pyc": true,
@@ -241,6 +282,13 @@
     "terminal.integrated.shellIntegration.decorationsEnabled": "both",
     "terminal.integrated.rightClickBehavior": "paste",
     "terminal.integrated.enableImages": true,
+    "terminal.integrated.confirmOnKill": "never",
+    "terminal.integrated.detectLocale": "auto",
+    "terminal.integrated.drawBoldTextInBrightColors": true,
+    "terminal.integrated.env.windows": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+    },
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
@@ -276,6 +324,13 @@
     "workbench.sideBar.location": "left",
     "workbench.activityBar.location": "side",
     "workbench.layoutControl.enabled": true,
+    "workbench.editor.revealIfOpen": true,
+    "workbench.editor.labelFormat": "medium",
+    "workbench.editor.scrollToSwitchTabs": true,
+    "workbench.editor.pinnedTabSizing": "shrink",
+    "workbench.editor.decorations.badges": true,
+    "workbench.editor.decorations.colors": true,
+    "workbench.quickOpen.preserveInput": true,
     "workbench.list.smoothScrolling": true,
     "workbench.panel.defaultLocation": "bottom",
     "workbench.statusBar.visible": true,
@@ -431,7 +486,73 @@
         "sash.hoverBorder": "#00ff88",
         "commandCenter.foreground": "#00ff88",
         "commandCenter.background": "#0d0d0d",
-        "commandCenter.border": "#00ff8833"
+        "commandCenter.border": "#00ff8833",
+        // === Copilot Ghost Text ===
+        "editorGhostText.foreground": "#00ff8866",
+        "editorGhostText.border": "#00ff8822",
+        // === Code Intelligence ===
+        "editorCodeLens.foreground": "#00ff8888",
+        "editorLightBulb.foreground": "#ffcc00",
+        "editorUnnecessaryCode.opacity": "#000000aa",
+        // === Quick Input (Ctrl+P, Ctrl+Shift+P) ===
+        "quickInput.background": "#0d0d0d",
+        "quickInput.foreground": "#e0e0e0",
+        "quickInputList.focusBackground": "#00ff8833",
+        "quickInputList.focusForeground": "#00ff88",
+        // === Dropdown & Checkbox ===
+        "dropdown.background": "#0a0a0a",
+        "dropdown.foreground": "#e0e0e0",
+        "dropdown.border": "#00ff8833",
+        "checkbox.background": "#0a0a0a",
+        "checkbox.foreground": "#00ff88",
+        "checkbox.border": "#00ff8833",
+        // === Welcome Page ===
+        "welcomePage.background": "#0a0a0a",
+        "welcomePage.tileBackground": "#0d0d0d",
+        "welcomePage.tileBorder": "#00ff8833",
+        // === Breadcrumbs ===
+        "breadcrumb.background": "#0a0a0a",
+        "breadcrumb.foreground": "#888888",
+        "breadcrumb.focusForeground": "#00ff88",
+        "breadcrumb.activeSelectionForeground": "#00ff88",
+        "breadcrumbPicker.background": "#0d0d0d",
+        // === Inline Chat (Copilot) ===
+        "inlineChat.background": "#0d0d0d",
+        "inlineChat.border": "#00ff8833",
+        // === Settings Editor ===
+        "settings.headerForeground": "#00ff88",
+        "settings.modifiedItemIndicator": "#00ff88",
+        "settings.focusedRowBackground": "#00ff8811",
+        "settings.focusedRowBorder": "#00ff8833",
+        // === Keybinding Label ===
+        "keybindingLabel.background": "#0d0d0d",
+        "keybindingLabel.foreground": "#00ff88",
+        "keybindingLabel.border": "#00ff8833",
+        "keybindingLabel.bottomBorder": "#00ff8844"
+    },
+    // === Semantic Token Colors (per-token type styling) ===
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "rules": {
+            "function": "#00ff88",
+            "method": "#00ff88",
+            "variable": "#e0e0e0",
+            "variable.readonly": "#00d4ff",
+            "parameter": "#ffcc00",
+            "property": "#e0e0e0",
+            "class": "#00d4ff",
+            "interface": "#00d4ff",
+            "enum": "#cc00ff",
+            "enumMember": "#cc00ff",
+            "type": "#00d4ff",
+            "namespace": "#ff6b00",
+            "decorator": "#ff6b00",
+            "string": "#ffcc00",
+            "number": "#ff6b00",
+            "keyword": "#cc00ff",
+            "comment": "#555555",
+            "regexp": "#ff0055"
+        }
     },
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Tokyo Night",
@@ -584,6 +705,65 @@
         "editor.tabSize": 2,
         "editor.formatOnSave": true
     },
+    "[vue]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vue.volar"
+    },
+    "[astro]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "astro-build.astro-vscode"
+    },
+    "[svelte]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[proto3]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[terraform]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[prisma]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[php]": {
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    "[ruby]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[kotlin]": {
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true
+    },
+    "[dart]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[r]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[plaintext]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "other": false,
+            "comments": false,
+            "strings": false
+        }
+    },
+    "[log]": {
+        "editor.wordWrap": "on",
+        "editor.minimap.enabled": false
+    },
     // ═══════════════════════════════════════════════════════════════════
     // 📂 EXPLORER - NAVEGAÇÃO DE ARQUIVOS
     // ═══════════════════════════════════════════════════════════════════
@@ -650,6 +830,14 @@
     "gitlens.graph.scrollMarkers.enabled": true,
     "gitlens.ai.experimental.model": "anthropic:claude-sonnet-4-20250514",
     "gitlens.telemetry.enabled": false,
+    "git.inputValidationLength": 72,
+    "git.inputValidationSubjectLength": 72,
+    "git.untrackedChanges": "separate",
+    "git.closeDiffOnOperation": true,
+    "git.openAfterClone": "always",
+    "git.pullTags": true,
+    "git.showCommitInput": true,
+    "git.showInlineOpenFileAction": true,
     // ═══════════════════════════════════════════════════════════════════
     // 🔍 SEARCH - CONFIGURAÇÃO DE BUSCA
     // ═══════════════════════════════════════════════════════════════════
@@ -688,6 +876,9 @@
     "search.followSymlinks": false,
     "search.maxResults": 20000,
     "search.seedWithNearestWord": true,
+    "search.defaultViewMode": "tree",
+    "search.decorations.badges": true,
+    "search.decorations.colors": true,
     // ═══════════════════════════════════════════════════════════════════
     // 🐛 DEBUG - DEPURAÇÃO
     // ═══════════════════════════════════════════════════════════════════
@@ -703,6 +894,10 @@
     "debug.internalConsoleOptions": "openOnSessionStart",
     "debug.saveBeforeStart": "allEditorsInActiveGroup",
     "debug.showSubSessionsInToolBar": true,
+    "debug.javascript.autoAttachFilter": "smart",
+    "debug.javascript.terminalOptions": {
+        "skipFiles": ["<node_internals>/**"]
+    },
     // ═══════════════════════════════════════════════════════════════════
     // DIFF EDITOR - COMPARACAO DE ARQUIVOS
     // ═══════════════════════════════════════════════════════════════════
@@ -947,7 +1142,7 @@
     "window.titleBarStyle": "custom",
     "window.menuBarVisibility": "compact",
     "window.zoomLevel": 0,
-    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}${separator}LEVIATHAN v15.2",
+    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}${separator}LEVIATHAN v15.3",
     "window.newWindowDimensions": "maximized",
     "window.restoreFullscreen": true,
     "window.commandCenter": true,
@@ -991,6 +1186,25 @@
     "notebook.compactView": false,
     "jupyter.askForKernelRestart": false,
     "jupyter.interactiveWindow.codeLens.enable": true,
+    // ═══════════════════════════════════════════════════════════════════
+    // 📊 OUTPUT & PROBLEMS PANEL
+    // ═══════════════════════════════════════════════════════════════════
+    "output.smartScroll.enabled": true,
+    "problems.defaultViewMode": "tree",
+    "problems.sortOrder": "severity",
+    "problems.showCurrentInStatus": true,
+    "problems.decorations.enabled": true,
+    // ═══════════════════════════════════════════════════════════════════
+    // 🧘 ZEN MODE & FOCUS
+    // ═══════════════════════════════════════════════════════════════════
+    "zenMode.hideStatusBar": false,
+    "zenMode.hideActivityBar": true,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.silentNotifications": true,
+    "zenMode.restore": false,
+    "zenMode.centerLayout": true,
+    "zenMode.fullScreen": true,
+    "zenMode.showTabs": "multiple",
     // ═══════════════════════════════════════════════════════════════════
     // 🔍 CODE QUALITY - ANÁLISE DE QUALIDADE
     // ═══════════════════════════════════════════════════════════════════

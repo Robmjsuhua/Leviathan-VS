@@ -9,6 +9,8 @@
         "gitkraken.gitkraken-mcp",
         "continue.continue",
         "Codeium.codeium",
+        // === LOCALIZATION ===
+        "ms-ceintl.vscode-language-pack-pt-BR",
         // === PYTHON ECOSYSTEM ===
         "ms-python.python",
         "ms-python.debugpy",
@@ -32,8 +34,15 @@
         "usernamehw.errorlens",
         "gruntfuggly.todo-tree",
         "christian-kohler.path-intellisense",
+        "christian-kohler.npm-intellisense",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+        "aaron-bond.better-comments",
+        "alefragnani.Bookmarks",
+        "Tyriar.sort-lines",
+        "wmaurer.change-case",
+        "IBM.output-colorizer",
+        "mikestead.dotenv",
         // === VISUAL ENHANCEMENT ===
         "PKief.material-icon-theme",
         "naumovs.color-highlight",
@@ -42,6 +51,7 @@
         // === MARKDOWN & DOCS ===
         "yzhang.markdown-all-in-one",
         "bierner.markdown-mermaid",
+        "bierner.github-markdown-preview",
         // === CONTAINERS & DEVOPS ===
         "ms-azuretools.vscode-docker",
         "ms-vscode-remote.remote-containers",
@@ -50,6 +60,8 @@
         "rangav.vscode-thunder-client",
         // === DATABASE ===
         "mtxr.sqltools",
+        // === XML ===
+        "redhat.vscode-xml",
         // ════════════════════════════════════════════════════════════════
         // TESTING & QA - FERRAMENTAS DE TESTE AVANCADAS
         // ════════════════════════════════════════════════════════════════
@@ -236,9 +248,10 @@
         // === ADVANCED PRODUCTIVITY ===
         "wix.vscode-import-cost",
         "pflannery.vscode-versionlens",
-        // (mhutchie.git-graph already listed above)
         "vivaxy.vscode-conventional-commits",
         "formulahendry.code-runner",
+        "adpyke.codesnap",
+        "fill-labs.dependi",
         // === CI/CD ===
         "github.vscode-github-actions",
         // === POWERSHELL ===
@@ -248,8 +261,11 @@
         // === REMOTE DEVELOPMENT ===
         "ms-vscode-remote.remote-ssh",
         "ms-vscode-remote.remote-wsl",
+        "ms-vscode-remote.remote-tunnels",
         // === NOTEBOOK / JUPYTER ===
         "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-renderers",
+        "ms-toolsai.jupyter-keymap",
         "ms-toolsai.jupyter-renderers"
     ],
     "unwantedRecommendations": []

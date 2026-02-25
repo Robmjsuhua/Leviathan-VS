@@ -1,4 +1,4 @@
-# LEVIATHAN VS v15.2 - Cognitive Architecture for Unrestricted AI Operations
+# LEVIATHAN VS v15.3 - Cognitive Architecture for Unrestricted AI Operations
 
 ## Core Identity
 
@@ -548,3 +548,90 @@ Nivel 5 (Persistencia) -> memory + sqlite + SESSION_BRIEFING + auto-scripts
 - SESSION_BRIEFING.md e o backup externo do contexto
 - Nunca repetir informacao que o usuario ja sabe
 - Codigo inline > referencia a arquivo quando possivel
+
+## MCP Server Troubleshooting
+
+Quando MCP server falha ao iniciar:
+
+```
+Erro "spawn ENOENT"  -> Verificar path do executavel (python.exe, npx.cmd)
+Erro "module not found" -> pip install / npm install o modulo
+Erro "address in use"   -> Outra instancia rodando, matar processo
+Erro "timeout"          -> Servidor lento, retry com timeout maior
+Erro "permission denied" -> Rodar como admin ou verificar permissoes
+```
+
+Diagnostico rapido:
+1. Verificar se Python 3.14 esta no PATH: `python --version`
+2. Verificar se npx esta disponivel: `npx --version`
+3. Testar servidor individual: `python -m core.adb.mcp_adb` (deve printar JSON-RPC)
+4. Rodar `[LEVIATHAN] Status Completo` para verificar todos
+
+## Cross-MCP Orchestration Patterns
+
+Combinacoes poderosas que maximizam resultado:
+
+```
+# APK Full Analysis (5 MCPs em cadeia)
+jadx decompile -> androguard security_audit -> ghidra analyze_so ->
+frida bypass_all -> wireshark capture
+
+# Network Protocol Crack (4 MCPs)
+wireshark capture -> frida hook_native_send_recv ->
+ghidra decompile_crypto -> memory save_findings
+
+# Emulator Farm + Attack (3+ MCPs)
+ldplayer start_multiple -> adb install_all ->
+frida spawn_with_hooks -> mitmproxy intercept
+
+# Web Recon Pipeline (5 MCPs)
+fetch fingerprint -> nuclei scan_quick -> burp active_scan ->
+puppeteer screenshot_evidence -> sqlite store_results
+
+# Binary RE + Hook (3 MCPs)
+ghidra full_analysis -> radare2 patch_bytes -> frida hook_native_custom
+
+# Password Attack Chain (2 MCPs)
+hashcat identify_hash -> hashcat crack_wordlist -> memory save_creds
+```
+
+## File Creation Conventions
+
+```
+Scripts Python:      snake_case.py, sem espacos, sem acentos
+Scripts Frida:       target_hook.js ou bypass_ssl.js
+Captures:            capture_YYYYMMDD_target.pcap
+Relatorios:          RELATORIO_target_fase.md
+Briefings:           SESSION_BRIEFING.md (padrao)
+Dados extraidos:     dados_tipo_data.json
+Logs:                target_YYYYMMDD.log
+Configs:             config_target.json
+```
+
+Nomenclatura de commit:
+- `feat(core): descricao` - Nova feature
+- `fix(frida): descricao` - Bug fix
+- `refactor(mcp): descricao` - Refatoracao
+- `docs: descricao` - Documentacao
+- `chore: descricao` - Manutencao
+
+## Performance-Critical Patterns
+
+### Quando priorizar velocidade:
+- Respostas simples (< 5 linhas) -> Responder direto, zero overhead
+- Grepar codigo -> grep_search (nao semantic_search)
+- Ler arquivo especifico -> read_file direto (nao buscar primeiro)
+- Executar comando -> terminal direto (nao criar script)
+
+### Quando priorizar profundidade:
+- Analise de seguranca -> TODOS os MCPs relevantes em pipeline
+- Primeiro contato com APK -> Pipeline completo jadx+ghidra+androguard
+- Bug complexo -> Debug with breakpoints + logging + memory analysis
+- Protocolo desconhecido -> Captura + hook + decompile + decoder
+
+### Token Efficiency
+- Usar tabelas em vez de listas quando dados sao tabulares
+- Comprimir stack traces para linhas relevantes
+- Omitir imports obvios da explicacao (so mostrar no codigo)
+- Referencias cruzadas por nome de funcao, nao arquivo inteiro
+- JSON compacto para dados intermediarios
