@@ -1,8 +1,8 @@
 {
     // ════════════════════════════════════════════════════════════════════
-    // LEVIATHAN VS v14.2 - ABSOLUTE DESTRUCTION CONFIGURATION
-    // 33 MCP Servers / 460+ Tools / Zero Limitations
-    // Updated: July 2025
+    // LEVIATHAN VS v15.1 - COGNITIVE DESTRUCTION CONFIGURATION
+    // 33 MCP Servers / 460+ Tools / Cognitive AI Architecture / Zero Limits
+    // Updated: February 2026
     // ════════════════════════════════════════════════════════════════════
     // ═══════════════════════════════════════════════════════════════════
     // 🐍 PYTHON - CONFIGURAÇÃO AVANÇADA
@@ -760,30 +760,41 @@
     "github.copilot.chat.generateTests.codeLens": true,
     "github.copilot.chat.temporalContext.enabled": true,
     "github.copilot.chat.followUps": "always",
+    "github.copilot.chat.localeOverride": "pt-BR",
+    "github.copilot.chat.fixTestFailure.enabled": true,
+    "github.copilot.chat.setupTests.enabled": true,
+    "github.copilot.chat.startDebugging.enabled": true,
+    "github.copilot.chat.terminalChatLocation": "terminal",
     "github.copilot.chat.commitMessageGeneration.instructions": [
         {
-            "text": "Use conventional commits (feat/fix/refactor/docs/chore). Portugues brasileiro. Maximo 72 chars no titulo. Corpo detalhado quando necessario."
+            "text": "Use conventional commits (feat/fix/refactor/docs/chore). Portugues brasileiro. Maximo 72 chars no titulo. Corpo detalhado quando necessario. Escopo entre parenteses quando aplicavel: feat(core): ..."
         }
     ],
     "github.copilot.chat.codeGeneration.instructions": [
         {
-            "text": "Python 3.14 com type hints. f-strings sempre. pathlib.Path. async quando IO-bound. Error handling robusto. Codigo completo, nunca parcial."
+            "text": "Python 3.14 com type hints obrigatorios em toda funcao/metodo. f-strings sempre. pathlib.Path pro filesystem. async quando IO-bound. Error handling robusto com try/except tipado. Codigo 100%% completo e funcional, nunca parcial, nunca pseudocodigo."
         },
         {
-            "text": "JavaScript/TypeScript: ES2024+, async/await, proper error handling, JSDoc quando util."
+            "text": "JavaScript/TypeScript: ES2024+, async/await, proper error handling, JSDoc quando util. Strict TypeScript. Prefer const over let."
         },
         {
-            "text": "Sempre entregar codigo funcional completo. Nunca pseudocodigo. Nunca snippets parciais."
+            "text": "Rust: Result<T,E> para errors, derive macros, lifetime annotations claras. C/C++: RAII, smart pointers, const-correctness."
+        },
+        {
+            "text": "Seguranca: Nunca hardcode secrets. Validar input sempre. Prepared statements para SQL. Escapar output. Rate limiting em APIs. CORS restritivo."
+        },
+        {
+            "text": "Performance: Usar generators/iterators para grandes datasets. Connection pooling. Cache quando aplicavel. Batch operations. Lazy loading."
         }
     ],
     "github.copilot.chat.testGeneration.instructions": [
         {
-            "text": "Pytest para Python. Jest para JS/TS. Testes com nomes descritivos. Edge cases cobertos. Mocks quando necessario. 100%% coverage target."
+            "text": "Pytest para Python com fixtures, parametrize, markers. Jest para JS/TS com describe/it/expect. Testes com nomes descritivos em portugues. Edge cases: null/empty/boundary/error/concurrent. Mocks com unittest.mock ou jest.mock. 100%% coverage target. AAA pattern (Arrange/Act/Assert)."
         }
     ],
     "github.copilot.chat.reviewSelection.instructions": [
         {
-            "text": "Foco em: seguranca, performance, bugs potenciais, race conditions, memory leaks, injection flaws. Ser agressivo na analise."
+            "text": "Analise agressiva: seguranca (injection, XSS, SSRF, auth bypass, IDOR), performance (N+1, memory leaks, blocking IO), bugs (race conditions, null deref, integer overflow, off-by-one), code quality (DRY, SOLID, naming, complexity). Classificar severidade: CRITICAL/HIGH/MEDIUM/LOW."
         }
     ],
     // --- Copilot Inline/NES: Maximum Prediction ---
@@ -799,6 +810,14 @@
     "chat.editor.wordWrap": "on",
     "chat.editing.confirmEditRequestRetry": false,
     "chat.editing.alwaysSaveWithGeneratedChanges": true,
+    "chat.promptFiles": true,
+    // --- Search: AI-Enhanced ---
+    "search.smartCase": true,
+    "search.showLineNumbers": true,
+    "search.seedWithNearestWord": true,
+    "search.quickAccess.preserveInput": true,
+    "search.searchEditor.reusePriorSearchConfiguration": true,
+    "search.experimental.closedNotebookRichContentResults": true,
     // ═══════════════════════════════════════════════════════════════════
     // 🔧 EXTENSÕES ESPECÍFICAS
     // ═══════════════════════════════════════════════════════════════════
@@ -897,15 +916,22 @@
         "github.copilot-chat": 1,
         "ms-python.vscode-pylance": 2,
         "ms-python.python": 2,
-        "eamodio.gitlens": 3
+        "eamodio.gitlens": 3,
+        "dbaeumer.vscode-eslint": 4,
+        "sonarsource.sonarlint-vscode": 4,
+        "rust-lang.rust-analyzer": 5,
+        "ms-vscode.cpptools": 5,
+        "redhat.java": 5
     },
     "update.mode": "default",
     "window.titleBarStyle": "custom",
     "window.menuBarVisibility": "compact",
     "window.zoomLevel": 0,
-    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}${separator}LEVIATHAN",
+    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}${separator}LEVIATHAN v15.1",
     "window.newWindowDimensions": "maximized",
     "window.restoreFullscreen": true,
+    "window.commandCenter": true,
+    "window.density.editorTabHeight": "compact",
     "breadcrumbs.enabled": true,
     "breadcrumbs.filePath": "on",
     "breadcrumbs.symbolPath": "on",

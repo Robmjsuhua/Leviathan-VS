@@ -7,6 +7,8 @@
         "github.copilot",
         "github.copilot-chat",
         "gitkraken.gitkraken-mcp",
+        "continue.continue",
+        "Codeium.codeium",
         // === PYTHON ECOSYSTEM ===
         "ms-python.python",
         "ms-python.debugpy",
@@ -230,7 +232,20 @@
         "auratechnologies.claude-code-ui-overlay",
         // === Multi-Agent Development ===
         "multi.multi-nightly",
-        "ecloud.zhanlu"
+        "ecloud.zhanlu",
+        // === ADVANCED PRODUCTIVITY ===
+        "wix.vscode-import-cost",
+        "pflannery.vscode-versionlens",
+        "mhutchie.git-graph",
+        "vivaxy.vscode-conventional-commits",
+        // === HEX EDITOR (Binary Analysis) ===
+        "ms-vscode.hexeditor",
+        // === REMOTE DEVELOPMENT ===
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-wsl",
+        // === NOTEBOOK / JUPYTER ===
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-renderers"
     ],
     "unwantedRecommendations": []
 }

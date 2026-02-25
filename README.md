@@ -15,7 +15,7 @@
 
 A monstrous VS Code configuration that rises from the depths. Cognitive AI architecture with auto-pipeline triggers, semantic translation engine, HTTP interceptor, 33 MCP security servers with 460+ tools, 4 emulator controllers, extension affinity optimization, and 80+ extensions forged in the darkness of the deep sea.
 
-![Version](https://img.shields.io/badge/version-15.0.0-0d1117?style=for-the-badge&labelColor=161b22)
+![Version](https://img.shields.io/badge/version-15.1.0-0d1117?style=for-the-badge&labelColor=161b22)
 ![Python](https://img.shields.io/badge/python-3.14-1f6feb?style=for-the-badge&labelColor=0d1117)
 ![License](https://img.shields.io/badge/license-MIT-238636?style=for-the-badge&labelColor=0d1117)
 ![Extensions](https://img.shields.io/badge/extensions-80+-8957e5?style=for-the-badge&labelColor=0d1117)
