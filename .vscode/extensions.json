@@ -3,298 +3,231 @@
         // ════════════════════════════════════════════════════════════════
         // NASA LEVEL - EXTENSOES ESSENCIAIS
         // ════════════════════════════════════════════════════════════════
-
-        // === AI & COPILOT ===
+        // === AI & COPILOT - MAXIMUM INTELLIGENCE ===
         "github.copilot",
         "github.copilot-chat",
-
+        "gitkraken.gitkraken-mcp",
         // === PYTHON ECOSYSTEM ===
         "ms-python.python",
         "ms-python.debugpy",
         "ms-python.vscode-pylance",
         "ms-python.black-formatter",
         "charliermarsh.ruff",
-
         // === JAVASCRIPT/TYPESCRIPT ===
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-
         // === RUST ===
         "rust-lang.rust-analyzer",
-
         // === GO ===
         "golang.go",
-
         // === WEB DEVELOPMENT ===
         "formulahendry.auto-rename-tag",
         "bradlc.vscode-tailwindcss",
-
         // === GIT & VERSION CONTROL ===
         "eamodio.gitlens",
         "mhutchie.git-graph",
-
         // === PRODUCTIVITY ===
         "usernamehw.errorlens",
         "gruntfuggly.todo-tree",
         "christian-kohler.path-intellisense",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-portuguese-brazilian",
-
         // === VISUAL ENHANCEMENT ===
         "PKief.material-icon-theme",
         "naumovs.color-highlight",
         "oderwat.indent-rainbow",
         "mechatroner.rainbow-csv",
-
         // === MARKDOWN & DOCS ===
         "yzhang.markdown-all-in-one",
         "bierner.markdown-mermaid",
-
         // === CONTAINERS & DEVOPS ===
         "ms-azuretools.vscode-docker",
         "ms-vscode-remote.remote-containers",
-
         // === API & REST ===
         "humao.rest-client",
         "rangav.vscode-thunder-client",
-
         // === DATABASE ===
         "mtxr.sqltools",
-
         // ════════════════════════════════════════════════════════════════
         // TESTING & QA - FERRAMENTAS DE TESTE AVANCADAS
         // ════════════════════════════════════════════════════════════════
-
         // === TEST RUNNERS ===
         "ms-vscode.test-adapter-converter",
         "hbenl.vscode-test-explorer",
         "ms-playwright.playwright",
         "Orta.vscode-jest",
-
         // === CODE QUALITY & ANALYSIS ===
         "sonarsource.sonarlint-vscode",
         "deepscan.vscode-deepscan",
         "codacy-app.codacy",
-
         // === SECURITY SCANNING ===
         "snyk-security.snyk-vulnerability-scanner",
         "42crunch.vscode-openapi",
-
         // ════════════════════════════════════════════════════════════════
         // STATIC ANALYSIS - ANALISE ESTATICA AVANCADA
         // ════════════════════════════════════════════════════════════════
-
         // === GO - Staticcheck, GoSec, Errcheck, Gocyclo ===
         "golang.go",
-
         // === PYTHON - Pylint, Bandit, Mypy, Flake8, Radon ===
         "ms-python.pylint",
         "ms-python.mypy-type-checker",
         "ms-python.flake8",
         "matangover.mypy",
-
         // === JAVASCRIPT/TYPESCRIPT - ESLint, Complexity ===
         "dbaeumer.vscode-eslint",
         "kisstkondansen.vscode-gutter-preview",
         "jbockle.jbockle-format-files",
-
         // ════════════════════════════════════════════════════════════════
         // GITHUB & CODE REVIEW - ANALISE DE PROJETOS GITHUB
         // ════════════════════════════════════════════════════════════════
-
         // === GitHub Integration ===
         "GitHub.vscode-pull-request-github",
         "GitHub.remotehub",
         "GitHub.codespaces",
-
         // === Code Review & Analysis ===
         "sourcery.sourcery",
         "codescene.codescene-vscode",
         "geekmasher.codeql-scanner-vscode",
-
         // === Multi-language Meta-Linters ===
         "trunk.io",
         "meterian.meterian-heidi",
-
         // === AI Code Review ===
         "bito.bito",
-
         // === Accessibility & HTML ===
         "deque-systems.vscode-axe-linter",
         "htmlhint.vscode-htmlhint",
-
         // === Datadog Observability ===
         "datadog.datadog-vscode",
-
         // ════════════════════════════════════════════════════════════════
         // FRONTEND FRAMEWORKS - React, Vue, Angular, Next.js, Tailwind
         // ════════════════════════════════════════════════════════════════
-
         // === React Ecosystem ===
         "styled-components.vscode-styled-components",
         "yoavbls.pretty-ts-errors",
         "chakrounanas.turbo-console-log",
         "ofhumanbondage.react-proptypes-intellisense",
         "riccardoforina.storybook-helper",
-
         // === Vue Ecosystem ===
         "vue.volar",
         "hollowtree.vue-snippets",
-
         // === Angular Ecosystem ===
         "angular.ng-template",
         "alexiv.vscode-angular2-files",
         "obenjiro.arrr",
-
         // === Next.js and T3 Stack ===
         "imgildev.vscode-nextjs-generator",
         "kristiyanvelkov.nextjs-cli",
-
         // === Astro and Modern Frameworks ===
         "astro-build.astro-vscode",
-
         // === Tailwind CSS ===
         "lightyen.tailwindcss-intellisense-twin",
-
         // === Design to Code - Figma Integration ===
         "animaapp.vscode-anima",
         "kombai.kombai",
         "aquilalabs.superflex",
-
         // === Component Preview and Testing ===
         "jinno.codelens-sample",
         "ardevia.sculptui-vscode",
-
         // === GraphQL ===
         "graphql.vscode-graphql-syntax",
-
         // === CSS-in-JS ===
         "blanu.vscode-styled-jsx",
         "mrmlnc.vscode-scss",
-
         // === UI Development ===
         "vsblox.blox",
         "saposs.vscode-ui5-language-assistant",
-
         // === Frontend AI Agents ===
         "purecodeai.purecode-ai",
         "dhiwisepvtltd.dhiwisecodesync",
-
         // === RUST - Clippy (via rust-analyzer) ===
         "rust-lang.rust-analyzer",
         "vadimcn.vscode-lldb",
         "tamasfe.even-better-toml",
-
         // === C/C++ - Clang-Tidy, Cppcheck, PVS-Studio ===
         "ms-vscode.cpptools",
         "ms-vscode.cpptools-extension-pack",
         "llvm-vs-code-extensions.vscode-clangd",
         "jbenden.c-cpp-flylint",
         "parasoft.vscode-cpptest",
-
         // === JAVA - SpotBugs, PMD, Checkstyle ===
         "redhat.java",
         "vscjava.vscode-java-pack",
         "shengchen.vscode-checkstyle",
         "chuckjonas.apex-pmd",
-
         // === .NET - Static Analysis ===
         "parasoft.vscode-dottest",
-
         // === PHP - PHPStan, Psalm, PHP_CodeSniffer ===
         "bmewburn.vscode-intelephense-client",
         "sanderronde.phpstan-vscode",
-
         // === SHELL/BASH - ShellCheck ===
         "timonwong.shellcheck",
         "foxundermoon.shell-format",
-
         // === SQL - SQLFluff, SQL Lint ===
         "dorzey.vscode-sqlfluff",
-
         // === DOCKER - Hadolint ===
         "exiasr.hadolint",
-
         // === TERRAFORM/IaC - TFLint, Checkov ===
         "hashicorp.terraform",
         "bridgecrew.checkov",
-
         // === YAML/JSON - Schema Validation ===
         "redhat.vscode-yaml",
         "ZainChen.json",
         "darioajr.yaml-doctor",
-
         // === SECURITY SCANNERS ===
         "wayneashleyberry.entropy-scanner",
-
         // === DEBUGGING ===
         "hediet.debug-visualizer",
         "msjsdiag.vscode-react-native",
-
         // ════════════════════════════════════════════════════════════════
         // WEB & E-COMMERCE TESTING
         // ════════════════════════════════════════════════════════════════
-
         // === BROWSER TESTING ===
         "nickmomrik.playwright-runner",
         "nickmomrik.jsonview",
-
         // === PERFORMANCE & ACCESSIBILITY ===
         "nickmomrik.lighthouse",
         "deque.axe-linter",
-
         // === HTML/CSS VALIDATION ===
         "ecmel.vscode-html-css",
         "ritwickdey.LiveServer",
         "ziishaned.livereload",
         "pranaygp.vscode-css-peek",
-
         // === NETWORK & API TESTING ===
         "anweber.vscode-httpyac",
         "pjmiravalle.openapi-designer",
-
         // ════════════════════════════════════════════════════════════════
         // LINTING & FORMATTING
         // ════════════════════════════════════════════════════════════════
-
         // === MULTI-LANGUAGE LINTING ===
         "DavidAnson.vscode-markdownlint",
         "stylelint.vscode-stylelint",
         "editorconfig.editorconfig",
         "redhat.vscode-yaml",
         "timonwong.shellcheck",
-
         // === CODE COVERAGE ===
         "ryanluker.vscode-coverage-gutters",
         "brainfit.vscode-coverage-highlighter",
-
         // ════════════════════════════════════════════════════════════════
         // PROJECT MANAGEMENT
         // ════════════════════════════════════════════════════════════════
-
         "alefragnani.project-manager",
         "Gruntfuggly.todo-tree",
         "wayou.vscode-todo-highlight",
-
         // ════════════════════════════════════════════════════════════════
         // FRONTEND AI TOOLS - DESIGN TO CODE
         // ════════════════════════════════════════════════════════════════
-
         // === Figma to Code - AI Conversion ===
         "sindujaramaraj.app-developer-copilot",
         "codespellai.codespellai-vscode",
         "nicepkg.aide-pro",
-
         // === Live Component Preview ===
         "sureshnettur.ccaia",
         "bugzi.forge-webbuilder",
-
         // === AI Code Generation and UI ===
         "gocodeo.gocodeo",
         "andrepimenta.claude-code-chat",
         "futuretechnexus.getbotai",
         "auratechnologies.claude-code-ui-overlay",
-
         // === Multi-Agent Development ===
         "multi.multi-nightly",
         "ecloud.zhanlu"

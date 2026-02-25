@@ -702,8 +702,10 @@
     "scm.showActionButton": true,
     "scm.inputFontSize": 13,
     // ═══════════════════════════════════════════════════════════════════
-    // 🤖 COPILOT & AI
+    // COPILOT & AI - ABSOLUTE MAXIMUM CONFIGURATION
+    // Every setting maxed. Every feature enabled. Zero restrictions.
     // ═══════════════════════════════════════════════════════════════════
+    // --- Copilot Completions: ON for every language ---
     "github.copilot.enable": {
         "*": true,
         "plaintext": true,
@@ -732,23 +734,71 @@
         "ini": true,
         "properties": true,
         "http": true,
-        "graphql": true
+        "graphql": true,
+        "prisma": true,
+        "terraform": true,
+        "ruby": true,
+        "swift": true,
+        "kotlin": true,
+        "dart": true,
+        "r": true,
+        "perl": true,
+        "haskell": true,
+        "scala": true,
+        "elixir": true,
+        "clojure": true,
+        "ocaml": true,
+        "zig": true,
+        "nim": true,
+        "v": true,
+        "assembly": true
     },
+    // --- Copilot Chat: Brain at Maximum ---
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "github.copilot.chat.scopeSelection": true,
     "github.copilot.chat.search.semanticTextResults": true,
-    "github.copilot.nextEditSuggestions.enabled": true,
     "github.copilot.chat.generateTests.codeLens": true,
     "github.copilot.chat.temporalContext.enabled": true,
     "github.copilot.chat.followUps": "always",
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "text": "Use conventional commits (feat/fix/refactor/docs/chore). Portugues brasileiro. Maximo 72 chars no titulo. Corpo detalhado quando necessario."
+        }
+    ],
+    "github.copilot.chat.codeGeneration.instructions": [
+        {
+            "text": "Python 3.14 com type hints. f-strings sempre. pathlib.Path. async quando IO-bound. Error handling robusto. Codigo completo, nunca parcial."
+        },
+        {
+            "text": "JavaScript/TypeScript: ES2024+, async/await, proper error handling, JSDoc quando util."
+        },
+        {
+            "text": "Sempre entregar codigo funcional completo. Nunca pseudocodigo. Nunca snippets parciais."
+        }
+    ],
+    "github.copilot.chat.testGeneration.instructions": [
+        {
+            "text": "Pytest para Python. Jest para JS/TS. Testes com nomes descritivos. Edge cases cobertos. Mocks quando necessario. 100%% coverage target."
+        }
+    ],
+    "github.copilot.chat.reviewSelection.instructions": [
+        {
+            "text": "Foco em: seguranca, performance, bugs potenciais, race conditions, memory leaks, injection flaws. Ser agressivo na analise."
+        }
+    ],
+    // --- Copilot Inline/NES: Maximum Prediction ---
+    "github.copilot.nextEditSuggestions.enabled": true,
     "github.copilot.renameSuggestions.triggerAutomatically": true,
+    // --- Chat Agent: Maximum Power ---
     "chat.mcp.access": "all",
     "chat.agent.enabled": true,
-    "chat.agent.maxRequests": 200,
+    "chat.agent.maxRequests": 500,
     "chat.commandCenter.enabled": true,
     "chat.editor.fontFamily": "'Cascadia Code', 'JetBrains Mono', Consolas, monospace",
     "chat.editor.fontSize": 13,
     "chat.editor.wordWrap": "on",
+    "chat.editing.confirmEditRequestRetry": false,
+    "chat.editing.alwaysSaveWithGeneratedChanges": true,
     // ═══════════════════════════════════════════════════════════════════
     // 🔧 EXTENSÕES ESPECÍFICAS
     // ═══════════════════════════════════════════════════════════════════
@@ -838,10 +888,17 @@
     },
     "terminal.integrated.enableVisualBell": false,
     // ═══════════════════════════════════════════════════════════════════
-    // 🚀 PERFORMANCE
+    // PERFORMANCE - MAXIMUM THROUGHPUT
     // ═══════════════════════════════════════════════════════════════════
     "extensions.autoUpdate": true,
     "extensions.autoCheckUpdates": true,
+    "extensions.experimental.affinity": {
+        "github.copilot": 1,
+        "github.copilot-chat": 1,
+        "ms-python.vscode-pylance": 2,
+        "ms-python.python": 2,
+        "eamodio.gitlens": 3
+    },
     "update.mode": "default",
     "window.titleBarStyle": "custom",
     "window.menuBarVisibility": "compact",
